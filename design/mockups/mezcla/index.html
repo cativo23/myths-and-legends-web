@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mezcla · Catálogo de mitos y leyendas</title>
+<meta name="description" content="Catálogo de mitos y leyendas de El Salvador. Dirección Mezcla: un marco sobrio de algodón e índigo, ventanas iluminadas para la obra de cada artista y fichas que se voltean para mostrar sus datos.">
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem('myl-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&display=swap">
+<style>
+/* Tokens. Light = undyed cotton with indigo ink (Añil). Dark = night (Faro). Ratios in README. */
+:root{
+  --bg:#F6F0E4;--surface:#FFFBF2;--text:#12203F;--muted:#46527A;--field:#6B7598;
+  --line:rgba(18,32,63,.13);--line-strong:rgba(18,32,63,.26);
+  --win:#111A33;--win-edge:#22305A;--on-win:#E8E4DA;--on-win-muted:#B7BFD6;
+  --btn-bg:#12203F;--btn-fg:#F6F0E4;--btn-bg-h:#1F3A93;
+  --focus:#12203F;
+  --mito:#2457B8;--leyenda:#0B645B;--tradicion:#9A3F14;
+  --pool-rgb:255 255 255;--pool-a:.6;--lamp-rgb:255 220 184;
+  --thread:rgba(18,32,63,.032);--bloom:rgba(31,58,147,.11);--bloom-2:rgba(11,100,91,.07);
+  --w-base:#F6F0E4;--w-a:rgba(31,58,147,.30);--w-b:rgba(31,58,147,.12);--w-line:rgba(18,32,63,.22);
+  --shadow-card:0 1px 2px rgba(18,32,63,.07),0 20px 34px -24px rgba(18,32,63,.5);
+  --sel-bg:#1F3A93;--sel-fg:#F6F0E4;
+  --lh:1.6;--track:0;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#070B14;--surface:#0F1626;--text:#E8E4DA;--muted:#9AA3B8;--field:#8E97AE;
+  --line:rgba(232,228,218,.11);--line-strong:rgba(232,228,218,.24);
+  --win:#0A1020;--win-edge:#26304A;
+  --btn-bg:#E8E4DA;--btn-fg:#070B14;--btn-bg-h:#FFFFFF;
+  --focus:#E8E4DA;
+  --mito:#6EA8FF;--leyenda:#3DD6C4;--tradicion:#FF7A2F;
+  --pool-rgb:255 200 160;--pool-a:.075;
+  --thread:rgba(232,228,218,.018);--bloom:rgba(110,168,255,.09);--bloom-2:rgba(61,214,196,.07);
+  --w-base:#070B14;--w-a:rgba(232,228,218,.16);--w-b:rgba(110,168,255,.12);--w-line:rgba(232,228,218,.16);
+  --shadow-card:0 1px 2px rgba(0,0,0,.4),0 24px 40px -26px rgba(0,0,0,.9);
+  --sel-bg:#E8E4DA;--sel-fg:#070B14;
+  --lh:1.66;--track:.006em;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#070B14;--surface:#0F1626;--text:#E8E4DA;--muted:#9AA3B8;--field:#8E97AE;
+  --line:rgba(232,228,218,.11);--line-strong:rgba(232,228,218,.24);
+  --win:#0A1020;--win-edge:#26304A;
+  --btn-bg:#E8E4DA;--btn-fg:#070B14;--btn-bg-h:#FFFFFF;
+  --focus:#E8E4DA;
+  --mito:#6EA8FF;--leyenda:#3DD6C4;--tradicion:#FF7A2F;
+  --pool-rgb:255 200 160;--pool-a:.075;
+  --thread:rgba(232,228,218,.018);--bloom:rgba(110,168,255,.09);--bloom-2:rgba(61,214,196,.07);
+  --w-base:#070B14;--w-a:rgba(232,228,218,.16);--w-b:rgba(110,168,255,.12);--w-line:rgba(232,228,218,.16);
+  --shadow-card:0 1px 2px rgba(0,0,0,.4),0 24px 40px -26px rgba(0,0,0,.9);
+  --sel-bg:#E8E4DA;--sel-fg:#070B14;
+  --lh:1.66;--track:.006em;
+  color-scheme:dark;
+}
+/* The category sets the accent: a text colour per theme, and one bright glow for the dark windows in both themes. */
+[data-cat="mito"]{--cat:var(--mito);--cat-glow:110 168 255}
+[data-cat="leyenda"]{--cat:var(--leyenda);--cat-glow:61 214 196}
+[data-cat="tradicion"]{--cat:var(--tradicion);--cat-glow:255 122 47}
+
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;scrollbar-color:var(--field) var(--bg);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"DM Sans",ui-sans-serif,system-ui,sans-serif;font-size:1.0625rem;line-height:var(--lh);letter-spacing:var(--track);font-optical-sizing:auto;font-kerning:normal;caret-color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:clip}
+::selection{background:var(--sel-bg);color:var(--sel-fg)}
+h1,h2,h3{font-family:Fraunces,ui-serif,Georgia,serif;font-weight:600;line-height:1.05;text-wrap:balance;margin:0;overflow-wrap:break-word}
+p{text-wrap:pretty}
+a{color:inherit;text-underline-offset:.22em;text-decoration-thickness:1px}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:2px}
+.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:1rem;top:-5rem;z-index:400;background:var(--btn-bg);color:var(--btn-fg);padding:.75rem 1rem;font-weight:600;text-decoration:none}
+.skip:focus{top:1rem}
+.wrap{width:min(100% - 2rem,80rem);margin-inline:auto}
+@media (min-width:48rem){.wrap{width:min(100% - 4rem,80rem)}}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
+.w-base{fill:var(--w-base)}.w-a{fill:var(--w-a)}.w-b{fill:var(--w-b)}.w-line{fill:var(--w-line)}
+
+/* Pointer light: a pool behind the content. It never carries information. */
+.pool{position:fixed;left:0;top:0;z-index:-1;width:46rem;height:46rem;margin:-23rem 0 0 -23rem;border-radius:50%;pointer-events:none;opacity:0;background:radial-gradient(circle,rgb(var(--pool-rgb)/var(--pool-a)) 0%,transparent 64%);transition:opacity .5s ease-out}
+.lit .pool{opacity:1}
+
+/* Header */
+.site-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.75rem 1.5rem;padding-block:.9rem}
+.brand{display:inline-flex;align-items:center;gap:.7rem;text-decoration:none;font-family:Fraunces,ui-serif,Georgia,serif;font-weight:620;font-size:1.25rem;line-height:1.1;letter-spacing:-.01em;font-variation-settings:"opsz" 24,"SOFT" 100,"WONK" 1}
+.brand small{display:block;font-family:"DM Sans",ui-sans-serif,system-ui,sans-serif;font-weight:500;font-size:.8125rem;letter-spacing:.01em;color:var(--muted);font-variation-settings:normal}
+.brand-mark{width:34px;height:34px;flex:none}
+.brand-mark .bm-win{fill:var(--win)}
+.brand-mark .bm-glow{fill:#3DD6C4}
+.head-end{display:flex;align-items:center;gap:.5rem 1rem;flex-wrap:wrap}
+.nav{display:flex;gap:.25rem}
+.nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 .7rem;text-decoration:none;font-weight:500}
+.nav a:hover{text-decoration:underline}
+.nav a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:.5em}
+.theme-btn{display:inline-flex;align-items:center;gap:.5rem;min-height:44px;padding:0 .9rem;border:1.5px solid var(--field);border-radius:999px;background:transparent;color:var(--text);font:inherit;font-size:.9375rem;font-weight:500;cursor:pointer;transition:background-color .2s ease-out}
+.theme-btn:hover{background:var(--surface)}
+.theme-btn svg{width:20px;height:20px;flex:none}
+.theme-btn .half{transition:transform .5s cubic-bezier(.16,1,.3,1);transform-origin:12px 12px}
+:root[data-theme="dark"] .theme-btn .half{transform:rotate(180deg)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .theme-btn .half{transform:rotate(180deg)}}
+@media (max-width:26rem){.theme-txt{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.theme-btn{padding:0;width:44px;justify-content:center}}
+
+/* Hero: type, palette, thread texture and light. No illustration. Layers are translucent so the pointer light reaches the ground. */
+.hero{position:relative;isolation:isolate;background:
+  radial-gradient(60% 90% at 88% 0%,var(--bloom),transparent 70%),
+  radial-gradient(50% 70% at 0% 100%,var(--bloom-2),transparent 70%),
+  repeating-linear-gradient(0deg,var(--thread) 0 1px,transparent 1px 3px),
+  repeating-linear-gradient(90deg,var(--thread) 0 1px,transparent 1px 5px)}
+.hero-grid{display:grid;gap:1.75rem;padding-block:clamp(2.5rem,7vw,5rem) clamp(2.25rem,5vw,3.75rem);align-items:end}
+@media (min-width:60rem){.hero-grid{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:3rem}}
+.hero h1{font-size:clamp(3rem,1.5rem + 5.4vw,6rem);font-weight:600;line-height:.94;letter-spacing:-.034em;font-variation-settings:"opsz" 144,"SOFT" 100,"WONK" 1}
+.h1-a{display:block}
+.h1-b{display:block;margin-top:.18em;font-weight:340;font-size:clamp(1.7rem,.85rem + 3vw,3.35rem);letter-spacing:-.014em;color:var(--muted);font-variation-settings:"opsz" 96,"SOFT" 100,"WONK" 1}
+.lede{margin:0;max-width:34rem;font-size:clamp(1.0625rem,1rem + .25vw,1.1875rem);line-height:1.6}
+.legend{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;margin:1.25rem 0 0;padding:0;font-size:.9375rem;font-weight:600}
+.legend li{display:inline-flex;align-items:center;gap:.5rem;color:var(--cat)}
+.legend-note{margin:.6rem 0 0;font-size:.875rem;color:var(--muted)}
+/* a category light: a lit dot, not an icon */
+.lamp{position:relative;display:inline-block;width:.6rem;height:.6rem;border-radius:50%;background:var(--cat);flex:none}
+.lamp::after{content:"";position:absolute;inset:-.45rem;border-radius:50%;background:radial-gradient(circle,rgb(var(--cat-glow)/.42),transparent 70%)}
+
+.woven{display:block;width:100%;height:14px}
+.woven svg{display:block;width:100%;height:14px}
+
+/* Catalog */
+.catalog{padding-block:clamp(2.25rem,5vw,3.5rem) clamp(3rem,7vw,5rem)}
+.catalog:focus{outline:none}
+.cat-head{display:grid;gap:.5rem 2.5rem;align-items:end}
+@media (min-width:60rem){.cat-head{grid-template-columns:auto minmax(0,1fr)}}
+.cat-head h2{font-size:clamp(2.1rem,1.5rem + 2.4vw,3.25rem);font-weight:600;letter-spacing:-.026em;font-variation-settings:"opsz" 120,"SOFT" 100,"WONK" 1}
+.cat-note{margin:0;max-width:62ch;color:var(--muted);font-size:.9375rem}
+
+.filters{margin-top:1.5rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,9rem),1fr));gap:1rem;padding:1.15rem;background:var(--surface);border:1px solid var(--line);border-radius:8px}
+.field{display:grid;gap:.35rem;align-content:start;min-width:0}
+.field-q{grid-column:1/-1}
+@media (min-width:64rem){.filters{grid-template-columns:minmax(0,2.3fr) repeat(4,minmax(0,1fr)) auto;align-items:start}.field-q{grid-column:auto}.field-go{padding-top:1.6rem}}
+@media (max-width:63.99rem){.field-go{grid-column:1/-1}}
+@media (max-width:39.99rem){.field-wide{grid-column:1/-1}}
+label{font-size:.875rem;font-weight:600;letter-spacing:.01em}
+.hint{margin:0;font-size:.8125rem;color:var(--muted)}
+.err{margin:0;font-size:.875rem;font-weight:600;color:var(--text);display:flex;gap:.4rem;align-items:flex-start}
+.err svg{width:18px;height:18px;flex:none;margin-top:.1rem;color:var(--tradicion)}
+input[type="search"],select{width:100%;min-height:46px;font:inherit;font-size:1rem;color:var(--text);background:var(--bg);border:1.5px solid var(--field);border-radius:6px;padding:.55rem .8rem;transition:border-color .15s ease-out}
+input[type="search"]{padding-left:2.5rem}
+input[type="search"]::placeholder{color:var(--muted);opacity:1}
+input[type="search"]:hover,select:hover{border-color:var(--text)}
+input[aria-invalid="true"]{border-color:var(--tradicion)}
+select{-webkit-appearance:none;appearance:none;padding-right:2.4rem;cursor:pointer}
+select option{background:var(--surface);color:var(--text)}
+.control{position:relative;display:block}
+.control svg{position:absolute;top:50%;width:18px;height:18px;transform:translateY(-50%);pointer-events:none;color:var(--muted)}
+.control .i-search{left:.8rem}
+.control .i-chev{right:.8rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:46px;padding:.6rem 1.3rem;border:0;border-radius:6px;font:inherit;font-weight:600;font-size:1rem;line-height:1.2;text-decoration:none;cursor:pointer;background:var(--btn-bg);color:var(--btn-fg);transition:background-color .15s ease-out}
+.btn:hover{background:var(--btn-bg-h)}
+.btn:active{transform:translateY(1px)}
+.field-go .btn{width:100%}
+
+.status{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1rem;margin:1.5rem 0 1.75rem;min-height:44px}
+.count{margin:0;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.count strong{color:var(--text)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;list-style:none}
+.chip{position:relative;display:inline-flex;align-items:center;gap:.4rem;min-height:36px;padding:.2rem .5rem .2rem .75rem;border:1.5px solid var(--field);border-radius:999px;background:var(--surface);color:var(--text);font:inherit;font-size:.875rem;font-weight:600;cursor:pointer}
+/* 36px chips keep a 44px hit area */
+.chip::before{content:"";position:absolute;inset:-4px 0}
+.chip svg{width:14px;height:14px}
+.chip:hover{border-color:var(--text)}
+.chip-all{border-style:dashed}
+
+/* Cards: a masonry of lantern windows. Each window takes the shape of its artwork. */
+.fichas{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,16.5rem),1fr));gap:1.75rem 1.5rem;align-items:start}
+/* JS enhancement: rows of 8px, each card spans the rows its height needs (row-major order kept) */
+.fichas.is-masonry{grid-auto-rows:8px;row-gap:0}
+.ficha{position:relative;perspective:1600px;min-width:0}
+.ficha-in{display:grid;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.ficha.is-flipped .ficha-in{transform:rotateY(-180deg)}
+.face{grid-area:1/1;position:relative;display:flex;flex-direction:column;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow-card);-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.back{transform:rotateY(180deg)}
+.face[inert]{pointer-events:none}
+
+.window{position:relative;isolation:isolate;flex:1;display:grid;align-content:center;justify-items:center;gap:.7rem;margin:.45rem .45rem 0;padding:clamp(.85rem,2vw,1.15rem);background:var(--win);border:1px solid var(--win-edge);border-radius:5px;overflow:hidden}
+/* the category glow rises from the sill */
+.window::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(130% 62% at 50% 112%,rgb(var(--cat-glow)/.34),transparent 72%);opacity:.75;transition:opacity .45s ease-out}
+/* the pointer light reaches into the window, behind the artwork only */
+.window::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle 15rem at var(--lx,-30rem) var(--ly,-30rem),rgb(var(--lamp-rgb)/.15),transparent 70%);opacity:0;transition:opacity .5s ease-out}
+.lit .window::before{opacity:1}
+.ficha:hover .window::after,.ficha:focus-within .window::after{opacity:1}
+.art{position:relative;width:100%;aspect-ratio:var(--ar);box-shadow:0 2px 3px rgba(0,0,0,.3),0 16px 26px -14px rgba(0,0,0,.75);transition:transform .5s cubic-bezier(.16,1,.3,1);forced-color-adjust:none}
+.art svg{display:block;width:100%;height:100%}
+.ficha:hover .art{transform:translateY(-2px)}
+.r-3x4{--ar:3/4}.r-4x3{--ar:4/3}.r-1x1{--ar:1/1}.r-16x9{--ar:16/9}
+.ph{position:absolute;left:.45rem;top:.45rem;padding:.12rem .45rem;border-radius:3px;background:rgba(7,11,20,.8);color:#E8E4DA;font-size:.75rem;font-weight:600;letter-spacing:.01em;line-height:1.4}
+.credit{margin:0;justify-self:stretch;font-size:.8125rem;line-height:1.4;color:var(--on-win-muted);text-wrap:pretty}
+.credit b{font-weight:600;color:var(--on-win)}
+/* no image: a neutral empty mat, not an illustration */
+.art.is-empty{display:grid;place-content:center;justify-items:center;gap:.5rem;box-shadow:none;border:1.5px dashed rgba(232,228,218,.3);border-radius:3px;color:var(--on-win-muted);font-size:.875rem;text-align:center;padding:1rem}
+.art.is-empty svg{width:34px;height:34px}
+
+.plate{position:relative;display:grid;gap:.4rem;padding:.9rem 6.5rem 1rem 1.05rem}
+.plate h3{font-size:1.4375rem;font-weight:580;letter-spacing:-.014em;line-height:1.1;font-variation-settings:"opsz" 36,"SOFT" 100,"WONK" 1}
+.plate h3 a{text-decoration:underline;text-decoration-color:transparent;text-decoration-thickness:2px;transition:text-decoration-color .2s ease-out}
+/* the whole front is the link's hit area; the flip button sits above it */
+.plate h3 a::after{content:"";position:absolute;inset:-1px;z-index:1;border-radius:8px}
+.front{position:relative}
+.front .plate{position:static}
+.ficha:hover .plate h3 a{text-decoration-color:var(--cat)}
+@supports selector(:has(*)){
+  .plate h3 a:focus-visible{outline:none}
+  .ficha:has(.plate h3 a:focus-visible) .front{outline:3px solid var(--focus);outline-offset:3px}
+}
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:.25rem 1rem;margin:0;font-size:.875rem;font-weight:600}
+.meta .cat{display:inline-flex;align-items:center;gap:.5rem;color:var(--cat)}
+.meta .kind{color:var(--muted)}
+
+.flip{position:absolute;right:.7rem;bottom:.7rem;z-index:3;display:inline-flex;align-items:center;gap:.4rem;min-height:44px;padding:0 .95rem 0 .75rem;border:1.5px solid var(--field);border-radius:999px;background:var(--surface);color:var(--text);font:inherit;font-size:.875rem;font-weight:600;cursor:pointer;transition:background-color .15s ease-out,color .15s ease-out,border-color .15s ease-out}
+.flip svg{width:18px;height:18px;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.flip:hover{border-color:var(--text)}
+.flip[aria-pressed="true"]{background:var(--btn-bg);color:var(--btn-fg);border-color:var(--btn-bg)}
+.flip[aria-pressed="true"] svg{transform:rotate(180deg)}
+
+/* The back: the verso of a framed work, with its label */
+.back{padding:1.1rem 1.1rem 4.6rem;gap:.85rem}
+.back::before{content:"";position:absolute;inset:.45rem;border:1px dashed var(--line-strong);border-radius:5px;pointer-events:none}
+.back h3{font-size:1.3125rem;font-weight:580;letter-spacing:-.012em;font-variation-settings:"opsz" 36,"SOFT" 100,"WONK" 1;padding:0 .25rem}
+.verso{display:grid;gap:.55rem;margin:0;padding:0 .25rem}
+.verso div{display:grid;grid-template-columns:6.4rem minmax(0,1fr);gap:.15rem .6rem;align-items:baseline}
+.verso dt{font-family:Fraunces,ui-serif,Georgia,serif;font-style:italic;font-weight:420;font-size:.9375rem;color:var(--muted);font-variation-settings:"opsz" 18,"SOFT" 100}
+.verso dd{margin:0;font-size:.9375rem;line-height:1.45;min-width:0}
+.verso dd.cat{display:inline-flex;align-items:center;gap:.5rem;color:var(--cat);font-weight:600}
+.verso ul{margin:0;padding:0 0 0 1rem}
+.verso li::marker{color:var(--cat)}
+.verso a{font-weight:600;text-decoration-color:var(--cat);text-decoration-thickness:2px}
+.verso-link{position:absolute;left:1.35rem;bottom:1.15rem;display:inline-flex;align-items:center;gap:.4rem;min-height:44px;font-weight:600;text-decoration:underline;text-decoration-color:var(--cat);text-decoration-thickness:2px}
+.verso-link svg{width:16px;height:16px}
+@media (max-width:22.5rem){.verso div{grid-template-columns:1fr}}
+
+.empty{display:grid;justify-items:center;text-align:center;gap:.75rem;padding:3rem 1rem;border:1.5px dashed var(--line-strong);border-radius:8px}
+.empty h3{font-size:1.75rem;font-variation-settings:"opsz" 48,"SOFT" 100,"WONK" 1}
+.empty p{margin:0;max-width:44ch;color:var(--muted)}
+
+.pager{margin-top:3.5rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;border-top:1px solid var(--line);padding-top:1.5rem}
+.pager ul{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0}
+.pg{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-width:46px;min-height:46px;padding:0 .9rem;border:1.5px solid var(--field);border-radius:6px;text-decoration:none;font-weight:600;font-variant-numeric:tabular-nums}
+a.pg[href]:not([aria-current]):hover{background:var(--surface);border-color:var(--text)}
+.pg[aria-current="page"]{background:var(--btn-bg);color:var(--btn-fg);border-color:var(--btn-bg)}
+.pg[aria-disabled="true"]{border-style:dashed;color:var(--muted);cursor:not-allowed}
+.pg-arrow{width:.5rem;height:.5rem;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg)}
+.pg-next{transform:rotate(-135deg)}
+.pg-note{margin:0;color:var(--muted);font-variant-numeric:tabular-nums}
+
+.site-foot{margin-top:1rem}
+.foot-inner{display:grid;gap:.9rem;padding-block:2.25rem 3rem;color:var(--muted);font-size:.9375rem}
+.foot-inner p{margin:0;max-width:70ch}
+.foot-brand{font-family:Fraunces,ui-serif,Georgia,serif;font-size:1.25rem;color:var(--text);font-variation-settings:"opsz" 24,"SOFT" 100,"WONK" 1}
+.foot-inner strong{color:var(--text)}
+
+/* Theme change: the new theme opens as a circle from the toggle (View Transitions, where supported) */
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+
+/* Reduced motion: no 3D turn (crossfade), no light, no lift */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .ficha-in{transition:none}
+  .ficha.is-flipped .ficha-in{transform:none}
+  .face{-webkit-backface-visibility:visible;backface-visibility:visible;transition:opacity .25s ease-out}
+  .back{transform:none;opacity:0}
+  .ficha.is-flipped .front{opacity:0}
+  .ficha.is-flipped .back{opacity:1}
+  .flip svg,.theme-btn .half,.art{transition:none}
+  .ficha:hover .art{transform:none}
+  .pool,.window::before{display:none}
+}
+@media (forced-colors:active){
+  .pool,.window::before,.window::after,.lamp::after{display:none}
+  .face,.window{border:1px solid CanvasText}
+  .lamp{forced-color-adjust:none;background:CanvasText}
+}
+@media print{.pool{display:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#catalogo">Saltar al catálogo</a>
+<div class="pool" id="pool" aria-hidden="true"></div>
+
+<svg class="defs" aria-hidden="true" focusable="false"><defs>
+  <symbol id="i-flip" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9a8 8 0 0 1 14-3l2 2"/><path d="M20 4v4h-4"/><path d="M20 15a8 8 0 0 1-14 3l-2-2"/><path d="M4 20v-4h4"/></g></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20 20"/></g></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m7 9.5 5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7 7 17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.5v.01"/></g></symbol>
+  <symbol id="i-frame" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="1"/><rect x="7" y="8" width="10" height="8" stroke-dasharray="2 2"/></g></symbol>
+  <filter id="f-wash" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".018" numOctaves="3" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="46" xChannelSelector="R" yChannelSelector="G" result="d"/><feGaussianBlur in="d" stdDeviation="1.6"/></filter>
+  <filter id="f-paper" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".75" numOctaves="2" seed="2"/><feColorMatrix values="0 0 0 0 .25  0 0 0 0 .2  0 0 0 0 .15  1.3 0 0 0 -.62"/></filter>
+  <filter id="f-grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".95" numOctaves="2" seed="5"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1.4 0 0 0 -.6"/></filter>
+  <filter id="f-rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".09" numOctaves="2" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"/></filter>
+  <filter id="f-torn" x="-10%" y="-10%" width="120%" height="125%"><feTurbulence type="fractalNoise" baseFrequency=".06" numOctaves="3" seed="9" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="11" xChannelSelector="R" yChannelSelector="G" result="d"/><feDropShadow in="d" dx="1.5" dy="3" stdDeviation="2.5" flood-color="#000" flood-opacity=".35"/></filter>
+  <filter id="f-blur-lg" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="16"/></filter>
+  <filter id="f-blur-sm" x="-5%" y="-20%" width="110%" height="140%"><feGaussianBlur stdDeviation="2"/></filter>
+  <filter id="f-smudge" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="10"/></filter>
+  <pattern id="hatch-a" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(38)"><path d="M0 0V7" stroke="#2A2724" stroke-width="1.5" stroke-opacity=".7"/></pattern>
+  <pattern id="hatch-b" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><path d="M0 0V5" stroke="#2A2724" stroke-width="1.6" stroke-opacity=".8"/></pattern>
+  <linearGradient id="g-dusk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#26344F"/><stop offset=".38" stop-color="#6A7898"/><stop offset=".6" stop-color="#D4A389"/><stop offset=".7" stop-color="#EFC9A1"/><stop offset=".75" stop-color="#A88C86"/><stop offset="1" stop-color="#2A2A33"/></linearGradient>
+  <linearGradient id="g-dig-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2B1E4F"/><stop offset=".55" stop-color="#8E3B6B"/><stop offset="1" stop-color="#E0765A"/></linearGradient>
+  <linearGradient id="g-dig-orb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD9A0"/><stop offset="1" stop-color="#F2835B"/></linearGradient>
+  <linearGradient id="g-dig-wave" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F6A85B"/><stop offset="1" stop-color="#F05D5E"/></linearGradient>
+  <pattern id="woven" width="12" height="12" patternUnits="userSpaceOnUse"><rect class="w-base" width="12" height="12"/><rect class="w-a" x="1" y="1" width="4" height="4"/><rect class="w-a" x="7" y="7" width="4" height="4"/><rect class="w-b" x="7" y="1" width="4" height="4"/><rect class="w-b" x="1" y="7" width="4" height="4"/></pattern>
+</defs></svg>
+
+<header class="site-head wrap">
+  <a class="brand" href="index.html"><svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true" focusable="false"><rect class="bm-win" x="3" y="2" width="28" height="30" rx="3"/><ellipse class="bm-glow" cx="17" cy="31" rx="11" ry="5" opacity=".55"/><rect x="9" y="8" width="16" height="16" rx="1" fill="#E8E4DA"/></svg><span>Mitos y Leyendas<small>de El Salvador</small></span></a>
+  <div class="head-end">
+    <nav class="nav" aria-label="Principal"><a href="index.html" aria-current="page">Catálogo</a><a href="../index.html">Direcciones</a></nav>
+    <button class="theme-btn" id="tema" type="button" aria-label="Cambiar a tema oscuro"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path class="half" d="M12 3.8a8.2 8.2 0 0 1 0 16.4z" fill="currentColor"/></svg><span class="theme-txt">Tema oscuro</span></button>
+  </div>
+</header>
+
+<main id="contenido">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-grid wrap">
+      <h1 id="hero-title"><span class="h1-a">Mitos y leyendas</span> <span class="h1-b">de El Salvador</span></h1>
+      <div>
+        <p class="lede">Personajes, lugares, objetos y grupos que guarda la tradición oral. Cada ficha enmarca una obra en su proporción original; al voltearla, muestra sus datos.</p>
+        <ul class="legend" aria-label="Categorías">
+          <li data-cat="mito"><span class="lamp" aria-hidden="true"></span>Mito</li>
+          <li data-cat="leyenda"><span class="lamp" aria-hidden="true"></span>Leyenda</li>
+          <li data-cat="tradicion"><span class="lamp" aria-hidden="true"></span>Tradición</li>
+        </ul>
+        <p class="legend-note">La luz al pie de cada ventana tiene el color de su categoría; el nombre de la categoría siempre está escrito.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="woven" aria-hidden="true"><svg width="100%" height="14" focusable="false"><rect class="w-line" y="0" width="100%" height="1"/><rect y="2" width="100%" height="10" fill="url(#woven)"/><rect class="w-line" y="13" width="100%" height="1"/></svg></div>
+
+  <section id="catalogo" class="catalog wrap" aria-labelledby="cat-title" tabindex="-1">
+    <div class="cat-head">
+      <h2 id="cat-title">Catálogo</h2>
+      <p class="cat-note">Las imágenes son marcadores provisionales en estilos distintos. La obra final la harán artistas salvadoreños, cada quien en su estilo; el marco no la recorta ni la retoca.</p>
+    </div>
+
+    <form id="filtros" class="filters" role="search" aria-label="Buscar y filtrar el catálogo" action="index.html" method="get" novalidate>
+      <div class="field field-q">
+        <label for="q">Buscar</label>
+        <span class="control"><svg class="i-search" aria-hidden="true" focusable="false"><use href="#i-search"/></svg><input id="q" name="q" type="search" maxlength="200" placeholder="Ej.: río, ceniza, camino" autocomplete="off" aria-describedby="q-hint q-err"></span>
+        <p class="hint" id="q-hint">De 1 a 200 caracteres.</p>
+        <p class="err" id="q-err" aria-live="polite" hidden><svg aria-hidden="true" focusable="false"><use href="#i-alert"/></svg><span></span></p>
+      </div>
+      <div class="field">
+        <label for="tipo">Tipo</label>
+        <span class="control"><select id="tipo" name="tipo">
+          <option value="">Todos</option><option value="CHARACTER">Personaje</option><option value="PLACE">Lugar</option><option value="OBJECT">Objeto</option><option value="GROUP">Grupo</option><option value="EVENT">Evento</option>
+        </select><svg class="i-chev" aria-hidden="true" focusable="false"><use href="#i-chev"/></svg></span>
+      </div>
+      <div class="field">
+        <label for="categoria">Categoría</label>
+        <span class="control"><select id="categoria" name="categoria">
+          <option value="">Todas</option><option value="MYTH">Mito</option><option value="LEGEND">Leyenda</option><option value="TRADITION">Tradición</option>
+        </select><svg class="i-chev" aria-hidden="true" focusable="false"><use href="#i-chev"/></svg></span>
+      </div>
+      <div class="field field-wide">
+        <label for="departamento">Departamento</label>
+        <span class="control"><select id="departamento" name="departamento">
+          <option value="">Todos</option><option>Ahuachapán</option><option>Cabañas</option><option>Chalatenango</option><option>Cuscatlán</option><option>La Libertad</option><option>La Paz</option><option>La Unión</option><option>Morazán</option><option>San Miguel</option><option>San Salvador</option><option>San Vicente</option><option>Santa Ana</option><option>Sonsonate</option><option>Usulután</option>
+        </select><svg class="i-chev" aria-hidden="true" focusable="false"><use href="#i-chev"/></svg></span>
+      </div>
+      <div class="field field-wide">
+        <label for="orden">Ordenar por</label>
+        <span class="control"><select id="orden" name="orden">
+          <option value="name-asc">Nombre, A a Z</option><option value="name-desc">Nombre, Z a A</option><option value="new" selected>Más recientes</option><option value="old">Más antiguas</option>
+        </select><svg class="i-chev" aria-hidden="true" focusable="false"><use href="#i-chev"/></svg></span>
+      </div>
+      <div class="field field-go"><button class="btn" type="submit">Buscar</button></div>
+    </form>
+
+    <div class="status">
+      <p id="conteo" class="count" aria-live="polite"><strong>10 fichas</strong> en esta página, de 18</p>
+      <ul id="activos" class="chips" aria-label="Filtros activos"></ul>
+    </div>
+    <p id="aviso" class="visually-hidden" aria-live="polite"></p>
+
+    <ul id="fichas" class="fichas">
+
+      <li class="ficha" data-cat="leyenda" data-kind="PLACE" data-category="LEGEND" data-depts="San Miguel|La Unión" data-name="Laguna de Olomega" data-created="2026-10-20T08:10">
+        <div class="ficha-in">
+          <article class="face front" aria-labelledby="t-olomega">
+            <figure class="window">
+              <div class="art r-16x9" role="img" aria-label="Marcador de obra: aguada horizontal en verdes y grises azulados. No es la obra final."><svg viewBox="0 0 480 270" aria-hidden="true" focusable="false"><rect width="480" height="270" fill="#EEF0EA"/><g filter="url(#f-wash)"><rect x="-20" y="58" width="520" height="72" rx="30" fill="#8FB3B0" fill-opacity=".55"/><rect x="-20" y="122" width="520" height="62" rx="30" fill="#4E7F86" fill-opacity=".45"/><rect x="-20" y="176" width="520" height="72" rx="30" fill="#2F5B66" fill-opacity=".38"/><ellipse cx="360" cy="56" rx="80" ry="26" fill="#C8B79A" fill-opacity=".45"/></g><rect width="480" height="270" filter="url(#f-paper)" opacity=".45"/></svg><span class="ph" aria-hidden="true">Marcador</span></div>
+              <figcaption class="credit">Obra: <b>Nombre de la artista</b> · acuarela sobre papel</figcaption>
+            </figure>
+            <div class="plate">
+              <h3 id="t-olomega"><a href="entity.html">Laguna de Olomega</a></h3>
+              <p class="meta"><span class="cat"><span class="lamp" aria-hidden="true"></span>Leyenda</span><span class="kind">Lugar</span></p>
+            </div>
+          </article>
+          <section class="face back" aria-labelledby="b-olomega" inert>
+            <h3 id="b-olomega">Laguna de Olomega</h3>
+            <dl class="verso">
+              <div><dt>Tipo</dt><dd>Lugar</dd></div>
+              <div><dt>Categoría</dt><dd class="cat"><span class="lamp" aria-hidden="true"></span>Leyenda</dd></div>
+              <div><dt>Dónde</dt><dd>San Miguel, La Unión</dd></div>
+              <div><dt>Se cuenta</dt><dd>Un relato de sirena cerca de la isla Olomegón.</dd></div>
+              <div><dt>Fuente</dt><dd>Tradición oral</dd></div>
+            </dl>
+            <a class="verso-link" href="entity.html">Abrir la ficha<svg aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+          </section>
+        </div>
+        <button class="flip" type="button" aria-pressed="false" aria-label="Datos de Laguna de Olomega"><svg aria-hidden="true" focusable="false"><use href="#i-flip"/></svg>Datos</button>
+      </li>
+
+      <li class="ficha" data-cat="leyenda" data-kind="GROUP" data-category="LEGEND" data-depts="Sonsonate" data-name="La Familia Girola" data-created="2026-09-12T17:30">
+        <div class="ficha-in">
+          <article class="face front" aria-labelledby="t-girola">
+            <figure class="window">
+              <div class="art r-3x4" role="img" aria-label="Marcador de obra: grabado vertical en tinta índigo con ranuras claras. No es la obra final."><svg viewBox="0 0 300 400" aria-hidden="true" focusable="false"><rect width="300" height="400" fill="#F0EADC"/><g filter="url(#f-rough)"><rect x="18" y="18" width="264" height="364" fill="#1F2F6B"/><g fill="#F0EADC"><rect x="40" y="44" width="8" height="300" rx="4"/><rect x="62" y="80" width="5" height="250" rx="2.5"/><rect x="82" y="40" width="10" height="190" rx="5"/><rect x="82" y="250" width="10" height="100" rx="5"/><rect x="108" y="96" width="4" height="260" rx="2"/><rect x="126" y="50" width="9" height="140" rx="4.5"/><rect x="126" y="210" width="9" height="150" rx="4.5"/><rect x="152" y="70" width="6" height="280" rx="3"/><rect x="174" y="40" width="11" height="230" rx="5.5"/><rect x="200" y="110" width="4" height="250" rx="2"/><rect x="218" y="48" width="8" height="120" rx="4"/><rect x="218" y="186" width="8" height="170" rx="4"/><rect x="242" y="76" width="6" height="270" rx="3"/></g></g></svg><span class="ph" aria-hidden="true">Marcador</span></div>
+            </figure>
+            <div class="plate">
+              <h3 id="t-girola"><a href="entity.html">La Familia Girola</a></h3>
+              <p class="meta"><span class="cat"><span class="lamp" aria-hidden="true"></span>Leyenda</span><span class="kind">Grupo</span></p>
+            </div>
+          </article>
+          <section class="face back" aria-labelledby="b-girola" inert>
+            <h3 id="b-girola">La Familia Girola</h3>
+            <dl class="verso">
+              <div><dt>Tipo</dt><dd>Grupo</dd></div>
+              <div><dt>Categoría</dt><dd class="cat"><span class="lamp" aria-hidden="true"></span>Leyenda</dd></div>
+              <div><dt>Dónde</dt><dd>Sonsonate</dd></div>
+              <div><dt>Se cuenta</dt><dd>Grupo familiar que recuerda la tradición oral; los detalles cambian de un relato a otro.</dd></div>
+              <div><dt>Fuente</dt><dd>Tradición oral</dd></div>
+            </dl>
+            <a class="verso-link" href="entity.html">Abrir la ficha<svg aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+          </section>
+        </div>
+        <button class="flip" type="button" aria-pressed="false" aria-label="Datos de La Familia Girola"><svg aria-hidden="true" focusable="false"><use href="#i-flip"/></svg>Datos</button>
+      </li>
+
+      <li class="ficha" data-cat="leyenda" data-kind="CHARACTER" data-category="LEGEND" data-depts="Chalatenango|San Vicente" data-name="El Cadejo Negro" data-created="2026-08-14T11:15">
+        <div class="ficha-in">
+          <article class="face front" aria-labelledby="t-negro">
+            <figure class="window">
+              <div class="art r-3x4" role="img" aria-label="Marcador de obra: estudio abstracto al carboncillo con tramas cruzadas. No es la obra final."><svg viewBox="0 0 300 400" aria-hidden="true" focusable="false"><rect width="300" height="400" fill="#E9E5DC"/><ellipse cx="150" cy="230" rx="110" ry="130" fill="#3A3734" opacity=".22" filter="url(#f-smudge)"/><g filter="url(#f-rough)"><path d="M60 90C110 60 220 70 240 150C260 230 210 330 140 340C80 348 40 280 50 200C55 150 40 110 60 90Z" fill="url(#hatch-a)"/><path d="M120 170C170 150 230 190 220 260C210 320 150 330 120 300C95 270 90 190 120 170Z" fill="url(#hatch-b)"/><path d="M150 230C175 225 195 250 185 280C175 300 150 300 140 285C130 265 135 235 150 230Z" fill="#26231F" opacity=".75"/></g><path d="M40 362C100 354 200 360 262 352" stroke="#2A2724" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".6" filter="url(#f-rough)"/></svg><span class="ph" aria-hidden="true">Marcador</span></div>
+            </figure>
+            <div class="plate">
+              <h3 id="t-negro"><a href="entity.html">El Cadejo Negro</a></h3>
+              <p class="meta"><span class="cat"><span class="lamp" aria-hidden="true"></span>Leyenda</span><span class="kind">Personaje</span></p>
+            </div>
+          </article>
+          <section class="face back" aria-labelledby="b-negro" inert>
+            <h3 id="b-negro">El Cadejo Negro</h3>
+            <dl class="verso">
+              <div><dt>Tipo</dt><dd>Personaje</dd></div>
+              <div><dt>Categoría</dt><dd class="cat"><span class="lamp" aria-hidden="true"></span>Leyenda</dd></div>
+              <div><dt>Dónde</dt><dd>Chalatenango, San Vicente</dd></div>
+              <div><dt>Rasgos</dt><dd><ul><li>Ojos rojos cuando se vuelve hostil</li><li>Lo anuncia un olor a cabra</li></ul></dd></div>
+              <div><dt>Enemigo de</dt><dd><a href="entity.html">El Cadejo Blanco</a></dd></div>
+            </dl>
+            <a class="verso-link" href="entity.html">Abrir la ficha<svg aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+          </section>
+        </div>
+        <button class="flip" type="button" aria-pressed="false" aria-label="Datos de El Cadejo Negro"><svg aria-hidden="true" focusable="false"><use href="#i-flip"/></svg>Datos</button>
+      </li>
+
+      <li class="ficha" data-cat="leyenda" data-kind="CHARACTER" data-category="LEGEND" data-depts="Chalatenango|Cuscatlán" data-name="El Cadejo Blanco" data-created="2026-08-14T10:30">
+        <div class="ficha-in">
+          <article class="face front" aria-labelledby="t-blanco">
+            <figure class="window">
+              <div class="art r-1x1" role="img" aria-label="Marcador de obra: grabado en linóleo, tinta negra con líneas onduladas talladas. No es la obra final."><svg viewBox="0 0 300 300" aria-hidden="true" focusable="false"><rect width="300" height="300" fill="#EEE7D8"/><g filter="url(#f-rough)"><rect x="16" y="16" width="268" height="268" fill="#1A1816"/><g fill="none" stroke="#EEE7D8" stroke-linecap="round"><path d="M32 52C82 38 120 66 160 52S240 38 268 52" stroke-width="6"/><path d="M32 76C82 90 120 62 160 76S240 90 268 76" stroke-width="2.5"/><path d="M32 100C82 86 120 114 160 100S240 86 268 100" stroke-width="8"/><path d="M32 124C82 138 120 110 160 124S240 138 268 124" stroke-width="3.5"/><path d="M32 150C82 136 120 164 160 150S240 136 268 150" stroke-width="10"/><path d="M32 174C82 188 120 160 160 174S240 188 268 174" stroke-width="2.5"/><path d="M32 198C82 184 120 212 160 198S240 184 268 198" stroke-width="7"/><path d="M32 222C82 236 120 208 160 222S240 236 268 222" stroke-width="4"/><path d="M32 246C82 232 120 260 160 246S240 232 268 246" stroke-width="6"/></g><g fill="#EEE7D8"><path d="M40 28h6l-3 10z"/><path d="M58 27h5l-2.5 9z"/><path d="M228 268h6l-3-10z"/><path d="M246 269h5l-2.5-9z"/></g></g></svg><span class="ph" aria-hidden="true">Marcador</span></div>
+              <figcaption class="credit">Obra: <b>Nombre Apellido Apellido</b> · grabado en linóleo, tinta sobre papel de algodón</figcaption>
+            </figure>
+            <div class="plate">
+              <h3 id="t-blanco"><a href="entity.html">El Cadejo Blanco</a></h3>
+              <p class="meta"><span class="cat"><span class="lamp" aria-hidden="true"></span>Leyenda</span><span class="kind">Personaje</span></p>
+            </div>
+          </article>
+          <section class="face back" aria-labelledby="b-blanco" inert>
+            <h3 id="b-blanco">El Cadejo Blanco</h3>
+            <dl class="verso">
+              <div><dt>Tipo</dt><dd>Personaje</dd></div>
+              <div><dt>Categoría</dt><dd class="cat"><span class="lamp" aria-hidden="true"></span>Leyenda</dd></div>
+              <div><dt>Dónde</dt><dd>Chalatenango, Cuscatlán</dd></div>
+              <div><dt>Rasgos</dt><dd><ul><li>Perro espíritu de los caminos</li><li>Ojos azules en calma</li></ul></dd></div>
+              <div><dt>Enemigo de</dt><dd><a href="entity.html">El Cadejo Negro</a></dd></div>
+            </dl>
+            <a class="verso-link" href="entity.html">Abrir la ficha<svg aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+          </section>
+        </div>
+        <button class="flip" type="button" aria-pressed="false" aria-label="Datos de El Cadejo Blanco"><svg aria-hidden="true" focusable="false"><use href="#i-flip"/></svg>Datos</button>
+      </li>
+
+      <li class="ficha" data-cat="tradicion" data-kind="PLACE" data-category="TRADITION" data-depts="Sonsonate" data-name="Volcán Izalco" data-created="2026-07-02T06:45">
+        <div class="ficha-in">
+          <article class="face front" aria-labelledby="t-izalco">
+            <figure class="window">
+              <div class="art r-16x9" role="img" aria-label="Marcador de obra: imagen de aspecto fotográfico, un cielo de atardecer desenfocado sobre una franja oscura. No es la obra final."><svg viewBox="0 0 480 270" aria-hidden="true" focusable="false"><rect width="480" height="270" fill="url(#g-dusk)"/><ellipse cx="320" cy="178" rx="150" ry="34" fill="#FFE2B6" opacity=".55" filter="url(#f-blur-lg)"/><path d="M0 206C70 198 150 204 240 199C320 195 400 190 480 198V270H0Z" fill="#1C1E27" filter="url(#f-blur-sm)"/><rect width="480" height="270" filter="url(#f-grain)" opacity=".22"/></svg><span class="ph" aria-hidden="true">Marcador</span></div>
+              <figcaption class="credit">Obra: <b>Nombre de la artista</b> · fotografía digital</figcaption>
+            </figure>
+            <div class="plate">
+              <h3 id="t-izalco"><a href="entity.html">Volcán Izalco</a></h3>
+              <p class="meta"><span class="cat"><span class="lamp" aria-hidden="true"></span>Tradición</span><span class="kind">Lugar</span></p>
+            </div>
+          </article>
+          <section class="face back" aria-labelledby="b-izalco" inert>
+            <h3 id="b-izalco">Volcán Izalco</h3>
+            <dl class="verso">
+              <div><dt>Tipo</dt><dd>Lugar</dd></div>
+              <div><dt>Categoría</dt><dd class="cat"><span class="lamp" aria-hidden="true"></span>Tradición</dd></div>
+              <div><dt>Dónde</dt><dd>Sonsonate</dd></div>
+              <div><dt>Rasgos</dt><dd><ul><li>Nació en 1770; ardió hasta 1958</li><li>Llamado Faro del Pacífico</li></ul></dd></div>
+              <div><dt>Fuente</dt><dd><cite>Mitos y leyendas de El Salvador</cite></dd></div>
+            </dl>
+            <a class="verso-link" href="entity.html">Abrir la ficha<svg aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+          </section>
+        </div>
+        <button class="flip" type="button" aria-pressed="false" aria-label="Datos de Volcán Izalco"><svg aria-hidden="true" focusable="false"><use href="#i-flip"/></svg>Datos</button>
+      </li>
+
+      <li class="ficha" data-cat="mito" data-kind="CHARACTER" data-category="MYTH" data-depts="San Miguel|Usulután" data-name="El Cipitío" data-created="2026-06-30T16:00">
+        <div class="ficha-in">
+          <article class="face front" aria-labelledby="t-cipitio">
+            <figure class="window">
+              <div class="art r-3x4" role="img" aria-label="Marcador de obra: composición de bloques de color planos en verde, ocre, terracota y azul. No es la obra final."><svg viewBox="0 0 300 400" aria-hidden="true" focusable="false"><rect width="300" height="400" fill="#EDE3CC"/><rect width="186" height="236" fill="#2F5D50"/><rect x="186" width="114" height="132" fill="#D9A441"/><rect x="186" y="132" width="114" height="268" fill="#B5523B"/><rect y="236" width="112" height="164" fill="#1E2A44"/><circle cx="186" cy="236" r="62" fill="#EDE3CC"/><rect x="112" y="318" width="74" height="82" fill="#D9A441"/><rect x="226" y="300" width="40" height="40" fill="#EDE3CC"/></svg><span class="ph" aria-hidden="true">Marcador</span></div>
+              <figcaption class="credit">Obra: <b>Nombre del artista</b> · acrílico</figcaption>
+            </figure>
+            <div class="plate">
+              <h3 id="t-cipitio"><a href="entity.html">El Cipitío</a></h3>
+              <p class="meta"><span class="cat"><span class="lamp" aria-hidden="true"></span>Mito</span><span class="kind">Personaje</span></p>
+            </div>
+          </article>
+          <section class="face back" aria-labelledby="b-cipitio" inert>
+            <h3 id="b-cipitio">El Cipitío</h3>
+            <dl class="verso">
+              <div><dt>Tipo</dt><dd>Personaje</dd></div>
+              <div><dt>Categoría</dt><dd class="cat"><span class="lamp" aria-hidden="true"></span>Mito</dd></div>
+              <div><dt>Dónde</dt><dd>San Miguel, Usulután</dd></div>
+              <div><dt>Rasgos</dt><dd><ul><li>Pies al revés</li><li>Come ceniza</li></ul></dd></div>
+              <div><dt>Hijo de</dt><dd><a href="entity.html">La Ciguanaba</a></dd></div>
+            </dl>
+            <a class="verso-link" href="entity.html">Abrir la ficha<svg aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+          </section>
+        </div>
+        <button class="flip" type="button" aria-pressed="false" aria-label="Datos de El Cipitío"><svg aria-hidden="true" focusable="false"><use href="#i-flip"/></svg>Datos</button>
+      </li>
+
+      <li class="ficha" data-cat="leyenda" data-kind="CHARACTER" data-category="LEGEND" data-depts="La Libertad|San Salvador" data-name="La Ciguanaba" data-created="2026-05-18T20:05">
+        <div class="ficha-in">
+          <article class="face front" aria-labelledby="t-ciguanaba">
+            <figure class="window">
+              <div class="art r-4x3" role="img" aria-label="Marcador de obra: acuarela suelta con manchas azules, ocres y rosadas. No es la obra final."><svg viewBox="0 0 400 300" aria-hidden="true" focusable="false"><rect width="400" height="300" fill="#F1EBDF"/><g filter="url(#f-wash)"><ellipse cx="140" cy="110" rx="130" ry="62" fill="#7EA3BA" fill-opacity=".55"/><ellipse cx="270" cy="150" rx="120" ry="70" fill="#4F7290" fill-opacity=".42"/><ellipse cx="170" cy="228" rx="170" ry="38" fill="#B98F5A" fill-opacity=".4"/><ellipse cx="320" cy="70" rx="60" ry="34" fill="#D7A995" fill-opacity=".5"/></g><rect width="400" height="300" filter="url(#f-paper)" opacity=".5"/></svg><span class="ph" aria-hidden="true">Marcador</span></div>
+              <figcaption class="credit">Obra: <b>Nombre de la artista</b> · acuarela</figcaption>
+            </figure>
+            <div class="plate">
+              <h3 id="t-ciguanaba"><a href="entity.html">La Ciguanaba</a></h3>
+              <p class="meta"><span class="cat"><span class="lamp" aria-hidden="true"></span>Leyenda</span><span class="kind">Personaje</span></p>
+            </div>
+          </article>
+          <section class="face back" aria-labelledby="b-ciguanaba" inert>
+            <h3 id="b-ciguanaba">La Ciguanaba</h3>
+            <dl class="verso">
+              <div><dt>Tipo</dt><dd>Personaje</dd></div>
+              <div><dt>Categoría</dt><dd class="cat"><span class="lamp" aria-hidden="true"></span>Leyenda</dd></div>
+              <div><dt>Dónde</dt><dd>La Libertad, San Salvador</dd></div>
+              <div><dt>Rasgos</dt><dd><ul><li>Cabello largo que le oculta el rostro</li><li>Aparece de noche junto al agua</li></ul></dd></div>
+              <div><dt>Madre de</dt><dd><a href="entity.html">El Cipitío</a></dd></div>
+            </dl>
+            <a class="verso-link" href="entity.html">Abrir la ficha<svg aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+          </section>
+        </div>
+        <button class="flip" type="button" aria-pressed="false" aria-label="Datos de La Ciguanaba"><svg aria-hidden="true" focusable="false"><use href="#i-flip"/></svg>Datos</button>
+      </li>
+
+      <li class="ficha" data-cat="leyenda" data-kind="OBJECT" data-category="LEGEND" data-depts="San Salvador" data-name="La Carreta Chillona" data-created="2026-04-09T21:40">
+        <div class="ficha-in">
+          <article class="face front" aria-labelledby="t-carreta">
+            <figure class="window">
+              <div class="art r-1x1" role="img" aria-label="Marcador de obra: ilustración digital con degradados violetas y naranjas y formas suaves. No es la obra final."><svg viewBox="0 0 300 300" aria-hidden="true" focusable="false"><rect width="300" height="300" fill="url(#g-dig-bg)"/><rect x="150" y="34" width="120" height="150" rx="60" transform="rotate(28 210 109)" fill="url(#g-dig-orb)" opacity=".9"/><rect x="58" y="52" width="64" height="40" rx="20" transform="rotate(-18 90 72)" fill="#FFFFFF" opacity=".12"/><path d="M0 205C60 170 120 230 180 200S270 160 300 180V300H0Z" fill="url(#g-dig-wave)"/><path d="M0 245C70 220 140 270 210 245S280 225 300 235V300H0Z" fill="#2A1B47" opacity=".88"/></svg><span class="ph" aria-hidden="true">Marcador</span></div>
+              <figcaption class="credit">Obra: <b>Nombre del artista</b> · ilustración digital</figcaption>
+            </figure>
+            <div class="plate">
+              <h3 id="t-carreta"><a href="entity.html">La Carreta Chillona</a></h3>
+              <p class="meta"><span class="cat"><span class="lamp" aria-hidden="true"></span>Leyenda</span><span class="kind">Objeto</span></p>
+            </div>
+          </article>
+          <section class="face back" aria-labelledby="b-carreta" inert>
+            <h3 id="b-carreta">La Carreta Chillona</h3>
+            <dl class="verso">
+              <div><dt>Tipo</dt><dd>Objeto</dd></div>
+              <div><dt>Categoría</dt><dd class="cat"><span class="lamp" aria-hidden="true"></span>Leyenda</dd></div>
+              <div><dt>Dónde</dt><dd>San Salvador</dd></div>
+              <div><dt>Se cuenta</dt><dd>Se oye chillar de noche por calles donde no pasa nadie.</dd></div>
+              <div><dt>Fuente</dt><dd>Tradición oral</dd></div>
+            </dl>
+            <a class="verso-link" href="entity.html">Abrir la ficha<svg aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+          </section>
+        </div>
+        <button class="flip" type="button" aria-pressed="false" aria-label="Datos de La Carreta Chillona"><svg aria-hidden="true" focusable="false"><use href="#i-flip"/></svg>Datos</button>
+      </li>
+
+      <li class="ficha" data-cat="leyenda" data-kind="CHARACTER" data-category="LEGEND" data-depts="Santa Ana|Chalatenango" data-name="La Llorona" data-created="2026-02-19T19:20">
+        <div class="ficha-in">
+          <article class="face front" aria-labelledby="t-llorona">
+            <figure class="window">
+              <div class="art r-4x3 is-empty" role="img" aria-label="Sin imagen todavía"><svg aria-hidden="true" focusable="false"><use href="#i-frame"/></svg><span aria-hidden="true">Sin imagen todavía</span></div>
+            </figure>
+            <div class="plate">
+              <h3 id="t-llorona"><a href="entity.html">La Llorona</a></h3>
+              <p class="meta"><span class="cat"><span class="lamp" aria-hidden="true"></span>Leyenda</span><span class="kind">Personaje</span></p>
+            </div>
+          </article>
+          <section class="face back" aria-labelledby="b-llorona" inert>
+            <h3 id="b-llorona">La Llorona</h3>
+            <dl class="verso">
+              <div><dt>Tipo</dt><dd>Personaje</dd></div>
+              <div><dt>Categoría</dt><dd class="cat"><span class="lamp" aria-hidden="true"></span>Leyenda</dd></div>
+              <div><dt>Dónde</dt><dd>Santa Ana, Chalatenango</dd></div>
+              <div><dt>Se cuenta</dt><dd>Llora junto al agua por sus hijos; se la oye antes de verla.</dd></div>
+              <div><dt>Fuente</dt><dd>Tradición oral</dd></div>
+            </dl>
+            <a class="verso-link" href="entity.html">Abrir la ficha<svg aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+          </section>
+        </div>
+        <button class="flip" type="button" aria-pressed="false" aria-label="Datos de La Llorona"><svg aria-hidden="true" focusable="false"><use href="#i-flip"/></svg>Datos</button>
+      </li>
+
+      <li class="ficha" data-cat="mito" data-kind="CHARACTER" data-category="MYTH" data-depts="Morazán|Cabañas" data-name="El Duende" data-created="2025-11-22T13:05">
+        <div class="ficha-in">
+          <article class="face front" aria-labelledby="t-duende">
+            <figure class="window">
+              <div class="art r-4x3" role="img" aria-label="Marcador de obra: collage de papeles rasgados en azul, rojo, crema y ocre. No es la obra final."><svg viewBox="0 0 400 300" aria-hidden="true" focusable="false"><rect width="400" height="300" fill="#D6C7AA"/><path d="M-10 40 250 20 270 170-10 190Z" fill="#2B4A6F" filter="url(#f-torn)"/><path d="M150 110 410 90 410 260 170 282Z" fill="#A33B2B" filter="url(#f-torn)"/><path d="M60 172 230 150 246 300 70 312Z" fill="#EDE4D0" filter="url(#f-torn)"/><path d="M282 22 360 32 350 112 272 102Z" fill="#C99A2E" filter="url(#f-torn)"/></svg><span class="ph" aria-hidden="true">Marcador</span></div>
+            </figure>
+            <div class="plate">
+              <h3 id="t-duende"><a href="entity.html">El Duende</a></h3>
+              <p class="meta"><span class="cat"><span class="lamp" aria-hidden="true"></span>Mito</span><span class="kind">Personaje</span></p>
+            </div>
+          </article>
+          <section class="face back" aria-labelledby="b-duende" inert>
+            <h3 id="b-duende">El Duende</h3>
+            <dl class="verso">
+              <div><dt>Tipo</dt><dd>Personaje</dd></div>
+              <div><dt>Categoría</dt><dd class="cat"><span class="lamp" aria-hidden="true"></span>Mito</dd></div>
+              <div><dt>Dónde</dt><dd>Morazán, Cabañas</dd></div>
+              <div><dt>Se cuenta</dt><dd>Ser pequeño de sombrero grande que ronda quebradas y cafetales.</dd></div>
+              <div><dt>Fuente</dt><dd>Tradición oral</dd></div>
+            </dl>
+            <a class="verso-link" href="entity.html">Abrir la ficha<svg aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+          </section>
+        </div>
+        <button class="flip" type="button" aria-pressed="false" aria-label="Datos de El Duende"><svg aria-hidden="true" focusable="false"><use href="#i-flip"/></svg>Datos</button>
+      </li>
+    </ul>
+
+    <div id="vacio" class="empty" hidden>
+      <h3>Ninguna ficha coincide</h3>
+      <p>No hay fichas con esa combinación en esta página. Probá con otro tipo, otra categoría u otro departamento, o borrá la búsqueda.</p>
+      <button type="button" class="btn" id="limpiar">Limpiar filtros</button>
+    </div>
+
+    <nav class="pager" aria-label="Paginación">
+      <ul>
+        <li><a aria-disabled="true" class="pg" role="link"><span class="pg-arrow" aria-hidden="true"></span>Anterior</a></li>
+        <li><a class="pg" href="index.html" aria-current="page"><span class="visually-hidden">Página </span>1</a></li>
+        <li><a class="pg" href="index.html"><span class="visually-hidden">Página </span>2</a></li>
+        <li><a class="pg" href="index.html">Siguiente<span class="pg-arrow pg-next" aria-hidden="true"></span></a></li>
+      </ul>
+      <p class="pg-note">Página 1 de 2</p>
+    </nav>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="woven" aria-hidden="true"><svg width="100%" height="14" focusable="false"><rect class="w-line" y="0" width="100%" height="1"/><rect y="2" width="100%" height="10" fill="url(#woven)"/><rect class="w-line" y="13" width="100%" height="1"/></svg></div>
+  <div class="foot-inner wrap">
+    <p class="foot-brand">Mitos y Leyendas · dirección Mezcla</p>
+    <p><strong>Datos de demostración.</strong> Entradas, fechas, departamentos y créditos son de ejemplo. Las fuentes se citan como «Tradición oral» o por título, por ejemplo <cite>Mitos y leyendas de El Salvador</cite>.</p>
+    <p>Las imágenes son marcadores provisionales hechos en SVG, en estilos distintos a propósito; no representan a los personajes. La obra final se encargará, con crédito y pago, a artistas salvadoreños.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('tema'), txt=btn.querySelector('.theme-txt');
+  var darkQ=matchMedia('(prefers-color-scheme: dark)'), still=matchMedia('(prefers-reduced-motion: reduce)');
+  var fine=matchMedia('(hover: hover) and (pointer: fine)'), forced=matchMedia('(forced-colors: active)');
+
+  /* Theme: follows the system until the visitor chooses; the choice is remembered */
+  function current(){var t=root.getAttribute('data-theme');return t?t:(darkQ.matches?'dark':'light');}
+  function label(){var next=current()==='dark'?'claro':'oscuro';btn.setAttribute('aria-label','Cambiar a tema '+next);txt.textContent='Tema '+next;}
+  function set(t){root.setAttribute('data-theme',t);try{localStorage.setItem('myl-theme',t);}catch(e){}label();}
+  btn.addEventListener('click',function(){
+    var next=current()==='dark'?'light':'dark';
+    if(!document.startViewTransition||still.matches){set(next);return;}
+    var r=btn.getBoundingClientRect(), x=r.left+r.width/2, y=r.top+r.height/2;
+    var R=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
+    document.startViewTransition(function(){set(next);}).ready.then(function(){
+      root.animate({clipPath:['circle(0px at '+x+'px '+y+'px)','circle('+R+'px at '+x+'px '+y+'px)']},{duration:700,easing:'cubic-bezier(.16,1,.3,1)',pseudoElement:'::view-transition-new(root)'});
+    }).catch(function(){});
+  });
+  if(darkQ.addEventListener)darkQ.addEventListener('change',label);
+  label();
+
+  /* Pointer light: mouse only; off for touch, reduced motion and forced colours */
+  var pool=document.getElementById('pool'), wins=[].slice.call(document.querySelectorAll('.window')), mx=0, my=0, raf=0;
+  function allowed(){return fine.matches&&!still.matches&&!forced.matches;}
+  function frame(){
+    raf=0;
+    if(!allowed()){root.classList.remove('lit');return;}
+    pool.style.transform='translate3d('+mx+'px,'+my+'px,0)';
+    var rects=wins.map(function(w){return w.getBoundingClientRect();});
+    wins.forEach(function(w,i){var b=rects[i];if(b.bottom<-240||b.top>innerHeight+240||!b.width)return;w.style.setProperty('--lx',(mx-b.left)+'px');w.style.setProperty('--ly',(my-b.top)+'px');});
+    root.classList.add('lit');
+  }
+  addEventListener('pointermove',function(e){if(e.pointerType!=='mouse')return;mx=e.clientX;my=e.clientY;if(!raf)raf=requestAnimationFrame(frame);},{passive:true});
+  addEventListener('scroll',function(){if(root.classList.contains('lit')&&!raf)raf=requestAnimationFrame(frame);},{passive:true});
+  root.addEventListener('pointerleave',function(){root.classList.remove('lit');});
+})();
+
+(function(){
+  var SVGNS='http://www.w3.org/2000/svg';
+  var list=document.getElementById('fichas'), items=[].slice.call(list.children), live=document.getElementById('aviso');
+
+  /* Masonry: each card spans as many 8px rows as its height needs. Without JS the grid stays a plain grid. */
+  var ROW=8, GAP=28;
+  function span(li){if(li.hidden)return;li.style.gridRowEnd='span '+Math.ceil((li.getBoundingClientRect().height+GAP)/ROW);}
+  if('ResizeObserver' in window){
+    list.classList.add('is-masonry');
+    var ro=new ResizeObserver(function(es){es.forEach(function(e){span(e.target);});});
+    items.forEach(function(li){ro.observe(li);});
+  }
+
+  /* Flip: the hidden face is inert, so focus and screen readers only meet the visible one */
+  items.forEach(function(li){
+    var b=li.querySelector('.flip'), front=li.querySelector('.front'), back=li.querySelector('.back');
+    var name=li.getAttribute('data-name');
+    b.addEventListener('click',function(){
+      var on=b.getAttribute('aria-pressed')!=='true';
+      li.classList.toggle('is-flipped',on);
+      b.setAttribute('aria-pressed',on?'true':'false');
+      front.inert=on; back.inert=!on;
+      live.textContent=on?('Datos de '+name+' a la vista.'):('Obra de '+name+' a la vista.');
+    });
+  });
+
+  /* Filters, search and sort run on the demo cards of this page */
+  var form=document.getElementById('filtros'), q=form.q, err=document.getElementById('q-err'), errTxt=err.querySelector('span');
+  var count=document.getElementById('conteo'), empty=document.getElementById('vacio'), chips=document.getElementById('activos');
+  var activeQ='', say=0;
+  var NAMES={tipo:'Tipo',categoria:'Categoría',departamento:'Departamento'};
+  function norm(s){return s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().trim();}
+  function key(li,o){return o.indexOf('name')===0?li.getAttribute('data-name'):li.getAttribute('data-created');}
+  function optText(sel){return sel.options[sel.selectedIndex].text;}
+  function setCount(strong,rest){
+    count.textContent='';
+    var s=document.createElement('strong');s.textContent=strong;count.appendChild(s);
+    if(rest)count.appendChild(document.createTextNode(rest));
+  }
+  function chip(text,aria,fn,cls){
+    var li=document.createElement('li'), b=document.createElement('button'), s=document.createElement('span');
+    var svg=document.createElementNS(SVGNS,'svg'), use=document.createElementNS(SVGNS,'use');
+    b.type='button';b.className='chip'+(cls?' '+cls:'');b.setAttribute('aria-label',aria);
+    s.textContent=text;svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');use.setAttribute('href','#i-x');
+    svg.appendChild(use);b.appendChild(s);b.appendChild(svg);
+    b.addEventListener('click',function(){
+      var idx=[].indexOf.call(chips.children,li);fn();
+      var left=chips.children, next=left[Math.min(idx,left.length-1)];
+      (next?next.querySelector('button'):q).focus();
+    });
+    li.appendChild(b);chips.appendChild(li);
+  }
+  function apply(){
+    var t=form.tipo.value, c=form.categoria.value, d=form.departamento.value, o=form.orden.value, qq=norm(activeQ);
+    var sorted=items.slice().sort(function(a,b){var r=key(a,o).localeCompare(key(b,o),'es');return (o==='name-desc'||o==='new')?-r:r;});
+    var shown=0;
+    sorted.forEach(function(li){
+      var ok=(!qq||norm(li.textContent).indexOf(qq)>-1)&&(!t||li.getAttribute('data-kind')===t)&&(!c||li.getAttribute('data-category')===c)&&(!d||li.getAttribute('data-depts').split('|').indexOf(d)>-1);
+      li.hidden=!ok;if(ok)shown++;list.appendChild(li);
+    });
+    var filtered=!!(qq||t||c||d);
+    clearTimeout(say);
+    say=setTimeout(function(){
+      if(!filtered)setCount('10 fichas',' en esta página, de 18');
+      else if(shown)setCount(shown+(shown===1?' ficha coincide':' fichas coinciden'),' en esta página');
+      else setCount('Ninguna ficha coincide','');
+    },250);
+    empty.hidden=shown>0;
+    chips.textContent='';
+    if(activeQ)chip('«'+activeQ+'»','Quitar búsqueda: '+activeQ,function(){activeQ='';q.value='';apply();});
+    ['tipo','categoria','departamento'].forEach(function(n){var s=form[n];if(s.value)chip(optText(s),'Quitar filtro '+NAMES[n]+': '+optText(s),function(){s.value='';apply();});});
+    if(chips.children.length>1)chip('Quitar todo','Quitar todos los filtros',clear,'chip-all');
+  }
+  function showErr(m){errTxt.textContent=m;err.hidden=false;q.setAttribute('aria-invalid','true');}
+  function hideErr(){err.hidden=true;q.removeAttribute('aria-invalid');}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=q.value.trim();
+    if(!v){showErr('Escribí al menos un carácter para buscar.');q.focus();return;}
+    if(v.length>200){showErr('La búsqueda admite hasta 200 caracteres; acortala un poco.');q.focus();return;}
+    hideErr();activeQ=v;apply();
+  });
+  q.addEventListener('input',function(){hideErr();if(q.value===''&&activeQ){activeQ='';apply();}});
+  ['tipo','categoria','departamento','orden'].forEach(function(n){form[n].addEventListener('change',apply);});
+  function clear(){form.reset();activeQ='';hideErr();apply();q.focus();}
+  document.getElementById('limpiar').addEventListener('click',clear);
+  apply();
+})();
+</script>
+</body>
+</html>
