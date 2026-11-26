@@ -1,0 +1,1230 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Baraja · Catálogo de mitos y leyendas</title>
+<meta name="description" content="Catálogo de mitos y leyendas de El Salvador impreso como una baraja numerada: dirección visual Baraja.">
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem('myl-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=swap">
+<style>
+/* Tokens. Light = warm paper table. Dark = near-black table; the cards stay paper so the print survives. */
+:root {
+  color-scheme: light;
+  --bg: #F7EBD0;
+  --ink: #1B1412;
+  --muted: #5A4B42;
+  --red-text: #B8302A;
+  --hero-bg: #F4B63F;
+  --hero-ink: #1B1412;
+  --hero-muted: #5A4B42;
+  --hero-dots: rgba(27, 20, 18, .16);
+  --strip-bg: #B8302A;
+  --strip-ink: #F7EBD0;
+  --foot-bg: #1B1412;
+  --foot-ink: #F7EBD0;
+  --foot-muted: #C9B9A3;
+  --ring: #B8302A;
+  --field-bg: #FFF8E6;
+  --field-ink: #1B1412;
+  --field-line: #1B1412;
+  --btn-bg: #1B1412;
+  --btn-ink: #F7EBD0;
+  --btn-hover-bg: #B8302A;
+  --btn-hover-ink: #F7EBD0;
+  --table-dots: rgba(27, 20, 18, .07);
+  --grain-opacity: .12;
+  /* Card stock: identical in both themes */
+  --c-paper: #FFF8E6;
+  --c-ink: #1B1412;
+  --c-muted: #5A4B42;
+  --c-red: #B8302A;
+  --c-mari: #F4B63F;
+  --c-turq: #2AA79F;
+  --c-turq-text: #116B66;
+  --gutter: clamp(16px, 4vw, 48px);
+  --ease: cubic-bezier(.16, 1, .3, 1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #17110F;
+    --ink: #F7EBD0;
+    --muted: #C9B9A3;
+    --red-text: #FF6B5E;
+    --hero-bg: #2A201C;
+    --hero-ink: #F7EBD0;
+    --hero-muted: #C9B9A3;
+    --hero-dots: rgba(244, 182, 63, .14);
+    --foot-bg: #2A201C;
+    --ring: #F4B63F;
+    --field-bg: #2A201C;
+    --field-ink: #F7EBD0;
+    --field-line: #C9B9A3;
+    --btn-bg: #F4B63F;
+    --btn-ink: #1B1412;
+    --btn-hover-bg: #F7EBD0;
+    --btn-hover-ink: #1B1412;
+    --table-dots: rgba(244, 182, 63, .06);
+    --grain-opacity: .07;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #17110F;
+  --ink: #F7EBD0;
+  --muted: #C9B9A3;
+  --red-text: #FF6B5E;
+  --hero-bg: #2A201C;
+  --hero-ink: #F7EBD0;
+  --hero-muted: #C9B9A3;
+  --hero-dots: rgba(244, 182, 63, .14);
+  --foot-bg: #2A201C;
+  --ring: #F4B63F;
+  --field-bg: #2A201C;
+  --field-ink: #F7EBD0;
+  --field-line: #C9B9A3;
+  --btn-bg: #F4B63F;
+  --btn-ink: #1B1412;
+  --btn-hover-bg: #F7EBD0;
+  --btn-hover-ink: #1B1412;
+  --table-dots: rgba(244, 182, 63, .06);
+  --grain-opacity: .07;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scrollbar-color: var(--muted) var(--bg); }
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image: radial-gradient(circle, var(--table-dots) 1.2px, transparent 1.6px);
+  background-size: 9px 9px;
+  color: var(--ink);
+  font-family: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+  font-optical-sizing: auto;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  caret-color: var(--red-text);
+  overflow-x: hidden;
+}
+/* Paper grain: one small static noise tile, never animated */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: var(--grain-opacity);
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .1 0 0 0 0 .08 0 0 0 0 .07 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+:root[data-theme="dark"] body::after { mix-blend-mode: screen; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) body::after { mix-blend-mode: screen; } }
+
+::selection { background: #F4B63F; color: #1B1412; }
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-underline-offset: .18em; text-decoration-thickness: .08em; }
+:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; overflow-wrap: break-word; }
+p, li, dd { text-wrap: pretty; }
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+.skip {
+  position: absolute; left: var(--gutter); top: -100px; z-index: 100;
+  background: var(--btn-bg); color: var(--btn-ink); padding: .7rem 1rem; border-radius: 8px;
+  font-weight: 750; text-decoration: none;
+}
+.skip:focus { top: 12px; }
+
+/* Rótulo: sign-painter slab with a block shade in a second ink and a dark keyline on the shade */
+.rotulo {
+  font-family: "Alfa Slab One", Georgia, serif;
+  font-weight: 400;
+  letter-spacing: .01em;
+  line-height: 1;
+  color: var(--ink);
+  text-shadow: .03em .03em 0 #B8302A, .05em .05em 0 #B8302A, .065em .065em 0 var(--shade-key, #1B1412);
+}
+
+/* Header */
+.site-head {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: .75rem 1.5rem; padding: .85rem var(--gutter);
+  border-bottom: 3px solid var(--ink);
+  background: var(--bg);
+}
+.brand {
+  font-family: "Alfa Slab One", Georgia, serif; font-size: 1.5rem; line-height: 1;
+  text-decoration: none; color: var(--ink);
+  text-shadow: .04em .04em 0 #B8302A;
+  padding: .25rem 0;
+}
+.brand span { color: var(--red-text); text-shadow: none; }
+.head-tools { display: flex; align-items: center; gap: 1rem; }
+.site-nav ul { list-style: none; display: flex; gap: .25rem; margin: 0; padding: 0; }
+.site-nav a {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 .75rem;
+  font-weight: 700; font-stretch: 85%; text-transform: uppercase; letter-spacing: .06em; font-size: .875rem;
+  text-decoration: none; border-radius: 999px; border: 2px solid transparent;
+}
+.site-nav a:hover { border-color: var(--ink); }
+.site-nav a[aria-current="page"] { background: var(--ink); color: var(--bg); }
+.theme-toggle {
+  display: inline-flex; align-items: center; gap: .45rem; min-height: 44px; padding: 0 .85rem 0 .7rem;
+  border: 2.5px solid var(--ink); border-radius: 999px; background: transparent; color: var(--ink);
+  font: inherit; font-weight: 750; font-size: .875rem; font-stretch: 85%; text-transform: uppercase; letter-spacing: .06em; cursor: pointer;
+}
+.theme-toggle svg { width: 20px; height: 20px; transition: transform .45s var(--ease); }
+.theme-toggle:hover { background: var(--ink); color: var(--bg); }
+.theme-toggle:hover svg { transform: rotate(180deg); }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  min-height: 48px; padding: 0 1.25rem;
+  border: 2.5px solid var(--btn-bg); border-radius: 999px;
+  background: var(--btn-bg); color: var(--btn-ink);
+  font: inherit; font-weight: 750; font-stretch: 90%; letter-spacing: .02em; text-decoration: none; cursor: pointer;
+  transition: background-color .18s ease, color .18s ease, border-color .18s ease;
+}
+.btn:hover { background: var(--btn-hover-bg); border-color: var(--btn-hover-bg); color: var(--btn-hover-ink); }
+.btn svg { width: 20px; height: 20px; }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn-ghost:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+/* Sign plate (rótulo phrase) hung on two cords */
+.plate {
+  position: relative; display: inline-block; margin: 1.6rem 0 0; padding: .55rem 1rem .6rem;
+  background: #B8302A; color: #F7EBD0; border: 2.5px solid #1B1412; border-radius: 6px;
+  font-weight: 800; font-stretch: 75%; text-transform: uppercase; letter-spacing: .08em; font-size: .9375rem; line-height: 1.2;
+  transform: rotate(-2deg);
+  box-shadow: inset 0 0 0 3px #B8302A, inset 0 0 0 4.5px #F7EBD0;
+}
+.plate::before, .plate::after {
+  content: ""; position: absolute; top: -1.45rem; width: 2px; height: 1.45rem;
+  background: var(--plate-cord, var(--ink));
+}
+.plate::before { left: 18%; transform: rotate(8deg); }
+.plate::after { right: 18%; transform: rotate(-8deg); }
+.plate .sep { display: inline-block; width: .42em; height: .42em; margin: 0 .5em .12em; background: #F4B63F; transform: rotate(45deg); }
+
+/* Card stock shared by deck, fan and detail */
+.card { position: relative; isolation: isolate; --cat-bg: var(--c-red); --cat-ink: #F7EBD0; --plate: var(--c-red); }
+.card[data-category="mito"] { --cat-bg: var(--c-turq); --cat-ink: #1B1412; --plate: var(--c-turq); }
+.card[data-category="tradicion"] { --cat-bg: var(--c-mari); --cat-ink: #1B1412; --plate: #D9921C; }
+/* Misregistered colour plate: a halftone of the category ink, slipped off the card */
+.card::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 16px;
+  transform: translate(7px, 8px) rotate(.6deg);
+  background: radial-gradient(circle, var(--plate) 1.9px, transparent 2.3px) 0 0 / 6px 6px;
+}
+.card-inner {
+  display: grid; height: 100%;
+  transform-style: preserve-3d;
+  transform: translateY(var(--lift, 0)) rotate(var(--tilt, 0deg)) rotateY(var(--flip, 0deg));
+  transition: transform .62s var(--ease);
+}
+@media (hover: hover) { .card:hover { --lift: -5px; --tilt: -.8deg; } }
+.card.is-flipped { --flip: 180deg; }
+.face {
+  grid-area: 1 / 1; position: relative;
+  -webkit-backface-visibility: hidden; backface-visibility: hidden;
+  background: var(--c-paper); color: var(--c-ink);
+  border: 3px solid var(--c-ink); border-radius: 16px;
+  padding: .85rem .85rem 4.4rem;
+}
+.face[inert] { pointer-events: none; }
+.face.back { transform: rotateY(180deg); }
+.num { font-weight: 800; font-stretch: 80%; font-variant-numeric: tabular-nums lining-nums; letter-spacing: .04em; font-size: 1rem; }
+.cat {
+  position: absolute; top: -3px; right: -3px; z-index: 1;
+  padding: .32rem .8rem .36rem 1rem;
+  background: var(--cat-bg); color: var(--cat-ink);
+  border: 3px solid var(--c-ink); border-radius: 0 16px 0 14px;
+  font-weight: 800; font-stretch: 78%; text-transform: uppercase; letter-spacing: .08em; font-size: .8125rem; line-height: 1.2;
+}
+.art {
+  margin-top: .6rem; width: 100%; height: auto; aspect-ratio: 200 / 240;
+  border: 3px solid var(--c-ink); border-radius: 9px; overflow: hidden; background: var(--c-turq);
+}
+.banner {
+  margin: .8rem -.85rem 0; padding: .5rem 1.6rem .55rem;
+  /* Ribbon with notched ends: two paper wedges cut into each end of the ink band */
+  background:
+    linear-gradient(to bottom right, var(--c-paper) 50%, transparent 51%) left top / 12px 50% no-repeat,
+    linear-gradient(to top right, var(--c-paper) 50%, transparent 51%) left bottom / 12px 50% no-repeat,
+    linear-gradient(to bottom left, var(--c-paper) 50%, transparent 51%) right top / 12px 50% no-repeat,
+    linear-gradient(to top left, var(--c-paper) 50%, transparent 51%) right bottom / 12px 50% no-repeat,
+    var(--c-ink);
+  color: var(--c-paper);
+  font-family: "Alfa Slab One", Georgia, serif; font-weight: 400; font-size: 1.55rem; line-height: 1.05; letter-spacing: .01em;
+  overflow-wrap: anywhere; hyphens: auto;
+}
+.banner a { display: block; color: inherit; text-decoration: none; }
+/* The whole face is the link's hit area; the flip button sits above it */
+.banner a::after { content: ""; position: absolute; inset: 0; z-index: 2; border-radius: 13px; }
+.banner a:focus-visible { outline: 3px solid var(--c-mari); outline-offset: 2px; border-radius: 2px; }
+.card:has(.banner a:focus-visible) .front { outline: 3px solid var(--ring); outline-offset: 5px; }
+.card:has(.banner a:hover) .banner { color: var(--c-mari); }
+.meta {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .2rem .6rem; margin: .85rem 0 0;
+  font-weight: 700; font-stretch: 80%; text-transform: uppercase; letter-spacing: .07em; font-size: .8125rem; line-height: 1.3;
+  color: var(--c-muted);
+}
+.meta .kind { display: inline-flex; align-items: center; gap: .3rem; color: var(--c-ink); }
+.meta svg { width: 18px; height: 18px; }
+.line { margin: .5rem 0 0; font-size: 1rem; line-height: 1.45; color: var(--c-ink); }
+.flip {
+  position: absolute; right: .95rem; bottom: .95rem; z-index: 3;
+  display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; padding: 0 .95rem 0 .75rem;
+  border: 2.5px solid var(--c-ink); border-radius: 999px; background: var(--c-paper); color: var(--c-ink);
+  font: inherit; font-weight: 800; font-stretch: 80%; text-transform: uppercase; letter-spacing: .07em; font-size: .8125rem; cursor: pointer;
+  transition: background-color .15s ease, color .15s ease;
+}
+.flip svg { width: 18px; height: 18px; transition: transform .5s var(--ease); }
+.flip:hover { background: var(--c-ink); color: var(--c-paper); }
+.flip[aria-pressed="true"] svg { transform: rotate(180deg); }
+.flip:focus-visible { outline: 3px solid var(--c-red); outline-offset: 2px; }
+.card .flip:focus-visible { outline-color: var(--c-red); }
+/* Card back: red halftone stock around a paper panel carrying the canta */
+.back {
+  display: flex; flex-direction: column; justify-content: center;
+  background:
+    radial-gradient(circle, rgba(184, 48, 42, .9) 1.7px, transparent 2.1px) 0 0 / 7px 7px,
+    var(--c-paper);
+}
+.back-panel {
+  background: var(--c-paper); border: 3px solid var(--c-ink); border-radius: 10px;
+  padding: 1rem 1rem 1.1rem;
+  box-shadow: inset 0 0 0 4px var(--c-paper), inset 0 0 0 5.5px var(--c-red);
+}
+.back-num { margin: 0; font-weight: 800; font-stretch: 80%; text-transform: uppercase; letter-spacing: .08em; font-size: .8125rem; color: var(--c-red); font-variant-numeric: tabular-nums; }
+.canta { margin: .6rem 0 0; font-weight: 700; font-stretch: 88%; font-size: 1.1875rem; line-height: 1.35; }
+.caller { margin: .7rem 0 0; font-size: .875rem; color: var(--c-muted); }
+
+/* Footer */
+.site-foot { background: var(--foot-bg); color: var(--foot-ink); padding: 3rem var(--gutter) 2.5rem; --ring: #F4B63F; --plate-cord: #F7EBD0; }
+.foot-in { max-width: 1240px; margin: 0 auto; display: grid; gap: 1.5rem; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 820px) { .foot-in { grid-template-columns: 1.2fr 1fr; align-items: end; } }
+.foot-sign { font-family: "Alfa Slab One", Georgia, serif; font-size: clamp(1.75rem, 4vw, 2.75rem); line-height: 1.05; margin: 0; color: #F4B63F; text-shadow: .05em .05em 0 #B8302A; text-wrap: balance; }
+.site-foot p { margin: 0; max-width: 62ch; }
+.foot-note { color: var(--foot-muted); font-size: .9375rem; }
+.site-foot a { color: #F4B63F; }
+.site-foot .foot-links { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; margin-top: .75rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .card-inner { transform: none !important; transition: none; }
+  .face { -webkit-backface-visibility: visible; backface-visibility: visible; transition: opacity .25s ease; }
+  .face.back { transform: none; opacity: 0; }
+  .card.is-flipped .front { opacity: 0; }
+  .card.is-flipped .back { opacity: 1; }
+  .flip svg, .theme-toggle svg { transition: none; }
+}
+/* Hero: the hand of five cards on a marigold print field (dark: the card table under one lamp) */
+.hero {
+  position: relative; overflow: hidden; isolation: isolate;
+  background: var(--hero-bg); color: var(--hero-ink);
+  border-bottom: 3px solid var(--ink);
+  --ink: var(--hero-ink);
+}
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(circle, var(--hero-dots) 2.4px, transparent 2.8px) 0 0 / 11px 11px;
+  -webkit-mask-image: radial-gradient(ellipse 55% 75% at 80% 58%, #000 25%, transparent 72%);
+  mask-image: radial-gradient(ellipse 55% 75% at 80% 58%, #000 25%, transparent 72%);
+}
+.hero-in {
+  max-width: 1240px; margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 5rem) var(--gutter) clamp(2.5rem, 5vw, 4.5rem);
+  display: grid; gap: 2.5rem; grid-template-columns: minmax(0, 1fr); align-items: center;
+}
+@media (min-width: 900px) { .hero-in { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 2rem; } }
+.hero-title { color: var(--hero-ink); }
+.ht { display: block; font-size: clamp(3rem, 13vw, 6rem); line-height: 1.02; }
+@media (min-width: 900px) { .ht { font-size: clamp(3rem, 6.4vw, 6rem); } }
+.ht-line { display: block; white-space: nowrap; }
+.ht-line span { display: inline-block; transform: translateY(calc(var(--w, 0) * 1.6px)) rotate(calc(var(--w, 0) * 1deg)); }
+.ht-line .sp { width: .28em; }
+.ht-sub {
+  display: block; margin-top: .9rem;
+  font-size: clamp(1.75rem, 3.4vw, 2.5rem); line-height: 1.05;
+  color: var(--red-text);
+  text-shadow: .05em .05em 0 var(--shade-key, #1B1412);
+}
+.hero-lead { max-width: 44ch; margin: 1.6rem 0 0; font-size: clamp(1.0625rem, 1.45vw, 1.25rem); line-height: 1.5; font-weight: 500; }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 1.25rem 2.25rem; margin-top: 1.9rem; }
+.hero .plate { margin-bottom: .25rem; }
+
+.fan-wrap { position: relative; min-height: clamp(290px, 78vw, 440px); }
+@media (min-width: 900px) { .fan-wrap { min-height: 470px; } }
+.fan {
+  position: absolute; inset: 0;
+  transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d;
+  transition: transform .5s var(--ease);
+}
+.fan-card {
+  --w: clamp(112px, 30vw, 196px);
+  position: absolute; left: 50%; bottom: 3%;
+  width: var(--w); margin-left: calc(var(--w) / -2);
+  isolation: isolate;
+  transform-origin: 50% 140%;
+  transform: rotate(calc((var(--i) - 2) * 10deg));
+  transition: transform .55s var(--ease);
+  animation: fan-open .8s var(--ease) backwards;
+  animation-delay: calc(var(--i) * 60ms + 120ms);
+}
+@media (min-width: 900px) { .fan-card { --w: clamp(150px, 15vw, 196px); } }
+.fan-card::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 13px;
+  transform: translate(5px, 6px);
+  background: radial-gradient(circle, #B8302A 1.7px, transparent 2.1px) 0 0 / 6px 6px;
+}
+.fan-face { background: #FFF8E6; color: #1B1412; border: 3px solid #1B1412; border-radius: 13px; padding: 6px 6px 9px; }
+.fan-num { display: block; margin: 0 0 4px 2px; font-weight: 800; font-stretch: 80%; font-size: .75rem; letter-spacing: .05em; font-variant-numeric: tabular-nums; }
+.fan-face svg { width: 100%; height: auto; aspect-ratio: 200 / 240; border: 2.5px solid #1B1412; border-radius: 7px; }
+.fan-name { display: block; margin-top: 6px; text-align: center; font-weight: 800; font-stretch: 76%; text-transform: uppercase; letter-spacing: .05em; font-size: clamp(.6875rem, 1.1vw, .875rem); line-height: 1.15; }
+.hero:focus-within .fan-card { transform: rotate(calc((var(--i) - 2) * 16deg)) translateY(-14px); }
+@media (hover: hover) { .hero:hover .fan-card { transform: rotate(calc((var(--i) - 2) * 16deg)) translateY(-14px); } }
+.fan-card:nth-child(3) { z-index: 1; }
+@keyframes fan-open { from { transform: rotate(0deg) translateY(28px); } }
+
+/* Rótulo strip: a painted sign band */
+.strip { background: var(--strip-bg); color: var(--strip-ink); border-bottom: 3px solid var(--ink); padding: .85rem var(--gutter); }
+.strip ul { list-style: none; max-width: 1240px; margin: 0 auto; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .2rem 0; font-weight: 800; font-stretch: 75%; text-transform: uppercase; letter-spacing: .1em; font-size: .9375rem; line-height: 1.6; }
+.strip li + li::before { content: ""; display: inline-block; width: .45em; height: .45em; margin: 0 .8em .12em; background: #F4B63F; transform: rotate(45deg); }
+
+/* The table */
+.mesa { padding: clamp(3rem, 7vw, 5.5rem) var(--gutter) clamp(3.5rem, 8vw, 6rem); }
+.mesa-in { max-width: 1240px; margin: 0 auto; }
+.mesa-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem 2.5rem; margin-bottom: 2rem; }
+.mesa-head h2 { font-size: clamp(2.5rem, 6vw, 4.25rem); }
+.mesa-head p { margin: 0; max-width: 46ch; color: var(--muted); }
+
+.filtros {
+  display: grid; gap: 1rem 1.1rem; grid-template-columns: minmax(0, 1fr);
+  padding: 1.25rem; border: 3px solid var(--ink); border-radius: 16px; background: var(--bg);
+}
+@media (min-width: 600px) {
+  .filtros { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .f-search, .f-actions { grid-column: 1 / -1; }
+}
+@media (min-width: 1100px) {
+  .filtros { grid-template-columns: minmax(0, 1.7fr) repeat(4, minmax(0, 1fr)) auto; align-items: end; }
+  .f-search, .f-actions { grid-column: auto; }
+}
+.field label { display: block; margin-bottom: .4rem; font-weight: 800; font-stretch: 78%; text-transform: uppercase; letter-spacing: .08em; font-size: .8125rem; }
+.field input, .field select {
+  width: 100%; min-height: 48px; margin: 0;
+  border: 2.5px solid var(--field-line); border-radius: 10px;
+  background: var(--field-bg); color: var(--field-ink);
+  font: inherit; font-size: 1rem; padding: 0 .85rem;
+  transition: border-color .15s ease;
+}
+.field input:hover, .field select:hover { border-color: var(--red-text); }
+.field input:focus-visible, .field select:focus-visible { outline-offset: 2px; border-color: var(--field-line); }
+.field input::placeholder { color: var(--muted); opacity: 1; }
+.hint { margin: .4rem 0 0; font-size: .875rem; color: var(--muted); }
+.search-box { position: relative; }
+.search-box svg { position: absolute; left: .8rem; top: 50%; width: 20px; height: 20px; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+.search-box input { padding-left: 2.6rem; }
+.select { position: relative; }
+.select select { -webkit-appearance: none; appearance: none; padding-right: 2.6rem; cursor: pointer; }
+.select::after {
+  content: ""; position: absolute; right: 1rem; top: 50%; width: .55rem; height: .55rem; pointer-events: none;
+  border-right: 2.5px solid var(--field-ink); border-bottom: 2.5px solid var(--field-ink);
+  transform: translateY(-70%) rotate(45deg);
+}
+.f-actions { display: flex; flex-wrap: wrap; gap: .6rem; align-items: flex-end; }
+
+.tally { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1rem; margin: 1.75rem 0 2rem; }
+.tally p { margin: 0; font-weight: 750; font-stretch: 85%; font-variant-numeric: tabular-nums; }
+.page-of { color: var(--muted); }
+
+.deck {
+  list-style: none; margin: 0; padding: 0 8px 0 0;
+  display: grid; gap: 2.75rem 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16.5rem), 1fr));
+  perspective: 1800px;
+}
+@media (min-width: 1100px) { .deck { grid-template-columns: repeat(3, minmax(0, 350px)); justify-content: center; gap: 3.25rem 3rem; } }
+.deck[hidden] { display: none; }
+.deck .card { scroll-margin-top: 2rem; }
+.deck .card:target .front { outline: 3px solid var(--ring); outline-offset: 5px; }
+.deck.dealing .card { animation: deal .42s var(--ease) backwards; animation-delay: calc(var(--i, 0) * 35ms); }
+@keyframes deal { from { transform: translate(var(--dx, 0), var(--dy, 0)) rotate(var(--r, 0deg)) scale(.94); } }
+
+.empty {
+  display: grid; justify-items: center; gap: .9rem; text-align: center;
+  padding: 3rem 1.25rem; border: 3px dashed var(--ink); border-radius: 16px;
+}
+.empty[hidden] { display: none; }
+.empty svg { width: 96px; height: auto; color: var(--muted); }
+.empty h3 { font-size: clamp(1.75rem, 4vw, 2.25rem); }
+.empty p { margin: 0; max-width: 42ch; color: var(--muted); }
+
+.pager {
+  margin-top: 3.5rem; padding-top: 1.5rem; border-top: 3px solid var(--ink);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem 2rem;
+}
+.pager ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+.pg {
+  display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+  min-width: 48px; min-height: 48px; padding: 0 1rem;
+  border: 2.5px solid var(--ink); border-radius: 999px; color: var(--ink);
+  font-weight: 800; font-stretch: 85%; text-decoration: none; font-variant-numeric: tabular-nums;
+  transition: background-color .15s ease, color .15s ease;
+}
+.pg svg { width: 18px; height: 18px; }
+.pg[aria-current="page"] { background: var(--ink); color: var(--bg); }
+.pg[aria-disabled="true"] { border-style: dashed; color: var(--muted); border-color: var(--muted); cursor: not-allowed; }
+.pg[href]:not([aria-current]):hover { background: var(--btn-hover-bg); border-color: var(--btn-hover-bg); color: var(--btn-hover-ink); }
+.peek { display: flex; align-items: center; gap: 1rem; }
+.peek p { margin: 0; max-width: 24ch; color: var(--muted); font-size: .9375rem; }
+.peek strong { color: var(--ink); }
+.peek-card {
+  width: 56px; flex: none; padding: 4px; background: #FFF8E6; border: 2.5px solid #1B1412; border-radius: 8px;
+  transform: rotate(6deg); transition: transform .35s var(--ease);
+}
+.peek-card svg { width: 100%; height: auto; border-radius: 4px; }
+@media (hover: hover) { .pager:hover .peek-card { transform: rotate(-3deg) translateY(-6px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .fan { transform: none !important; transition: none; }
+  .fan-card { animation: none; transition: none; }
+  .hero:hover .fan-card, .hero:focus-within .fan-card { transform: rotate(calc((var(--i) - 2) * 10deg)); }
+  .deck.dealing .card { animation: none; }
+  .peek-card { transition: none; }
+}
+</style>
+</head>
+<body>
+<svg class="sprite" aria-hidden="true" focusable="false" width="0" height="0">
+  <defs>
+    <!-- Halftone screens: the print texture every plate is drawn with -->
+    <pattern id="ht-ink" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="3" cy="3" r="1.2" fill="#1B1412"/></pattern>
+    <pattern id="ht-ink-lg" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="3.5" cy="3.5" r="2.1" fill="#1B1412"/></pattern>
+    <pattern id="ht-paper" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(30)"><circle cx="3.5" cy="3.5" r="1" fill="#FFF8E6"/></pattern>
+    <pattern id="ht-mari" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(15)"><circle cx="4" cy="4" r="2.7" fill="#F4B63F"/></pattern>
+    <pattern id="ht-red" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="3" cy="3" r="1.5" fill="#B8302A"/></pattern>
+    <pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><line x1="0" y1="0" x2="0" y2="5" stroke="#1B1412" stroke-width="1.3"/></pattern>
+    <linearGradient id="fade-down" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="fade-up" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <radialGradient id="glow-g"><stop offset="0" stop-color="#fff"/><stop offset=".7" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <mask id="m-top"><rect width="200" height="150" fill="url(#fade-down)"/></mask>
+    <mask id="m-bottom"><rect y="110" width="200" height="130" fill="url(#fade-up)"/></mask>
+    <mask id="m-glow"><circle cx="100" cy="74" r="96" fill="url(#glow-g)"/></mask>
+
+    <!-- El Cipitio -->
+    <path id="ci-hat" d="M93 12 L44 90 L144 90 Z"/>
+    <path id="ci-band" d="M55 74 L133 74 L142 90 L46 90 Z"/>
+    <path id="ci-brim" d="M26 93 C26 81 162 81 162 93 C162 105 26 105 26 93 Z"/>
+    <circle id="ci-head" cx="100" cy="115" r="19"/>
+    <path id="ci-shirt" d="M84 134 C71 152 71 181 84 198 L126 198 C151 192 157 160 137 140 C128 133 114 131 100 132 C94 132 89 133 84 134 Z"/>
+    <path id="ci-arm" d="M120 146 C133 152 144 149 151 139 L159 145 C150 161 132 166 114 158 Z"/>
+    <circle id="ci-hand" cx="156" cy="137" r="7"/>
+    <path id="ci-shorts" d="M84 196 L126 196 L124 214 L108 214 L105 205 L102 214 L86 214 Z"/>
+    <path id="ci-legs" d="M90 213 L98 213 L98 227 L90 227 Z M108 213 L117 213 L117 227 L108 227 Z"/>
+    <path id="ci-foot-b" d="M118 226 L99 226 C93 226 93 233 99 233 L119 233 Z"/>
+    <path id="ci-foot-f" d="M99 226 L77 226 C70 226 70 234 77 234 L100 234 Z"/>
+    <path id="ci-ash" d="M10 238 C16 218 46 214 62 238 Z"/>
+    <path id="ci-puff" d="M147 124 a6 6 0 1 0 12 0 a6 6 0 1 0 -12 0 Z M159 113 a5 5 0 1 0 10 0 a5 5 0 1 0 -10 0 Z M151 103 a4 4 0 1 0 8 0 a4 4 0 1 0 -8 0 Z"/>
+
+    <!-- La Ciguanaba -->
+    <path id="cg-bank" d="M0 150 C40 140 80 147 120 139 C150 134 178 141 200 136 L200 172 L0 172 Z"/>
+    <path id="cg-dress" d="M81 108 C77 148 69 184 61 214 L139 214 C131 184 123 148 119 108 Z"/>
+    <path id="cg-hair" d="M100 34 C82 34 74 52 76 72 C78 110 66 152 50 200 C66 194 76 204 90 196 C102 206 114 196 126 204 C122 160 120 112 124 72 C126 52 118 34 100 34 Z"/>
+    <path id="cg-wisp" d="M78 88 C62 108 42 116 20 112 C38 124 62 124 80 106 Z"/>
+    <path id="moon" d="M156 26 A18 18 0 1 0 172 56 A14 14 0 1 1 156 26 Z"/>
+
+    <!-- Los Cadejos (one dog, two temperaments) -->
+    <path id="dog" d="M48 128 C52 116 62 110 72 112 L76 100 L84 114 C94 118 102 124 110 126 L148 124 C162 124 170 132 172 142 C180 138 186 130 188 118 C194 128 190 146 176 154 L172 188 L162 188 L160 162 L144 164 L142 190 L132 190 L130 162 C118 162 106 160 96 154 L94 190 L84 190 L82 152 C74 150 68 146 64 140 L50 141 C43 141 41 133 48 128 Z"/>
+    <path id="cb-road" d="M44 240 C72 214 88 198 96 184 L110 184 C120 200 148 218 186 240 Z"/>
+    <path id="cb-hills" d="M0 188 C30 172 62 178 96 184 L110 184 C140 172 170 176 200 168 L200 196 L0 200 Z"/>
+
+    <!-- Volcan Izalco -->
+    <path id="iz-cone" d="M8 208 L82 78 C92 70 108 70 118 78 L192 208 Z"/>
+    <path id="iz-plume" d="M89 56 a11 11 0 1 0 22 0 a11 11 0 1 0 -22 0 Z M104 44 a10 10 0 1 0 20 0 a10 10 0 1 0 -20 0 Z M119 34 a9 9 0 1 0 18 0 a9 9 0 1 0 -18 0 Z M135 28 a7 7 0 1 0 14 0 a7 7 0 1 0 -14 0 Z M84 44 a8 8 0 1 0 16 0 a8 8 0 1 0 -16 0 Z"/>
+    <path id="iz-hull" d="M24 220 L58 220 L51 229 L31 229 Z"/>
+    <path id="iz-sail" d="M40 218 L40 194 L56 216 Z"/>
+
+    <!-- La Llorona -->
+    <path id="ll-bank" d="M0 148 L118 148 C130 148 134 156 126 164 L0 172 Z"/>
+    <path id="ll-skirt" d="M38 150 C36 128 50 116 70 116 L98 120 C106 128 106 142 102 150 Z"/>
+    <path id="ll-shawl" d="M58 72 C78 60 102 68 106 90 C110 108 102 122 92 128 C76 130 56 126 46 116 C38 104 42 84 58 72 Z"/>
+    <path id="ll-hands" d="M96 86 C104 82 112 88 110 98 C108 106 98 106 94 100 Z"/>
+
+    <!-- El Duende -->
+    <path id="du-crown" d="M76 92 C74 62 126 62 124 92 Z"/>
+    <path id="du-brim" d="M44 96 C44 82 156 82 156 96 C156 108 44 108 44 96 Z"/>
+    <path id="du-face" d="M80 100 C80 130 120 130 120 100 Z"/>
+    <path id="du-bush" d="M10 240 L10 150 C18 126 44 120 58 132 C66 112 96 112 104 126 C118 112 150 112 156 134 C172 126 192 138 190 160 L190 240 Z"/>
+    <path id="du-hand" d="M121 131 C121 124 131 124 131 131 L131 136 L121 136 Z"/>
+
+    <!-- La Carreta Chillona -->
+    <path id="ca-bed" d="M28 118 L152 118 L148 150 L32 150 Z"/>
+    <circle id="ca-wheel" cx="92" cy="168" r="42"/>
+    <circle id="ca-hub" cx="92" cy="168" r="9"/>
+
+    <!-- La Familia Girola -->
+    <path id="gi-b1" d="M36 120 L68 120 L74 176 L30 176 Z"/>
+    <path id="gi-b2" d="M77 126 L107 126 L111 180 L73 180 Z"/>
+    <path id="gi-b3" d="M118 154 L142 154 L146 186 L114 186 Z"/>
+    <path id="gi-b4" d="M153 169 L171 169 L174 192 L150 192 Z"/>
+    <path id="gi-heads" d="M40 102 a12 12 0 1 0 24 0 a12 12 0 1 0 -24 0 Z M80 108 a12 12 0 1 0 24 0 a12 12 0 1 0 -24 0 Z M120 140 a10 10 0 1 0 20 0 a10 10 0 1 0 -20 0 Z M154 158 a8 8 0 1 0 16 0 a8 8 0 1 0 -16 0 Z"/>
+
+    <!-- Laguna de Olomega -->
+    <path id="ol-isl" d="M62 160 C72 132 124 128 138 160 Z"/>
+    <path id="ol-tail" d="M156 188 C158 170 166 160 170 148 C164 142 158 140 154 132 C164 134 172 138 176 144 C180 136 188 132 196 132 C190 140 184 146 180 152 C178 164 170 178 166 192 Z"/>
+  </defs>
+
+  <!-- Each figure: colour plate slipped off the key line (translate 2.5,-1.5), then the ink key on top -->
+  <symbol id="s-cipitio" viewBox="0 0 200 240">
+    <rect width="200" height="240" fill="#2AA79F"/>
+    <rect width="200" height="240" fill="url(#ht-paper)" mask="url(#m-top)"/>
+    <rect y="204" width="200" height="36" fill="#F4B63F"/>
+    <rect y="204" width="200" height="36" fill="url(#ht-ink)" opacity=".45"/>
+    <g stroke="#1B1412" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+      <use href="#ci-ash" fill="#B9B0A6" stroke="none" transform="translate(2.5 -1.5)"/><use href="#ci-ash" fill="url(#ht-ink)" stroke="none"/><use href="#ci-ash" fill="none"/>
+      <g fill="#1B1412" stroke="none"><ellipse cx="146" cy="222" rx="7" ry="3"/><circle cx="137" cy="221" r="1.7"/><ellipse cx="174" cy="216" rx="7" ry="3"/><circle cx="165" cy="215" r="1.7"/></g>
+      <use href="#ci-foot-b" fill="#A8683F" stroke="none" transform="translate(2.5 -1.5)"/><use href="#ci-foot-b" fill="none"/>
+      <use href="#ci-legs" fill="#A8683F" stroke="none" transform="translate(2.5 -1.5)"/><use href="#ci-legs" fill="none"/>
+      <use href="#ci-foot-f" fill="#A8683F" stroke="none" transform="translate(2.5 -1.5)"/><use href="#ci-foot-f" fill="none"/>
+      <path d="M84 226 L88 233 M106 226 L110 233" fill="none" stroke="#B8302A" stroke-width="3"/>
+      <use href="#ci-shorts" fill="#FFF8E6" stroke="none" transform="translate(2.5 -1.5)"/><use href="#ci-shorts" fill="none"/>
+      <use href="#ci-shirt" fill="#FFF8E6" stroke="none" transform="translate(2.5 -1.5)"/><use href="#ci-shirt" fill="none"/>
+      <path d="M95 134 q6 7 12 0" fill="none" stroke-width="3"/>
+      <path d="M131 178 q9 -15 1 -32" fill="none" stroke="#2AA79F" stroke-width="3"/>
+      <path d="M78 160 q10 4 18 2" fill="none" stroke-width="2.5"/>
+      <use href="#ci-arm" fill="#FFF8E6" stroke="none" transform="translate(2.5 -1.5)"/><use href="#ci-arm" fill="none"/>
+      <use href="#ci-hand" fill="#A8683F" stroke="none" transform="translate(2.5 -1.5)"/><use href="#ci-hand" fill="none"/>
+      <use href="#ci-puff" fill="#D9D2C8" stroke="none" transform="translate(2.5 -1.5)"/><use href="#ci-puff" fill="url(#ht-ink)" stroke="none" opacity=".5"/><use href="#ci-puff" fill="none" stroke-width="3"/>
+      <use href="#ci-head" fill="#A8683F" stroke="none" transform="translate(2.5 -1.5)"/><use href="#ci-head" fill="none"/>
+      <path d="M84 112 q-7 3 0 9" fill="none" stroke-width="3"/>
+      <circle cx="110" cy="112" r="2.7" fill="#1B1412" stroke="none"/>
+      <circle cx="112" cy="119" r="3.6" fill="#B8302A" opacity=".55" stroke="none"/>
+      <path d="M105 123 q6 4 12 -2" fill="none" stroke-width="3"/>
+      <use href="#ci-brim" fill="#F4B63F" stroke="none" transform="translate(2.5 -1.5)"/><use href="#ci-brim" fill="url(#hatch)" stroke="none" opacity=".35"/><use href="#ci-brim" fill="none"/>
+      <use href="#ci-hat" fill="#F4B63F" stroke="none" transform="translate(2.5 -1.5)"/><use href="#ci-hat" fill="url(#hatch)" stroke="none" opacity=".35"/><use href="#ci-hat" fill="none"/>
+      <use href="#ci-band" fill="#B8302A" stroke="none" transform="translate(2.5 -1.5)"/><use href="#ci-band" fill="none"/>
+    </g>
+  </symbol>
+
+  <symbol id="s-ciguanaba" viewBox="0 0 200 240">
+    <rect width="200" height="240" fill="#116B66"/>
+    <rect width="200" height="240" fill="url(#ht-paper)" mask="url(#m-top)"/>
+    <g stroke="#1B1412" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+      <use href="#moon" fill="#F4B63F" stroke="none" transform="translate(2.5 -1.5)"/><use href="#moon" fill="none" stroke-width="3.5"/>
+      <use href="#cg-bank" fill="#1B1412"/>
+      <rect y="170" width="200" height="70" fill="#2AA79F" stroke="none"/>
+      <rect y="170" width="200" height="70" fill="url(#ht-ink)" stroke="none" mask="url(#m-bottom)" opacity=".6"/>
+      <path d="M8 188 q10 -6 20 0 t20 0 t20 0 M128 192 q10 -6 20 0 t20 0 t20 0 M24 216 q10 -6 20 0 t20 0 M146 222 q10 -6 20 0 t20 0" fill="none" stroke="#FFF8E6" stroke-width="2.5"/>
+      <path d="M64 216 L136 216 L126 238 L74 238 Z" fill="url(#ht-ink-lg)" stroke="none" opacity=".6"/>
+      <use href="#cg-dress" fill="#FFF8E6" stroke="none" transform="translate(2.5 -1.5)"/><use href="#cg-dress" fill="none"/>
+      <use href="#cg-hair" fill="#1B1412"/>
+      <use href="#cg-wisp" fill="#1B1412"/>
+      <path d="M96 46 C92 90 86 140 70 190 M104 46 C106 90 106 140 104 194 M112 50 C116 100 118 150 120 196 M70 110 C54 118 40 118 28 115" fill="none" stroke="#2AA79F" stroke-width="1.6"/>
+      <path d="M58 198 C50 210 40 214 30 222 M118 202 C126 214 140 218 152 228" fill="none" stroke-width="3"/>
+      <path d="M170 172 q3 -30 -3 -54 M178 172 q-2 -26 6 -46 M186 172 q1 -20 -2 -34" fill="none" stroke-width="3"/>
+      <ellipse cx="167" cy="122" rx="3.5" ry="9" fill="#B8302A" stroke-width="2"/><ellipse cx="184" cy="130" rx="3.5" ry="8" fill="#B8302A" stroke-width="2"/>
+    </g>
+  </symbol>
+
+  <symbol id="s-cadejo-blanco" viewBox="0 0 200 240">
+    <rect width="200" height="240" fill="#116B66"/>
+    <rect width="200" height="240" fill="url(#ht-paper)" mask="url(#m-top)"/>
+    <g stroke="#1B1412" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+      <use href="#cb-hills" fill="#1B1412"/>
+      <use href="#cb-road" fill="#F4B63F" stroke="none" transform="translate(2.5 -1.5)"/><use href="#cb-road" fill="url(#ht-ink)" stroke="none" opacity=".55"/><use href="#cb-road" fill="none"/>
+      <g transform="translate(0 22)">
+        <use href="#dog" fill="#FFF8E6" stroke="none" transform="translate(2.5 -1.5)"/><use href="#dog" fill="none"/>
+        <path d="M96 152 C110 160 128 162 144 160 L144 164 C126 166 108 164 96 158 Z" fill="#2AA79F" stroke="none"/>
+        <path d="M80 148 l-3 7 M88 150 l-3 7 M166 140 l5 -6 M160 132 l5 -5 M120 128 l3 -5 M130 127 l3 -5" fill="none" stroke-width="2.5"/>
+        <path d="M76 104 L79 112" fill="none" stroke-width="2"/>
+        <circle cx="59" cy="125" r="7.5" fill="#8DB8FF" stroke="none" opacity=".7"/><circle cx="70" cy="123" r="7.5" fill="#8DB8FF" stroke="none" opacity=".7"/>
+        <circle cx="59" cy="125" r="3.8" fill="#2F6FD6" stroke-width="1.5"/><circle cx="70" cy="123" r="3.8" fill="#2F6FD6" stroke-width="1.5"/>
+        <circle cx="58" cy="124" r="1" fill="#FFF8E6" stroke="none"/><circle cx="69" cy="122" r="1" fill="#FFF8E6" stroke="none"/>
+        <circle cx="46" cy="133" r="3" fill="#1B1412" stroke="none"/>
+        <path d="M47 138 q6 3 12 0" fill="none" stroke-width="2.5"/>
+      </g>
+    </g>
+  </symbol>
+
+  <symbol id="s-cadejo-negro" viewBox="0 0 200 240">
+    <rect width="200" height="240" fill="#F4B63F"/>
+    <rect width="200" height="240" fill="url(#ht-red)" mask="url(#m-top)" opacity=".7"/>
+    <rect y="212" width="200" height="28" fill="#B8302A"/>
+    <rect y="212" width="200" height="28" fill="url(#ht-ink)" opacity=".6"/>
+    <g stroke="#1B1412" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M52 78 q6 -6 0 -12 t0 -12 M70 64 q6 -6 0 -12 t0 -12 t0 -12 M88 76 q6 -6 0 -12 t0 -12" fill="none" stroke="#B8302A" stroke-width="3"/>
+      <g transform="translate(200 22) scale(-1 1)">
+        <use href="#dog" fill="#B8302A" stroke="none" transform="translate(3 -2)"/><use href="#dog" fill="#1B1412"/>
+        <path d="M98 126 l5 -12 l5 10 l5 -13 l5 11 l5 -13 l5 11 l5 -12 l5 10" fill="#1B1412" stroke-width="3"/>
+        <circle cx="59" cy="125" r="8" fill="#B8302A" stroke="none" opacity=".75"/><circle cx="70" cy="123" r="8" fill="#B8302A" stroke="none" opacity=".75"/>
+        <circle cx="59" cy="125" r="3.8" fill="#FF6B5E" stroke="none"/><circle cx="70" cy="123" r="3.8" fill="#FF6B5E" stroke="none"/>
+        <path d="M59 122 v6 M70 120 v6" fill="none" stroke-width="1.4"/>
+        <path d="M47 138 l3 4 l3 -4 l3 4 l3 -4" fill="#FFF8E6" stroke="#FFF8E6" stroke-width="1.2"/>
+      </g>
+    </g>
+  </symbol>
+
+  <symbol id="s-izalco" viewBox="0 0 200 240">
+    <rect width="200" height="240" fill="#B8302A"/>
+    <rect width="200" height="240" fill="url(#ht-mari)" mask="url(#m-glow)"/>
+    <g stroke="#1B1412" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+      <use href="#iz-plume" fill="#FFF8E6" stroke="none" transform="translate(2.5 -1.5)"/><use href="#iz-plume" fill="url(#ht-ink)" stroke="none" opacity=".35"/><use href="#iz-plume" fill="none" stroke-width="3"/>
+      <use href="#iz-cone" fill="#1B1412"/>
+      <path d="M86 78 q14 9 28 0" fill="none" stroke="#F4B63F" stroke-width="4"/>
+      <path d="M95 84 C92 112 101 132 92 162 M107 84 C114 114 109 142 121 172 M101 86 C101 100 99 110 103 124" fill="none" stroke="#F4B63F" stroke-width="3.5"/>
+      <rect y="206" width="200" height="34" fill="#2AA79F" stroke="none"/>
+      <path d="M90 216 q10 -5 20 0 t20 0 t20 0 M120 230 q10 -5 20 0 t20 0 t20 0 M6 234 q10 -5 20 0 t20 0" fill="none" stroke="#FFF8E6" stroke-width="2.5"/>
+      <use href="#iz-sail" fill="#FFF8E6" stroke="none" transform="translate(2 -1)"/><use href="#iz-sail" fill="none" stroke-width="3"/>
+      <use href="#iz-hull" fill="#1B1412" stroke-width="3"/>
+    </g>
+  </symbol>
+
+  <symbol id="s-llorona" viewBox="0 0 200 240">
+    <rect width="200" height="240" fill="#116B66"/>
+    <rect width="200" height="240" fill="url(#ht-paper)" mask="url(#m-top)"/>
+    <g stroke="#1B1412" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+      <rect y="150" width="200" height="90" fill="#2AA79F" stroke="none"/>
+      <rect y="150" width="200" height="90" fill="url(#ht-ink)" stroke="none" mask="url(#m-bottom)" opacity=".55"/>
+      <g fill="none" stroke="#FFF8E6" stroke-width="2.2"><ellipse cx="128" cy="196" rx="18" ry="4.5"/><ellipse cx="128" cy="196" rx="36" ry="9"/><ellipse cx="128" cy="196" rx="56" ry="14"/></g>
+      <use href="#ll-bank" fill="#1B1412"/>
+      <use href="#ll-skirt" fill="#FFF8E6" stroke="none" transform="translate(2.5 -1.5)"/><use href="#ll-skirt" fill="none"/>
+      <use href="#ll-shawl" fill="#B8302A" stroke="none" transform="translate(2.5 -1.5)"/><use href="#ll-shawl" fill="none"/>
+      <path d="M64 78 C80 74 96 80 100 94 M54 92 C70 88 88 94 94 108" fill="none" stroke="#FFF8E6" stroke-width="2"/>
+      <path d="M50 118 l-3 7 M58 123 l-2 7 M66 126 l-1 7 M74 128 l0 7 M82 128 l1 7 M90 127 l2 7" fill="none" stroke-width="2.2"/>
+      <use href="#ll-hands" fill="#A8683F" stroke="none" transform="translate(2.5 -1.5)"/><use href="#ll-hands" fill="none" stroke-width="3"/>
+      <path d="M100 89 l6 -2 M101 95 l7 -1" fill="none" stroke-width="1.8"/>
+      <path d="M114 118 c-3 5 -3 8 0 8 c3 0 3 -3 0 -8 Z M122 150 c-3 5 -3 8 0 8 c3 0 3 -3 0 -8 Z" fill="#FFF8E6" stroke-width="1.5"/>
+    </g>
+  </symbol>
+
+  <symbol id="s-duende" viewBox="0 0 200 240">
+    <rect width="200" height="240" fill="#2AA79F"/>
+    <rect width="200" height="240" fill="url(#ht-paper)" mask="url(#m-top)"/>
+    <g stroke="#1B1412" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+      <use href="#du-face" fill="#A8683F" stroke="none" transform="translate(2.5 -1.5)"/><use href="#du-face" fill="none"/>
+      <ellipse cx="91" cy="109" rx="4.5" ry="5.5" fill="#FFF8E6" stroke-width="2"/><ellipse cx="109" cy="109" rx="4.5" ry="5.5" fill="#FFF8E6" stroke-width="2"/>
+      <circle cx="93" cy="110" r="2.2" fill="#1B1412" stroke="none"/><circle cx="111" cy="110" r="2.2" fill="#1B1412" stroke="none"/>
+      <use href="#du-brim" fill="#F4B63F" stroke="none" transform="translate(2.5 -1.5)"/><use href="#du-brim" fill="url(#hatch)" stroke="none" opacity=".35"/><use href="#du-brim" fill="none"/>
+      <use href="#du-crown" fill="#F4B63F" stroke="none" transform="translate(2.5 -1.5)"/><use href="#du-crown" fill="url(#hatch)" stroke="none" opacity=".35"/><use href="#du-crown" fill="none"/>
+      <path d="M77 85 C90 89 110 89 123 85 L124 92 L76 92 Z" fill="#B8302A" stroke-width="3"/>
+      <use href="#du-bush" fill="#116B66" stroke="none" transform="translate(2.5 -1.5)"/><use href="#du-bush" fill="none"/>
+      <g fill="#2AA79F" stroke-width="2.5">
+        <ellipse cx="38" cy="150" rx="15" ry="7" transform="rotate(-30 38 150)"/><ellipse cx="66" cy="140" rx="14" ry="6.5" transform="rotate(20 66 140)"/>
+        <ellipse cx="150" cy="146" rx="15" ry="7" transform="rotate(25 150 146)"/><ellipse cx="174" cy="166" rx="14" ry="6.5" transform="rotate(-20 174 166)"/>
+        <ellipse cx="40" cy="196" rx="15" ry="7" transform="rotate(15 40 196)"/><ellipse cx="112" cy="176" rx="15" ry="7" transform="rotate(-15 112 176)"/>
+        <ellipse cx="164" cy="214" rx="15" ry="7" transform="rotate(30 164 214)"/><ellipse cx="86" cy="214" rx="14" ry="6.5" transform="rotate(-25 86 214)"/>
+      </g>
+      <path d="M26 156 L50 144 M56 136 L76 144 M138 142 L162 150 M162 170 L186 162" fill="none" stroke-width="1.6"/>
+      <g fill="#B8302A" stroke-width="2"><circle cx="70" cy="162" r="5"/><circle cx="79" cy="167" r="5"/><circle cx="72" cy="174" r="5"/><circle cx="134" cy="152" r="5"/><circle cx="143" cy="157" r="5"/><circle cx="148" cy="186" r="5"/><circle cx="157" cy="190" r="5"/><circle cx="52" cy="216" r="5"/></g>
+      <use href="#du-hand" fill="#A8683F" stroke="none" transform="translate(2.5 -1.5)"/><use href="#du-hand" fill="none" stroke-width="3"/>
+      <path d="M124.5 128 v6 M128 128 v6" fill="none" stroke-width="1.5"/>
+    </g>
+  </symbol>
+
+  <symbol id="s-carreta" viewBox="0 0 200 240">
+    <rect width="200" height="240" fill="#116B66"/>
+    <rect width="200" height="240" fill="url(#ht-paper)" mask="url(#m-top)"/>
+    <rect y="188" width="200" height="52" fill="#F4B63F"/>
+    <rect y="188" width="200" height="52" fill="url(#ht-ink)" opacity=".5"/>
+    <g stroke="#1B1412" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M160 128 h28 M166 140 h22 M156 152 h30" fill="none" stroke="#FFF8E6" stroke-width="3" stroke-dasharray="6 5"/>
+      <path d="M34 140 L2 164" fill="none" stroke-width="7"/><path d="M0 156 L10 172" fill="none" stroke-width="5"/>
+      <path d="M40 118 L38 96 M70 118 L70 96 M110 118 L110 96 M144 118 L146 96 M34 98 L150 98" fill="none" stroke-width="4"/>
+      <use href="#ca-bed" fill="#F4B63F" stroke="none" transform="translate(2.5 -1.5)"/><use href="#ca-bed" fill="url(#hatch)" stroke="none" opacity=".25"/><use href="#ca-bed" fill="none"/>
+      <path d="M31 129 L151 129 M31 140 L150 140" fill="none" stroke-width="2.5"/>
+      <use href="#ca-wheel" fill="#F4B63F" stroke="none" transform="translate(2.5 -1.5)"/><use href="#ca-wheel" fill="none" stroke-width="7"/>
+      <circle cx="92" cy="168" r="33" fill="none" stroke-width="2.5"/>
+      <path d="M92 135 L92 201 M59 168 L125 168 M69 145 L115 191 M115 145 L69 191" fill="none" stroke-width="5"/>
+      <use href="#ca-hub" fill="#1B1412" stroke-width="3"/>
+      <path d="M140 160 l9 -6 l-4 -4 l10 -7 M146 182 l11 1 l-4 5 l12 2 M136 202 l8 6 l-5 3 l9 6" fill="none" stroke="#B8302A" stroke-width="4"/>
+    </g>
+  </symbol>
+
+  <symbol id="s-girola" viewBox="0 0 200 240">
+    <rect width="200" height="240" fill="#F4B63F"/>
+    <rect width="200" height="240" fill="url(#ht-red)" mask="url(#m-top)" opacity=".6"/>
+    <rect y="206" width="200" height="34" fill="url(#ht-ink-lg)" opacity=".5"/>
+    <g stroke="#1B1412" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M44 176 L44 206 M60 176 L60 206 M84 180 L84 206 M100 180 L100 206 M124 186 L124 206 M136 186 L136 206 M157 192 L157 206 M167 192 L167 206" fill="none" stroke-width="4"/>
+      <path d="M70 146 L78 154 M108 158 L118 166 M143 172 L152 178" fill="none" stroke-width="4"/>
+      <use href="#gi-b1" fill="#B8302A" stroke="none" transform="translate(2.5 -1.5)"/><use href="#gi-b1" fill="none"/>
+      <use href="#gi-b2" fill="#2AA79F" stroke="none" transform="translate(2.5 -1.5)"/><use href="#gi-b2" fill="none"/>
+      <use href="#gi-b3" fill="#FFF8E6" stroke="none" transform="translate(2.5 -1.5)"/><use href="#gi-b3" fill="none"/>
+      <use href="#gi-b4" fill="#116B66" stroke="none" transform="translate(2.5 -1.5)"/><use href="#gi-b4" fill="none"/>
+      <use href="#gi-heads" fill="#FFF8E6" stroke="none" transform="translate(2.5 -1.5)"/><use href="#gi-heads" fill="none"/>
+      <path d="M8 206 L192 206" fill="none" stroke-width="4"/>
+    </g>
+  </symbol>
+
+  <symbol id="s-olomega" viewBox="0 0 200 240">
+    <rect width="200" height="126" fill="#F4B63F"/>
+    <rect width="200" height="126" fill="url(#ht-red)" mask="url(#m-top)" opacity=".6"/>
+    <rect y="122" width="200" height="118" fill="#2AA79F"/>
+    <rect y="122" width="200" height="118" fill="url(#ht-ink-lg)" mask="url(#m-bottom)" opacity=".35"/>
+    <g stroke="#1B1412" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M0 112 C30 96 60 100 84 108 C110 92 150 94 200 104 L200 126 L0 126 Z" fill="#1B1412"/>
+      <path d="M66 166 L134 166 L122 186 L78 186 Z" fill="url(#ht-ink-lg)" stroke="none" opacity=".5"/>
+      <use href="#ol-isl" fill="#116B66" stroke="none" transform="translate(2.5 -1.5)"/><use href="#ol-isl" fill="none"/>
+      <path d="M84 142 q4 -10 8 0 q4 -10 8 0 q4 -10 8 0" fill="#116B66" stroke-width="2.5"/>
+      <path d="M12 150 q10 -5 20 0 t20 0 M20 204 q10 -5 20 0 t20 0 t20 0 M92 222 q10 -5 20 0 t20 0" fill="none" stroke="#FFF8E6" stroke-width="2.5"/>
+      <use href="#ol-tail" fill="#FFF8E6" stroke="none" transform="translate(2.5 -1.5)"/><use href="#ol-tail" fill="url(#ht-ink)" stroke="none" opacity=".4"/><use href="#ol-tail" fill="none"/>
+      <path d="M138 194 q28 -10 54 0 M146 202 q20 -6 40 0" fill="none" stroke="#FFF8E6" stroke-width="2.5"/>
+    </g>
+  </symbol>
+
+  <!-- Kind pips: one stroke weight, drawn for this deck -->
+  <symbol id="k-personaje" viewBox="0 0 20 20"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6.5" r="3.2"/><path d="M3.5 17.5c0-4 3-6.5 6.5-6.5s6.5 2.5 6.5 6.5"/></g></symbol>
+  <symbol id="k-lugar" viewBox="0 0 20 20"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 16.5 8 5.5l3.2 5.2 2-3 5.3 8.8Z"/></g></symbol>
+  <symbol id="k-objeto" viewBox="0 0 20 20"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><circle cx="10" cy="10" r="1.6"/><path d="M10 3v5.4M10 11.6V17M3 10h5.4M11.6 10H17"/></g></symbol>
+  <symbol id="k-grupo" viewBox="0 0 20 20"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="7.5" r="2.4"/><circle cx="14" cy="7.5" r="2.4"/><path d="M1.5 16c0-2.8 2-4.6 4.5-4.6S10.5 13.2 10.5 16M9.5 16c0-2.8 2-4.6 4.5-4.6s4.5 1.8 4.5 4.6"/></g></symbol>
+  <symbol id="k-evento" viewBox="0 0 20 20"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2l1.8 6.2L18 10l-6.2 1.8L10 18l-1.8-6.2L2 10l6.2-1.8Z"/></g></symbol>
+
+  <!-- Interface icons -->
+  <symbol id="i-theme" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17Z" fill="currentColor"/></g></symbol>
+  <symbol id="i-flip" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9a8 8 0 0 1 14-3l2 2"/><path d="M20 4v4h-4"/><path d="M20 15a8 8 0 0 1-14 3l-2-2"/><path d="M4 20v-4h4"/></g></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></g></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></g></symbol>
+</svg>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="site-head">
+  <a class="brand" href="index.html">Mitos <span>y</span> Leyendas</a>
+  <div class="head-tools">
+    <nav class="site-nav" aria-label="Principal">
+      <ul>
+        <li><a href="index.html" aria-current="page">Catálogo</a></li>
+        <li><a href="../index.html">Direcciones</a></li>
+      </ul>
+    </nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar a tema oscuro"><svg aria-hidden="true" focusable="false"><use href="#i-theme"/></svg><span class="tt-text">Oscuro</span></button>
+  </div>
+</header>
+<main id="contenido">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-in">
+      <div class="hero-copy">
+        <h1 class="hero-title rotulo" id="hero-title"><span class="sr-only">Mitos y leyendas de El Salvador</span><span class="ht" aria-hidden="true"><span class="ht-line"><span style="--w:-1.2">M</span><span style="--w:0.8">i</span><span style="--w:-0.4">t</span><span style="--w:1.3">o</span><span style="--w:-0.9">s</span><span class="sp"> </span><span style="--w:1.1">y</span></span><span class="ht-line"><span style="--w:-1.3">l</span><span style="--w:0.6">e</span><span style="--w:-0.7">y</span><span style="--w:1.2">e</span><span style="--w:-0.3">n</span><span style="--w:0.9">d</span><span style="--w:-1">a</span><span style="--w:-1.2">s</span></span></span><span class="ht-sub" aria-hidden="true">de El Salvador</span></h1>
+        <p class="hero-lead">Una baraja impresa a mano con los aparecidos, los lugares y los objetos que se cuentan en El Salvador. Barajá, volteá cada carta y oí su canta.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#baraja">Ver la baraja <svg aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+          <p class="plate">Se cantan leyendas<span class="sep" aria-hidden="true"></span>No se fía</p>
+        </div>
+      </div>
+      <div class="fan-wrap" aria-hidden="true">
+        <div class="fan" id="fan">
+          <div class="fan-card" style="--i:0"><div class="fan-face"><span class="fan-num">Nº 03</span><svg viewBox="0 0 200 240"><use href="#s-cadejo-blanco"/></svg><span class="fan-name">El Cadejo Blanco</span></div></div>
+          <div class="fan-card" style="--i:1"><div class="fan-face"><span class="fan-num">Nº 01</span><svg viewBox="0 0 200 240"><use href="#s-ciguanaba"/></svg><span class="fan-name">La Ciguanaba</span></div></div>
+          <div class="fan-card" style="--i:2"><div class="fan-face"><span class="fan-num">Nº 02</span><svg viewBox="0 0 200 240"><use href="#s-cipitio"/></svg><span class="fan-name">El Cipitío</span></div></div>
+          <div class="fan-card" style="--i:3"><div class="fan-face"><span class="fan-num">Nº 08</span><svg viewBox="0 0 200 240"><use href="#s-carreta"/></svg><span class="fan-name">La Carreta Chillona</span></div></div>
+          <div class="fan-card" style="--i:4"><div class="fan-face"><span class="fan-num">Nº 05</span><svg viewBox="0 0 200 240"><use href="#s-izalco"/></svg><span class="fan-name">Volcán Izalco</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip"><ul><li>Abierto de noche</li><li>Cerrado al miedo</li><li>Prohibido silbar después de las doce</li><li>Se cuenta al contado</li></ul></div>
+
+  <section class="mesa" id="baraja" aria-labelledby="baraja-title">
+    <div class="mesa-in">
+      <div class="mesa-head">
+        <h2 class="rotulo" id="baraja-title">La baraja</h2>
+        <p>Diez cartas impresas; nueve en esta mano. Buscá por nombre o filtrá por tipo, categoría y departamento.</p>
+      </div>
+
+      <form class="filtros" id="filtros" role="search" aria-label="Filtrar el catálogo">
+        <div class="field f-search">
+          <label for="q">Buscar</label>
+          <div class="search-box"><svg aria-hidden="true" focusable="false"><use href="#i-search"/></svg><input id="q" name="q" type="search" minlength="1" maxlength="200" placeholder="Nombre o detalle, p. ej. ceniza" autocomplete="off" spellcheck="false" aria-describedby="q-hint"></div>
+          <p class="hint" id="q-hint">Hasta 200 caracteres; no hace falta escribir las tildes.</p>
+        </div>
+        <div class="field">
+          <label for="f-kind">Tipo</label>
+          <div class="select"><select id="f-kind" name="kind"><option value="">Todos</option><option value="personaje">Personaje</option><option value="lugar">Lugar</option><option value="objeto">Objeto</option><option value="grupo">Grupo</option><option value="evento">Evento</option></select></div>
+        </div>
+        <div class="field">
+          <label for="f-cat">Categoría</label>
+          <div class="select"><select id="f-cat" name="category"><option value="">Todas</option><option value="mito">Mito</option><option value="leyenda">Leyenda</option><option value="tradicion">Tradición</option></select></div>
+        </div>
+        <div class="field">
+          <label for="f-dept">Departamento</label>
+          <div class="select"><select id="f-dept" name="dept"><option value="">Todos</option><option value="Ahuachapán">Ahuachapán</option><option value="Cabañas">Cabañas</option><option value="Chalatenango">Chalatenango</option><option value="Cuscatlán">Cuscatlán</option><option value="La Libertad">La Libertad</option><option value="La Paz">La Paz</option><option value="La Unión">La Unión</option><option value="Morazán">Morazán</option><option value="San Miguel">San Miguel</option><option value="San Salvador">San Salvador</option><option value="San Vicente">San Vicente</option><option value="Santa Ana">Santa Ana</option><option value="Sonsonate">Sonsonate</option><option value="Usulután">Usulután</option></select></div>
+        </div>
+        <div class="field">
+          <label for="f-sort">Ordenar</label>
+          <div class="select"><select id="f-sort" name="sort">
+            <option value="name-asc">Nombre A–Z</option>
+            <option value="name-desc">Nombre Z–A</option>
+            <option value="new">Más recientes</option>
+            <option value="old">Más antiguas</option>
+          </select></div>
+        </div>
+        <div class="f-actions">
+          <button class="btn" type="submit">Barajar</button>
+          <button class="btn btn-ghost" type="reset">Limpiar</button>
+        </div>
+      </form>
+
+      <div class="tally">
+        <p class="count" id="count" aria-live="polite">9 de 10 entradas</p>
+        <p class="page-of">Página 1 de 2</p>
+      </div>
+
+      <ul class="deck" id="deck">
+<li class="card" id="carta-03" data-kind="personaje" data-category="leyenda" data-depts="Chalatenango|Cuscatlán" data-sort="Cadejo Blanco" data-created="2025-05-07">
+  <div class="card-inner">
+    <article class="face front" aria-labelledby="t-03">
+      <p class="num"><span class="sr-only">Carta </span>Nº 03</p>
+      <p class="cat"><span class="sr-only">Categoría: </span>Leyenda</p>
+      <svg class="art" viewBox="0 0 200 240" role="img" aria-label="Perro blanco de ojos azules, parado en un camino de tierra de noche."><use href="#s-cadejo-blanco"/></svg>
+      <h3 class="banner" id="t-03"><a href="entity.html">El Cadejo Blanco</a></h3>
+      <p class="meta"><span class="kind"><svg aria-hidden="true" focusable="false"><use href="#k-personaje"/></svg>Personaje</span><span>Chalatenango, Cuscatlán</span></p>
+      <p class="line">Perro espíritu de los caminos solitarios; benévolo, cuida al caminante trasnochado.</p>
+    </article>
+    <div class="face back" inert>
+      <div class="back-panel">
+        <p class="back-num">Nº 03 · El Cadejo Blanco</p>
+        <p class="canta">Chucho blanco de ojos azules en calma:<br>si venís bolo de noche, te cuida la espalda.</p>
+        <p class="caller">canta el cantor de la baraja</p>
+      </div>
+    </div>
+  </div>
+  <button class="flip" type="button" aria-pressed="false" aria-label="Voltear carta: El Cadejo Blanco" data-flip><svg aria-hidden="true" focusable="false"><use href="#i-flip"/></svg><span>Voltear</span></button>
+</li>
+<li class="card" id="carta-04" data-kind="personaje" data-category="leyenda" data-depts="Chalatenango|San Vicente" data-sort="Cadejo Negro" data-created="2025-06-21">
+  <div class="card-inner">
+    <article class="face front" aria-labelledby="t-04">
+      <p class="num"><span class="sr-only">Carta </span>Nº 04</p>
+      <p class="cat"><span class="sr-only">Categoría: </span>Leyenda</p>
+      <svg class="art" viewBox="0 0 200 240" role="img" aria-label="Perro negro con el lomo erizado y ojos rojos; del aire suben líneas de olor."><use href="#s-cadejo-negro"/></svg>
+      <h3 class="banner" id="t-04"><a href="entity.html">El Cadejo Negro</a></h3>
+      <p class="meta"><span class="kind"><svg aria-hidden="true" focusable="false"><use href="#k-personaje"/></svg>Personaje</span><span>Chalatenango, San Vicente</span></p>
+      <p class="line">Su opuesto malévolo: los ojos se le ponen rojos cuando se enoja y lo anuncia un olor a chivo.</p>
+    </article>
+    <div class="face back" inert>
+      <div class="back-panel">
+        <p class="back-num">Nº 04 · El Cadejo Negro</p>
+        <p class="canta">Huele a chivo y los ojos le arden rojos;<br>no volteés, caminante: cerrá bien los ojos.</p>
+        <p class="caller">canta el cantor de la baraja</p>
+      </div>
+    </div>
+  </div>
+  <button class="flip" type="button" aria-pressed="false" aria-label="Voltear carta: El Cadejo Negro" data-flip><svg aria-hidden="true" focusable="false"><use href="#i-flip"/></svg><span>Voltear</span></button>
+</li>
+<li class="card" id="carta-08" data-kind="objeto" data-category="leyenda" data-depts="San Salvador" data-sort="Carreta Chillona" data-created="2026-01-18">
+  <div class="card-inner">
+    <article class="face front" aria-labelledby="t-08">
+      <p class="num"><span class="sr-only">Carta </span>Nº 08</p>
+      <p class="cat"><span class="sr-only">Categoría: </span>Leyenda</p>
+      <svg class="art" viewBox="0 0 200 240" role="img" aria-label="Carreta de madera sin bueyes, con una rueda grande que chilla, en una calle de noche."><use href="#s-carreta"/></svg>
+      <h3 class="banner" id="t-08"><a href="entity.html">La Carreta Chillona</a></h3>
+      <p class="meta"><span class="kind"><svg aria-hidden="true" focusable="false"><use href="#k-objeto"/></svg>Objeto</span><span>San Salvador</span></p>
+      <p class="line">Carreta que se oye chillar de noche por calles sin gente.</p>
+    </article>
+    <div class="face back" inert>
+      <div class="back-panel">
+        <p class="back-num">Nº 08 · La Carreta Chillona</p>
+        <p class="canta">Rechina sin bueyes por la calle vacía;<br>el que la oye pasar no sale hasta el día.</p>
+        <p class="caller">canta el cantor de la baraja</p>
+      </div>
+    </div>
+  </div>
+  <button class="flip" type="button" aria-pressed="false" aria-label="Voltear carta: La Carreta Chillona" data-flip><svg aria-hidden="true" focusable="false"><use href="#i-flip"/></svg><span>Voltear</span></button>
+</li>
+<li class="card" id="carta-01" data-kind="personaje" data-category="leyenda" data-depts="La Libertad|San Salvador" data-sort="Ciguanaba" data-created="2025-02-14">
+  <div class="card-inner">
+    <article class="face front" aria-labelledby="t-01">
+      <p class="num"><span class="sr-only">Carta </span>Nº 01</p>
+      <p class="cat"><span class="sr-only">Categoría: </span>Leyenda</p>
+      <svg class="art" viewBox="0 0 200 240" role="img" aria-label="La Ciguanaba de espaldas a la orilla de un río de noche, con el cabello largo cubriéndole el rostro."><use href="#s-ciguanaba"/></svg>
+      <h3 class="banner" id="t-01"><a href="entity.html">La Ciguanaba</a></h3>
+      <p class="meta"><span class="kind"><svg aria-hidden="true" focusable="false"><use href="#k-personaje"/></svg>Personaje</span><span>La Libertad, San Salvador</span></p>
+      <p class="line">Mujer de cabello largo que oculta el rostro; aparece de noche junto a ríos, quebradas y lagos.</p>
+    </article>
+    <div class="face back" inert>
+      <div class="back-panel">
+        <p class="back-num">Nº 01 · La Ciguanaba</p>
+        <p class="canta">A la orilla del río se peina su pena;<br>cipote, no la sigás: la noche no es buena.</p>
+        <p class="caller">canta el cantor de la baraja</p>
+      </div>
+    </div>
+  </div>
+  <button class="flip" type="button" aria-pressed="false" aria-label="Voltear carta: La Ciguanaba" data-flip><svg aria-hidden="true" focusable="false"><use href="#i-flip"/></svg><span>Voltear</span></button>
+</li>
+<li class="card" id="carta-02" data-kind="personaje" data-category="mito" data-depts="San Miguel|Usulután" data-sort="Cipitío" data-created="2025-03-02">
+  <div class="card-inner">
+    <article class="face front" aria-labelledby="t-02">
+      <p class="num"><span class="sr-only">Carta </span>Nº 02</p>
+      <p class="cat"><span class="sr-only">Categoría: </span>Mito</p>
+      <svg class="art" viewBox="0 0 200 240" role="img" aria-label="El Cipitío de perfil: sombrero cónico enorme, camisa de manta, barriga grande, un puño de ceniza en la mano y los pies apuntando hacia atrás."><use href="#s-cipitio"/></svg>
+      <h3 class="banner" id="t-02"><a href="entity.html">El Cipitío</a></h3>
+      <p class="meta"><span class="kind"><svg aria-hidden="true" focusable="false"><use href="#k-personaje"/></svg>Personaje</span><span>San Miguel, Usulután</span></p>
+      <p class="line">Niño panzón de sombrero cónico enorme y pies al revés; se baña en ceniza y se la come.</p>
+    </article>
+    <div class="face back" inert>
+      <div class="back-panel">
+        <p class="back-num">Nº 02 · El Cipitío</p>
+        <p class="canta">Sombrerón, panzoncito, se come la ceniza;<br>los pies le van pa’trás: seguilo y te despista.</p>
+        <p class="caller">canta el cantor de la baraja</p>
+      </div>
+    </div>
+  </div>
+  <button class="flip" type="button" aria-pressed="false" aria-label="Voltear carta: El Cipitío" data-flip><svg aria-hidden="true" focusable="false"><use href="#i-flip"/></svg><span>Voltear</span></button>
+</li>
+<li class="card" id="carta-07" data-kind="personaje" data-category="mito" data-depts="Morazán|Cabañas" data-sort="Duende" data-created="2025-11-30">
+  <div class="card-inner">
+    <article class="face front" aria-labelledby="t-07">
+      <p class="num"><span class="sr-only">Carta </span>Nº 07</p>
+      <p class="cat"><span class="sr-only">Categoría: </span>Mito</p>
+      <svg class="art" viewBox="0 0 200 240" role="img" aria-label="Un ser pequeño de sombrero grande asoma los ojos entre matas de café con granos rojos."><use href="#s-duende"/></svg>
+      <h3 class="banner" id="t-07"><a href="entity.html">El Duende</a></h3>
+      <p class="meta"><span class="kind"><svg aria-hidden="true" focusable="false"><use href="#k-personaje"/></svg>Personaje</span><span>Morazán, Cabañas</span></p>
+      <p class="line">Ser pequeño de sombrero grande que ronda quebradas y cafetales.</p>
+    </article>
+    <div class="face back" inert>
+      <div class="back-panel">
+        <p class="back-num">Nº 07 · El Duende</p>
+        <p class="canta">Chiquitito y sombrerudo, ronda el cafetal;<br>si te esconde algo, no lo andés a buscar.</p>
+        <p class="caller">canta el cantor de la baraja</p>
+      </div>
+    </div>
+  </div>
+  <button class="flip" type="button" aria-pressed="false" aria-label="Voltear carta: El Duende" data-flip><svg aria-hidden="true" focusable="false"><use href="#i-flip"/></svg><span>Voltear</span></button>
+</li>
+<li class="card" id="carta-10" data-kind="lugar" data-category="leyenda" data-depts="San Miguel|La Unión" data-sort="Laguna de Olomega" data-created="2026-04-22">
+  <div class="card-inner">
+    <article class="face front" aria-labelledby="t-10">
+      <p class="num"><span class="sr-only">Carta </span>Nº 10</p>
+      <p class="cat"><span class="sr-only">Categoría: </span>Leyenda</p>
+      <svg class="art" viewBox="0 0 200 240" role="img" aria-label="Laguna con una isla al centro y una cola de sirena que sale del agua."><use href="#s-olomega"/></svg>
+      <h3 class="banner" id="t-10"><a href="entity.html">Laguna de Olomega</a></h3>
+      <p class="meta"><span class="kind"><svg aria-hidden="true" focusable="false"><use href="#k-lugar"/></svg>Lugar</span><span>San Miguel, La Unión</span></p>
+      <p class="line">Laguna con un relato de sirena cerca de la isla Olomegón.</p>
+    </article>
+    <div class="face back" inert>
+      <div class="back-panel">
+        <p class="back-num">Nº 10 · Laguna de Olomega</p>
+        <p class="canta">Junto al Olomegón algo coletea en el agua;<br>pescador, no te asomés cuando la luna se apaga.</p>
+        <p class="caller">canta el cantor de la baraja</p>
+      </div>
+    </div>
+  </div>
+  <button class="flip" type="button" aria-pressed="false" aria-label="Voltear carta: Laguna de Olomega" data-flip><svg aria-hidden="true" focusable="false"><use href="#i-flip"/></svg><span>Voltear</span></button>
+</li>
+<li class="card" id="carta-06" data-kind="personaje" data-category="leyenda" data-depts="Santa Ana|Chalatenango" data-sort="Llorona" data-created="2025-09-11">
+  <div class="card-inner">
+    <article class="face front" aria-labelledby="t-06">
+      <p class="num"><span class="sr-only">Carta </span>Nº 06</p>
+      <p class="cat"><span class="sr-only">Categoría: </span>Leyenda</p>
+      <svg class="art" viewBox="0 0 200 240" role="img" aria-label="Mujer arrodillada a la orilla del agua, cubierta con un rebozo rojo y el rostro entre las manos."><use href="#s-llorona"/></svg>
+      <h3 class="banner" id="t-06"><a href="entity.html">La Llorona</a></h3>
+      <p class="meta"><span class="kind"><svg aria-hidden="true" focusable="false"><use href="#k-personaje"/></svg>Personaje</span><span>Santa Ana, Chalatenango</span></p>
+      <p class="line">Mujer que llora junto al agua por sus hijos.</p>
+    </article>
+    <div class="face back" inert>
+      <div class="back-panel">
+        <p class="back-num">Nº 06 · La Llorona</p>
+        <p class="canta">«¡Ay, mis hijos!», se oye en la quebrada;<br>cerrá la ventana, que es de madrugada.</p>
+        <p class="caller">canta el cantor de la baraja</p>
+      </div>
+    </div>
+  </div>
+  <button class="flip" type="button" aria-pressed="false" aria-label="Voltear carta: La Llorona" data-flip><svg aria-hidden="true" focusable="false"><use href="#i-flip"/></svg><span>Voltear</span></button>
+</li>
+<li class="card" id="carta-05" data-kind="lugar" data-category="tradicion" data-depts="Sonsonate" data-sort="Volcán Izalco" data-created="2025-07-23">
+  <div class="card-inner">
+    <article class="face front" aria-labelledby="t-05">
+      <p class="num"><span class="sr-only">Carta </span>Nº 05</p>
+      <p class="cat"><span class="sr-only">Categoría: </span>Tradición</p>
+      <svg class="art" viewBox="0 0 200 240" role="img" aria-label="Cono del volcán Izalco con lava y humo sobre un cielo rojo; abajo, un velero en el mar."><use href="#s-izalco"/></svg>
+      <h3 class="banner" id="t-05"><a href="entity.html">Volcán Izalco</a></h3>
+      <p class="meta"><span class="kind"><svg aria-hidden="true" focusable="false"><use href="#k-lugar"/></svg>Lugar</span><span>Sonsonate</span></p>
+      <p class="line">Nació en 1770 y ardió casi sin pausa hasta 1958: lo llamaron el Faro del Pacífico.</p>
+    </article>
+    <div class="face back" inert>
+      <div class="back-panel">
+        <p class="back-num">Nº 05 · Volcán Izalco</p>
+        <p class="canta">Faro del Pacífico, de mil setecientos setenta;<br>ya no alumbra el mar, pero el cuento se cuenta.</p>
+        <p class="caller">canta el cantor de la baraja</p>
+      </div>
+    </div>
+  </div>
+  <button class="flip" type="button" aria-pressed="false" aria-label="Voltear carta: Volcán Izalco" data-flip><svg aria-hidden="true" focusable="false"><use href="#i-flip"/></svg><span>Voltear</span></button>
+</li>
+      </ul>
+
+      <div class="empty" id="empty" hidden>
+        <svg viewBox="0 0 120 150" aria-hidden="true" focusable="false"><rect x="5" y="5" width="110" height="140" rx="12" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="9 7"/><text x="60" y="84" text-anchor="middle" fill="currentColor" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="20">Nº ??</text></svg>
+        <h3 class="rotulo">No salió ninguna carta</h3>
+        <p>Ninguna leyenda de esta página coincide. Probá con otro departamento o borrá la búsqueda.</p>
+        <button class="btn" type="button" id="clear">Limpiar filtros</button>
+      </div>
+
+      <nav class="pager" aria-label="Paginación">
+        <ol>
+          <li><a class="pg" role="link" aria-disabled="true">Anterior</a></li>
+          <li><a class="pg" href="index.html" aria-current="page" aria-label="Página 1">1</a></li>
+          <li><a class="pg" href="index.html" aria-label="Página 2">2</a></li>
+          <li><a class="pg pg-next" href="index.html">Siguiente <svg aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></li>
+        </ol>
+        <div class="peek">
+          <div class="peek-card" aria-hidden="true"><svg viewBox="0 0 200 240"><use href="#s-girola"/></svg></div>
+          <p>En la página 2 espera la Nº 09, <strong>La Familia Girola</strong>.</p>
+        </div>
+      </nav>
+    </div>
+  </section>
+  <p class="sr-only" id="anuncio" aria-live="polite"></p>
+</main>
+<footer class="site-foot">
+  <div class="foot-in">
+    <p class="foot-sign">Hoy no se fía.<br>Mañana se cuenta.</p>
+    <div>
+      <p class="foot-note">Datos de demostración: textos breves escritos para esta maqueta a partir de la tradición oral y de <cite>Mitos y leyendas de El Salvador</cite>. Las ilustraciones están dibujadas en código como marcador; las definitivas deben encargarse, con crédito y pago, a ilustradores salvadoreños.</p>
+      <p class="foot-links"><a href="index.html">Catálogo</a><a href="../index.html">Las tres direcciones</a></p>
+    </div>
+  </div>
+</footer>
+<script>
+(function () {
+  var root = document.documentElement;
+  var darkQ = window.matchMedia('(prefers-color-scheme: dark)');
+  var reduceQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var live = document.getElementById('anuncio');
+
+  /* Theme toggle: explicit choice wins over the system preference */
+  var toggle = document.getElementById('theme-toggle');
+  function theme() { return root.getAttribute('data-theme') || (darkQ.matches ? 'dark' : 'light'); }
+  function labelToggle() {
+    var dark = theme() === 'dark';
+    toggle.setAttribute('aria-label', dark ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro');
+    toggle.querySelector('.tt-text').textContent = dark ? 'Claro' : 'Oscuro';
+  }
+  toggle.addEventListener('click', function () {
+    var next = theme() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('myl-theme', next); } catch (e) { /* storage blocked: the choice lasts this visit */ }
+    labelToggle();
+  });
+  if (darkQ.addEventListener) darkQ.addEventListener('change', labelToggle);
+  labelToggle();
+
+  /* Flip: the hidden face is inert so focus and screen readers only meet the visible one */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-flip]'), function (btn) {
+    var card = btn.closest('.card');
+    var front = card.querySelector('.front');
+    var back = card.querySelector('.back');
+    var name = btn.getAttribute('aria-label').replace('Voltear carta: ', '');
+    btn.addEventListener('click', function () {
+      var on = !card.classList.contains('is-flipped');
+      card.classList.toggle('is-flipped', on);
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      front.inert = on;
+      back.inert = !on;
+      if (live) live.textContent = on
+        ? 'Canta de ' + name + ': ' + back.querySelector('.canta').textContent
+        : name + ': de vuelta al frente.';
+    });
+  });
+
+  /* Listing only: filters, sort, the deal and the tilting hand */
+  var form = document.getElementById('filtros');
+  if (!form) return;
+  var deck = document.getElementById('deck');
+  var cards = Array.prototype.slice.call(deck.children);
+  var count = document.getElementById('count');
+  var empty = document.getElementById('empty');
+  var total = 10;
+
+  function norm(s) { return s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim(); }
+  var sorters = {
+    'name-asc': function (a, b) { return a.dataset.sort.localeCompare(b.dataset.sort, 'es'); },
+    'name-desc': function (a, b) { return b.dataset.sort.localeCompare(a.dataset.sort, 'es'); },
+    'new': function (a, b) { return b.dataset.created.localeCompare(a.dataset.created); },
+    'old': function (a, b) { return a.dataset.created.localeCompare(b.dataset.created); }
+  };
+  function field(n) { return form.elements.namedItem(n).value; }
+
+  function apply() {
+    var q = norm(field('q').slice(0, 200));
+    var kind = field('kind'), cat = field('category'), dept = field('dept');
+    var shown = 0;
+    cards.forEach(function (li) {
+      var text = norm(li.dataset.sort + ' ' + li.querySelector('.line').textContent);
+      var ok = (!q || text.indexOf(q) > -1) &&
+        (!kind || li.dataset.kind === kind) &&
+        (!cat || li.dataset.category === cat) &&
+        (!dept || li.dataset.depts.split('|').indexOf(dept) > -1);
+      li.hidden = !ok;
+      if (ok) shown++;
+    });
+    cards.slice().sort(sorters[field('sort')] || sorters['name-asc']).forEach(function (li) { deck.appendChild(li); });
+    count.textContent = shown + ' de ' + total + ' entradas';
+    empty.hidden = shown > 0;
+    deck.hidden = shown === 0;
+  }
+  form.addEventListener('input', apply);
+  form.addEventListener('change', apply);
+  form.addEventListener('submit', function (e) { e.preventDefault(); apply(); });
+  form.addEventListener('reset', function () { window.setTimeout(apply, 0); });
+  document.getElementById('clear').addEventListener('click', function () {
+    form.reset();
+    apply();
+    form.elements.namedItem('q').focus();
+  });
+
+  /* The deal: once, when the board first comes into view; cards stay visible if it never runs */
+  function deal() {
+    var visible = cards.filter(function (li) { return !li.hidden; });
+    var box = deck.getBoundingClientRect();
+    var cx = box.left + box.width / 2;
+    var cy = box.top + Math.min(180, box.height / 2);
+    visible.forEach(function (li, i) {
+      var r = li.getBoundingClientRect();
+      li.style.setProperty('--dx', Math.round(cx - (r.left + r.width / 2)) + 'px');
+      li.style.setProperty('--dy', Math.round(cy - (r.top + r.height / 2)) + 'px');
+      li.style.setProperty('--r', ((i * 37) % 17 - 8) + 'deg');
+      li.style.setProperty('--i', i);
+    });
+    deck.classList.add('dealing');
+    window.setTimeout(function () { deck.classList.remove('dealing'); }, 1000);
+  }
+  if (!reduceQ.matches && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { io.disconnect(); deal(); }
+    }, { rootMargin: '0px 0px -30% 0px' });
+    io.observe(deck);
+  }
+
+  /* The hand in the hero tilts toward a mouse pointer; never on touch or reduced motion */
+  var hero = document.querySelector('.hero');
+  var fan = document.getElementById('fan');
+  if (fan && !reduceQ.matches && window.matchMedia('(pointer: fine)').matches) {
+    var frame = 0;
+    hero.addEventListener('pointermove', function (e) {
+      if (frame) return;
+      frame = window.requestAnimationFrame(function () {
+        frame = 0;
+        var r = fan.getBoundingClientRect();
+        var x = Math.max(-1, Math.min(1, (e.clientX - r.left) / r.width - 0.5));
+        var y = Math.max(-1, Math.min(1, (e.clientY - r.top) / r.height - 0.5));
+        fan.style.setProperty('--ry', (x * 14).toFixed(2) + 'deg');
+        fan.style.setProperty('--rx', (-y * 10).toFixed(2) + 'deg');
+      });
+    });
+    hero.addEventListener('pointerleave', function () {
+      fan.style.setProperty('--ry', '0deg');
+      fan.style.setProperty('--rx', '0deg');
+    });
+  }
+})();
+</script>
+</body>
+</html>

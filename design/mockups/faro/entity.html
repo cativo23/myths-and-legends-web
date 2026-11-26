@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="es" data-eyes="calm">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El Cadejo Blanco · Faro</title>
+<meta name="description" content="El Cadejo Blanco: perro espíritu de los caminos solitarios de El Salvador. Ficha del catálogo de mitos y leyendas.">
+<meta name="color-scheme" content="dark light">
+<script>
+  (function () {
+    var d = document.documentElement;
+    d.classList.add('js');
+    try { var t = localStorage.getItem('myl-theme'); if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t); } catch (e) {}
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300..700&display=swap">
+<style>
+:root {
+  --bg: #EDEAE3; --surface: #F7F5F0; --window: #E4E2DC;
+  --text: #14181F; --muted: #4A5262; --line: #B9B6AE; --field-line: #4A5262;
+  --ember: #B03F0A; --on-ember: #FFFFFF;
+  --teal: #0B645B; --teal-rgb: 11 100 91;
+  --blue: #2457B8; --blue-rgb: 36 87 184;
+  --red: #B3261E; --red-rgb: 179 38 30;
+  --focus: #0B645B;
+  --sky-top: #D7D9DF; --sky-mid: #E4E1DA; --sky-low: #EBDDCB;
+  --ridge-far: #C2C5CD; --ridge-izalco: #A9AEB9; --ridge-mid: #8C93A1; --ridge-near: #5D6474;
+  --road: #D9D3C7; --road-edge: #B5AEA1; --moon: #FFFFFF;
+  --sil: #20252F; --coat-hi: #FBFAF7; --coat-lo: #C9CDD6; --coat-line: #20252F; --rim-a: .55;
+  --star-a: 0; --pool-a: .10;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #070B14; --surface: #0F1626; --window: #0A1020;
+    --text: #E8E4DA; --muted: #9AA3B8; --line: #26304A; --field-line: #9AA3B8;
+    --ember: #FF7A2F; --on-ember: #070B14;
+    --teal: #3DD6C4; --teal-rgb: 61 214 196;
+    --blue: #6EA8FF; --blue-rgb: 110 168 255;
+    --red: #FF6B6B; --red-rgb: 255 107 107;
+    --focus: #3DD6C4;
+    --sky-top: #070B14; --sky-mid: #0B1326; --sky-low: #142048;
+    --ridge-far: #1C2754; --ridge-izalco: #151D40; --ridge-mid: #0C1228; --ridge-near: #04060C;
+    --road: #1A2240; --road-edge: #2A3460; --moon: #E8E4DA;
+    --sil: #03050A; --coat-hi: #F1F3F8; --coat-lo: #8E98AE; --coat-line: #03050A; --rim-a: 1;
+    --star-a: 1; --pool-a: .09;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #070B14; --surface: #0F1626; --window: #0A1020;
+  --text: #E8E4DA; --muted: #9AA3B8; --line: #26304A; --field-line: #9AA3B8;
+  --ember: #FF7A2F; --on-ember: #070B14;
+  --teal: #3DD6C4; --teal-rgb: 61 214 196;
+  --blue: #6EA8FF; --blue-rgb: 110 168 255;
+  --red: #FF6B6B; --red-rgb: 255 107 107;
+  --focus: #3DD6C4;
+  --sky-top: #070B14; --sky-mid: #0B1326; --sky-low: #142048;
+  --ridge-far: #1C2754; --ridge-izalco: #151D40; --ridge-mid: #0C1228; --ridge-near: #04060C;
+  --road: #1A2240; --road-edge: #2A3460; --moon: #E8E4DA;
+  --sil: #03050A; --coat-hi: #F1F3F8; --coat-lo: #8E98AE; --coat-line: #03050A; --rim-a: 1;
+  --star-a: 1; --pool-a: .09;
+  color-scheme: dark;
+}
+/* The Cadejo's eyes set the page accent: blue in calm, red when hostile */
+:root { --accent: var(--blue); --accent-rgb: var(--blue-rgb); }
+:root[data-eyes="hostile"] { --accent: var(--red); --accent-rgb: var(--red-rgb); }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scrollbar-color: var(--muted) var(--bg); }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  font-size: 1rem; line-height: 1.6; letter-spacing: .005em;
+  caret-color: var(--accent); -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+::selection { background: var(--accent); color: var(--bg); }
+svg { display: block; max-width: 100%; }
+a { color: inherit; text-underline-offset: .22em; text-decoration-thickness: 1px; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+.skip { position: absolute; left: 16px; top: -100px; z-index: 50; background: var(--ember); color: var(--on-ember); padding: .6rem 1rem; font-weight: 600; text-decoration: none; }
+.skip:focus { top: 12px; }
+.num { font-variant-numeric: tabular-nums lining-nums; }
+.wrap { max-width: 1320px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); }
+
+/* header (shared with the listing) */
+.site-head { position: relative; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem clamp(16px, 4vw, 48px); }
+.brand { display: flex; align-items: center; gap: .6rem; text-decoration: none; }
+.brand svg { width: 34px; height: 34px; }
+.brand-name { font-family: "Instrument Serif", Georgia, serif; font-size: 1.5rem; line-height: 1; }
+.head-right { display: flex; align-items: center; gap: clamp(.5rem, 2vw, 1.5rem); }
+.site-nav ul { display: flex; gap: clamp(.75rem, 2vw, 1.5rem); list-style: none; margin: 0; padding: 0; }
+.site-nav a { text-decoration: none; font-size: .9375rem; font-weight: 500; padding: .5rem .125rem; color: var(--muted); }
+.site-nav a:hover { color: var(--text); text-decoration: underline; }
+.theme-btn { inline-size: 44px; block-size: 44px; flex: none; display: grid; place-items: center; border: 1px solid var(--field-line); border-radius: 50%; background: transparent; color: var(--text); cursor: pointer; transition: background-color .2s, color .2s; }
+.theme-btn:hover { background: var(--text); color: var(--bg); }
+.theme-btn svg { width: 22px; height: 22px; }
+.theme-btn .i-dawn { display: none; }
+.is-night .theme-btn .i-dawn { display: block; }
+.is-night .theme-btn .i-night { display: none; }
+
+.crumbs ol { display: flex; flex-wrap: wrap; gap: .4rem; list-style: none; margin: 0; padding: .25rem 0 1.25rem; font-size: .875rem; color: var(--muted); }
+.crumbs li + li::before { content: "/"; margin-right: .4rem; color: var(--line); }
+.crumbs a { color: var(--text); }
+.crumbs [aria-current] { color: var(--muted); }
+
+/* ---------- Opening: night road scene + title in a pool of light ---------- */
+.opening { display: grid; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; }
+@media (min-width: 980px) { .opening { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); } }
+.scene { margin: 0; position: relative; }
+.scene-frame {
+  position: relative; overflow: hidden; border-radius: 260px 260px 12px 12px; aspect-ratio: 800 / 560;
+  background: linear-gradient(to bottom, var(--sky-top), var(--sky-mid) 50%, var(--sky-low));
+  border: 1px solid var(--line);
+}
+.scene-frame::before {
+  content: ""; position: absolute; inset: 0; opacity: var(--star-a); pointer-events: none;
+  background-image:
+    radial-gradient(1.2px 1.2px at 30px 40px, rgb(232 228 218 / .9), transparent 70%),
+    radial-gradient(1px 1px at 150px 110px, rgb(232 228 218 / .6), transparent 70%),
+    radial-gradient(1.4px 1.4px at 90px 170px, rgb(200 214 255 / .8), transparent 70%),
+    radial-gradient(1px 1px at 230px 60px, rgb(255 226 200 / .7), transparent 70%);
+  background-size: 260px 220px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 30%, transparent 62%); mask-image: linear-gradient(to bottom, #000 30%, transparent 62%);
+}
+.scene svg { position: relative; width: 100%; height: 100%; }
+.scene figcaption { margin-top: .75rem; font-size: .875rem; color: var(--muted); }
+.eye-core, .eye-glow { transition: fill .5s ease-out; }
+.eye-core { fill: var(--accent); }
+.eye-glow-stop { stop-color: var(--accent); transition: stop-color .5s ease-out; }
+.ember-dot { animation: core 4s cubic-bezier(.45, 0, .2, 1) infinite; }
+@keyframes core { 0%, 100% { opacity: .55; } 40% { opacity: 1; } }
+
+.title-block { position: relative; display: grid; gap: 1.25rem; padding-block: 1rem; }
+.title-block::before {
+  content: ""; position: absolute; z-index: -1; inset: -20% -15%; pointer-events: none;
+  background: radial-gradient(closest-side, rgb(var(--accent-rgb) / .14), transparent 75%);
+  transition: background .5s ease-out;
+}
+h1 { margin: 0; font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: clamp(3rem, 1.9rem + 4.4vw, 5.75rem); line-height: .92; letter-spacing: -.022em; text-wrap: balance; }
+.facts { display: flex; flex-wrap: wrap; gap: .5rem 1.75rem; margin: 0; }
+.facts div { display: grid; gap: .1rem; }
+.facts dt { font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.facts dd { margin: 0; font-size: 1.0625rem; font-weight: 500; }
+.facts .cat { color: var(--teal); }
+.lead { margin: 0; font-size: clamp(1.125rem, 1.05rem + .35vw, 1.375rem); line-height: 1.45; max-width: 34ch; text-wrap: pretty; }
+
+/* eye-state control */
+.eyes { margin: 0; padding: 1rem 1.1rem 1.1rem; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); min-width: 0; }
+.eyes legend { padding: 0 .35rem; font-size: .8125rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.eye-opts { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-top: .25rem; }
+.eye-opt { position: relative; }
+.eye-opt input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.eye-opt label { display: flex; align-items: center; gap: .6rem; min-height: 48px; padding: .55rem .8rem; border: 1px solid var(--field-line); border-radius: 999px; cursor: pointer; font-weight: 600; transition: background-color .25s, color .25s, border-color .25s; }
+.eye-opt label svg { width: 26px; height: 12px; flex: none; }
+.eye-opt.calm { --c: var(--blue); }
+.eye-opt.hostile { --c: var(--red); }
+.eye-opt label svg circle { fill: var(--c); }
+.eye-opt input:checked + label { border: 2px solid var(--c); padding: calc(.55rem - 1px) calc(.8rem - 1px); background: var(--bg); }
+.eye-opt input:focus-visible + label { outline: 2px solid var(--focus); outline-offset: 3px; }
+.eye-opt label:hover { border-color: var(--text); }
+.eye-status { margin: .75rem 0 0; font-size: .9375rem; color: var(--text); }
+.eye-status b { color: var(--accent); font-weight: 600; transition: color .4s; }
+
+/* ---------- Body: reading column + aside ---------- */
+.detail { display: grid; gap: clamp(2.5rem, 5vw, 4.5rem); padding-block: clamp(3rem, 7vw, 5.5rem) 4rem; }
+@media (min-width: 980px) { .detail { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: start; } }
+.col { display: grid; gap: clamp(2.5rem, 5vw, 3.5rem); min-width: 0; }
+.sec { position: relative; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+.sec-head { display: flex; align-items: center; gap: .8rem; margin: 0 0 1.25rem; }
+.sec h2 { margin: 0; font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: clamp(1.875rem, 1.5rem + 1.2vw, 2.5rem); line-height: 1.05; letter-spacing: -.01em; }
+.lampdot { position: relative; width: 10px; height: 10px; flex: none; border-radius: 50%; background: var(--accent); transition: background-color .4s, opacity .5s ease-out; }
+.lampdot::after { content: ""; position: absolute; inset: -12px; border-radius: 50%; background: radial-gradient(circle, rgb(var(--accent-rgb) / .55), transparent 70%); opacity: 0; transition: opacity .7s ease-out; }
+.sec.is-lit .lampdot::after { opacity: 1; }
+.js .sec:not(.is-lit) .lampdot { opacity: .45; }
+.prose p { margin: 0 0 1.1em; max-width: 65ch; font-size: 1.0625rem; line-height: 1.7; text-wrap: pretty; hyphens: auto; }
+h1 { overflow-wrap: break-word; }
+
+.traits { display: grid; margin: 0; }
+.traits div { display: grid; gap: .2rem 1.5rem; padding: .85rem 0; border-bottom: 1px solid var(--line); }
+@media (min-width: 640px) { .traits div { grid-template-columns: 11rem 1fr; } }
+.traits dt { font-size: .875rem; font-weight: 600; color: var(--muted); }
+.traits dd { margin: 0; max-width: 55ch; }
+.traits .eyes-row dd b { font-weight: 600; }
+.traits .eyes-row .c-blue { color: var(--blue); } .traits .eyes-row .c-red { color: var(--red); }
+
+.chips { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; margin: 1rem 0 0; padding: 0; }
+.chips li { display: inline-flex; align-items: center; gap: .45rem; min-height: 36px; padding: .35rem .85rem; border: 1px solid var(--accent); border-radius: 999px; font-weight: 500; transition: border-color .4s; }
+.chips svg { width: 14px; height: 14px; color: var(--accent); }
+.minimap { width: 100%; height: auto; border-radius: 8px; background: linear-gradient(to bottom, var(--sky-mid), var(--sky-low)); }
+.minimap .mm-far { fill: var(--ridge-far); } .minimap .mm-near { fill: var(--ridge-near); }
+.minimap .mm-izalco { fill: var(--ember); }
+.minimap .mm-lamp { fill: var(--accent); transition: fill .4s; }
+.minimap .mm-halo-stop { stop-color: var(--accent); }
+
+.sources { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; }
+.sources li { display: grid; grid-template-columns: 22px 1fr; gap: .6rem; align-items: start; }
+.sources svg { width: 20px; height: 20px; margin-top: .15rem; color: var(--muted); }
+.sources cite { font-style: italic; font-family: "Instrument Serif", Georgia, serif; font-size: 1.25rem; line-height: 1.2; }
+.sources small { display: block; color: var(--muted); font-size: .875rem; }
+
+.rel-group h3 { margin: 0 0 .75rem; font-size: .875rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.rel-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; }
+.rel { --rel: var(--red); --rel-rgb: var(--red-rgb); position: relative; display: grid; grid-template-columns: 96px 1fr; gap: 1rem; align-items: center; padding: 10px; border: 1px solid var(--line); border-radius: 60px 12px 12px 60px; background: var(--surface); transition: border-color .25s; }
+.rel:hover { border-color: var(--rel); }
+.rel .mini { position: relative; aspect-ratio: 200 / 150; border-radius: 48px 48px 4px 4px; overflow: hidden; background: var(--window); }
+.rel .mini::before { content: ""; position: absolute; inset: 0; background: radial-gradient(110% 90% at 50% 100%, rgb(var(--rel-rgb) / .4), transparent 70%); }
+.rel .mini svg { position: relative; width: 100%; height: 100%; }
+.rel a { font: 400 1.625rem/1.1 "Instrument Serif", Georgia, serif; text-decoration: none; }
+.rel a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+@supports selector(:has(*)) {
+  .rel a:focus-visible { outline: none; }
+  .rel:has(a:focus-visible) { outline: 2px solid var(--focus); outline-offset: 3px; }
+}
+.rel p { margin: .2rem 0 0; font-size: .875rem; color: var(--muted); }
+.rel p b { color: var(--rel); font-weight: 600; }
+.rel-note { margin: .75rem 0 0; font-size: .875rem; color: var(--muted); }
+
+.back { display: inline-flex; align-items: center; gap: .5rem; min-height: 44px; font-weight: 600; text-decoration: none; }
+.back:hover { text-decoration: underline; }
+.back svg { width: 18px; height: 18px; }
+
+.site-foot { border-top: 1px solid var(--line); padding: 2rem clamp(16px, 4vw, 48px) 3rem; color: var(--muted); font-size: .875rem; }
+.site-foot .inner { max-width: 1320px; margin: 0 auto; display: grid; gap: .75rem; }
+@media (min-width: 800px) { .site-foot .inner { grid-template-columns: 1fr auto; } }
+.site-foot p { margin: 0; max-width: 70ch; }
+.site-foot a { color: var(--text); }
+
+.pool { position: fixed; left: 0; top: 0; z-index: -1; width: 640px; height: 640px; margin: -320px 0 0 -320px; border-radius: 50%; pointer-events: none; opacity: 0; background: radial-gradient(circle, rgb(var(--accent-rgb) / var(--pool-a)) 0%, transparent 65%); transform: translate3d(var(--mx, -999px), var(--my, -999px), 0); transition: opacity .4s; }
+.pool.is-on { opacity: 1; }
+main { position: relative; isolation: isolate; }
+
+@media (max-width: 640px) {
+  .brand-name { font-size: 1.25rem; }
+  .scene-frame { border-radius: 160px 160px 10px 10px; }
+  .rel { grid-template-columns: 76px 1fr; }
+}
+@media (max-width: 420px) { .site-nav li:first-child { display: none; } .eye-opts { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) {
+  .ember-dot { animation: none; opacity: .9; }
+  .pool { display: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <path id="dog-shape" d="M30 76 C32 72 37 69 43 68 L49 64 L52 52 C53 50 55 50 56 52 L60 62 C65 64 69 68 73 72 C81 76 93 77 107 76 C119 75 129 74 137 78 C147 82 153 90 157 102 C159 110 161 118 166 123 C161 124 156 118 153 109 C150 101 147 96 143 93 C145 103 147 115 147 127 L149 132 L141 132 L139 126 C137 116 134 108 130 102 L127 108 L129 132 L121 132 L119 110 C112 104 100 102 86 102 C80 102 76 104 73 106 L72 132 L65 132 L64 110 L60 132 L53 132 L56 106 C54 98 52 92 52 88 C50 84 46 82 42 82 C37 82 33 80 30 76Z"/>
+    <symbol id="s-cadejo" viewBox="0 0 200 150">
+      <path d="M0 132 C40 126 70 134 104 130 C140 126 170 133 200 129 L200 150 L0 150Z" style="fill:var(--sil)"/>
+      <use href="#dog-shape" style="fill:var(--coat);stroke:var(--rim);stroke-width:3;stroke-opacity:var(--rim-a);paint-order:stroke"/>
+      <circle cx="44" cy="72" r="7" style="fill:var(--eye)" opacity=".18"/>
+      <circle cx="44" cy="72" r="4" style="fill:var(--eye)" opacity=".35"/>
+      <circle cx="44" cy="72" r="1.9" style="fill:var(--eye)"/>
+    </symbol>
+    <symbol id="pin" viewBox="0 0 16 16"><path d="M8 15s5-5.2 5-8.6A5 5 0 0 0 3 6.4C3 9.8 8 15 8 15Z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="6.5" r="1.8" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+
+<header class="site-head">
+  <a class="brand" href="index.html" aria-label="Mitos y Leyendas, inicio del catálogo">
+    <svg viewBox="0 0 34 34" aria-hidden="true"><path d="M3 28 C9 24 13 15 16 8 L17 7 L18 8 C21 15 25 24 31 28Z" fill="currentColor"/><circle cx="17" cy="5" r="2.6" style="fill:var(--ember)"/></svg>
+    <span class="brand-name">Mitos y Leyendas</span>
+  </a>
+  <div class="head-right">
+    <nav class="site-nav" aria-label="Principal">
+      <ul>
+        <li><a href="index.html">Catálogo</a></li>
+        <li><a href="../index.html">Direcciones</a></li>
+      </ul>
+    </nav>
+    <button class="theme-btn" type="button" id="theme-btn" aria-label="Cambiar a tema noche (oscuro)">
+      <svg class="i-night" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 14.6A8 8 0 0 1 9.4 4.5a8 8 0 1 0 10.1 10.1Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+      <svg class="i-dawn" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 18 L8 11 L11 14 L15 8 L22 18Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M3 21.5 H21" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="15" cy="4.2" r="1.6" fill="currentColor"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="contenido">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Ruta">
+      <ol>
+        <li><a href="index.html">Catálogo</a></li>
+        <li><span aria-current="page">El Cadejo Blanco</span></li>
+      </ol>
+    </nav>
+
+    <article aria-labelledby="ent-title">
+      <div class="opening">
+        <figure class="scene">
+          <div class="scene-frame">
+            <svg viewBox="0 0 800 560" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="scene-title">
+              <title id="scene-title">El Cadejo Blanco, un perro flaco de pelaje blanco y ojos encendidos, cuida un camino de tierra entre milpas mientras un caminante se aleja bajo la luna.</title>
+              <defs>
+                <linearGradient id="coat" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" style="stop-color:var(--coat-hi)"/><stop offset="1" style="stop-color:var(--coat-lo)"/></linearGradient>
+                <radialGradient id="eyeGlow"><stop offset="0" class="eye-glow-stop" stop-opacity=".9"/><stop offset=".4" class="eye-glow-stop" stop-opacity=".3"/><stop offset="1" class="eye-glow-stop" stop-opacity="0"/></radialGradient>
+                <radialGradient id="roadLight" cx=".5" cy=".5" r=".5"><stop offset="0" class="eye-glow-stop" stop-opacity=".22"/><stop offset="1" class="eye-glow-stop" stop-opacity="0"/></radialGradient>
+                <radialGradient id="emberGlow"><stop offset="0" style="stop-color:var(--ember)" stop-opacity=".7"/><stop offset="1" style="stop-color:var(--ember)" stop-opacity="0"/></radialGradient>
+                <mask id="crescent"><rect width="800" height="560" fill="#fff"/><circle cx="652" cy="84" r="26" fill="#000"/></mask>
+              </defs>
+              <!-- moon -->
+              <circle cx="640" cy="92" r="28" style="fill:var(--moon)" mask="url(#crescent)" opacity=".9"/>
+              <!-- far skyline: Izalco with its historical ember, Chichontepec twin peaks -->
+              <path d="M0 300 C40 290 70 250 100 222 L112 214 L120 218 L128 212 C150 240 180 280 230 292 C300 306 360 300 420 296 C480 292 520 270 560 250 C572 244 580 246 588 252 C594 246 602 244 612 250 C650 276 720 290 800 288 L800 560 L0 560Z" style="fill:var(--ridge-far)"/>
+              <circle cx="120" cy="212" r="26" fill="url(#emberGlow)"/>
+              <circle class="ember-dot" cx="120" cy="213" r="3" style="fill:var(--ember)"/>
+              <!-- mid hills -->
+              <path d="M0 360 C80 340 150 330 230 342 C300 352 340 330 400 322 C470 314 540 334 620 330 C690 326 750 318 800 322 L800 560 L0 560Z" style="fill:var(--ridge-mid)"/>
+              <!-- road -->
+              <path d="M466 330 C470 340 462 352 448 366 C420 394 360 420 330 460 C312 486 306 520 300 560 L610 560 C590 520 560 486 530 456 C500 426 486 398 482 372 C480 354 482 340 474 330Z" style="fill:var(--road)"/>
+              <path d="M466 330 C470 340 462 352 448 366 C420 394 360 420 330 460 C312 486 306 520 300 560 M474 330 C482 340 480 354 482 372 C486 398 500 426 530 456 C560 486 590 520 610 560" style="fill:none;stroke:var(--road-edge);stroke-width:2"/>
+              <!-- near ground -->
+              <path d="M0 420 C60 408 120 412 200 420 C260 426 300 440 336 452 L300 560 L0 560Z M800 420 C740 410 680 414 600 428 C570 434 548 442 532 454 L610 560 L800 560Z" style="fill:var(--ridge-near)"/>
+              <!-- distant traveler walking away -->
+              <g style="fill:var(--sil)"><circle cx="474" cy="338" r="2.6"/><path d="M471 341 L477 341 L478 352 L476 352 L475 346 L474 352 L472 352 L470 346Z"/></g>
+              <!-- milpa: corn stalks, left -->
+              <g style="fill:none;stroke:var(--sil);stroke-linecap:round">
+                <path d="M40 560 C42 480 44 430 48 380" stroke-width="5"/><path d="M48 420 C30 410 18 396 10 384 M46 450 C66 438 84 432 100 434 M44 486 C26 478 12 474 0 476 M47 396 C60 386 70 374 76 362" stroke-width="3.5"/>
+                <path d="M96 560 C98 494 100 452 104 404" stroke-width="5"/><path d="M103 440 C120 426 136 420 150 420 M101 470 C84 460 70 458 58 460 M104 414 C96 400 92 388 92 376" stroke-width="3.5"/>
+                <path d="M150 560 C151 506 152 474 156 438" stroke-width="4.5"/><path d="M155 462 C170 452 184 450 196 452 M154 488 C140 480 128 478 116 480" stroke-width="3"/>
+              </g>
+              <path d="M48 380 L52 366 M104 404 L107 392" style="stroke:var(--sil);stroke-width:2"/>
+              <!-- fence posts and wire, right -->
+              <g style="fill:var(--sil)"><rect x="640" y="380" width="6" height="70" rx="1"/><rect x="702" y="370" width="7" height="86" rx="1"/><rect x="772" y="358" width="8" height="104" rx="1"/><rect x="592" y="388" width="5" height="54" rx="1"/></g>
+              <path d="M592 400 C620 404 640 396 646 394 C670 392 690 386 709 384 C740 380 760 374 800 370 M592 420 C620 422 640 416 646 414 C674 410 690 406 709 404 C744 400 764 394 800 392" style="fill:none;stroke:var(--sil);stroke-width:1.2"/>
+              <!-- the Cadejo Blanco -->
+              <ellipse cx="408" cy="482" rx="170" ry="40" fill="url(#roadLight)"/>
+              <ellipse cx="420" cy="478" rx="120" ry="9" style="fill:var(--sil)" opacity=".35"/>
+              <g transform="translate(250 200) scale(2.1)">
+                <use href="#dog-shape" style="fill:url(#coat);stroke:var(--coat-line);stroke-width:1.4"/>
+                <path d="M74 74 C88 82 112 82 132 80 M140 84 C144 92 146 100 146 108 M58 90 C60 96 61 102 60 108" style="fill:none;stroke:var(--coat-lo);stroke-width:1.1;stroke-linecap:round"/>
+                <path d="M30 76 C33 79 37 81 42 82" style="fill:none;stroke:var(--coat-line);stroke-width:1.2"/>
+              </g>
+              <circle cx="322" cy="351" r="22" fill="url(#eyeGlow)"/>
+              <circle class="eye-core" cx="322.4" cy="351.2" r="3.6"/>
+            </svg>
+          </div>
+          <figcaption>Ilustración hecha en código. El brillo del Izalco, al fondo, es memoria: se apagó en <span class="num">1958</span>.</figcaption>
+        </figure>
+
+        <div class="title-block">
+          <h1 id="ent-title">El Cadejo Blanco</h1>
+          <dl class="facts">
+            <div><dt>Tipo</dt><dd>Personaje</dd></div>
+            <div><dt>Categoría</dt><dd class="cat">Leyenda</dd></div>
+            <div><dt>Añadido</dt><dd><time class="num" datetime="2025-02-03">3 feb 2025</time></dd></div>
+          </dl>
+          <p class="lead">Perro espíritu de los caminos solitarios. Cuida a quien camina de noche y lo acompaña hasta su casa.</p>
+          <fieldset class="eyes">
+            <legend>Ojos del Cadejo</legend>
+            <div class="eye-opts">
+              <div class="eye-opt calm">
+                <input type="radio" name="eyes" id="eyes-calm" value="calm" checked>
+                <label for="eyes-calm"><svg viewBox="0 0 26 12" aria-hidden="true"><circle cx="6" cy="6" r="4"/><circle cx="20" cy="6" r="4"/></svg>En calma</label>
+              </div>
+              <div class="eye-opt hostile">
+                <input type="radio" name="eyes" id="eyes-hostile" value="hostile">
+                <label for="eyes-hostile"><svg viewBox="0 0 26 12" aria-hidden="true"><circle cx="6" cy="6" r="4"/><circle cx="20" cy="6" r="4"/></svg>Hostil</label>
+              </div>
+            </div>
+            <p class="eye-status" id="eye-status" aria-live="polite"><b>Ojos azules:</b> el Cadejo está en calma.</p>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="detail">
+        <div class="col">
+          <section class="sec" aria-labelledby="h-relato">
+            <div class="sec-head"><span class="lampdot" aria-hidden="true"></span><h2 id="h-relato">Relato</h2></div>
+            <div class="prose">
+              <p>El Cadejo Blanco es un perro espíritu que aparece de noche en los caminos solitarios. En las versiones salvadoreñas y guatemaltecas acompaña al caminante trasnochado, también al que va bebido, y lo cuida hasta que llega a su casa.</p>
+              <p>La tradición habla de dos cadejos. El blanco es benévolo; el negro, malévolo. Los dos se reconocen por los ojos: azules cuando están en calma, rojos cuando se vuelven hostiles. Algunas versiones dicen que se anuncian con un olor a cabra.</p>
+              <p>Su origen se asocia a las creencias mayas y nahuas sobre el animal compañero: un espíritu que acompaña a cada persona.</p>
+            </div>
+          </section>
+
+          <section class="sec" aria-labelledby="h-rasgos">
+            <div class="sec-head"><span class="lampdot" aria-hidden="true"></span><h2 id="h-rasgos">Características</h2></div>
+            <dl class="traits">
+              <div><dt>Forma</dt><dd>Perro grande y flaco, de pelaje blanco</dd></div>
+              <div class="eyes-row"><dt>Ojos</dt><dd><b class="c-blue">Azules</b> en calma; <b class="c-red">rojos</b> si se vuelve hostil</dd></div>
+              <div><dt>Carácter</dt><dd>Benévolo y protector</dd></div>
+              <div><dt>Dónde aparece</dt><dd>Caminos rurales y veredas solitarias, de noche</dd></div>
+              <div><dt>A quién cuida</dt><dd>Al caminante trasnochado</dd></div>
+              <div><dt>Señal</dt><dd>Olor a cabra, en algunas versiones</dd></div>
+              <div><dt>Origen</dt><dd>Creencias mayas y nahuas sobre el animal compañero</dd></div>
+            </dl>
+          </section>
+        </div>
+
+        <aside class="col" aria-label="Datos de la ficha">
+          <section class="sec" aria-labelledby="h-lugares">
+            <div class="sec-head"><span class="lampdot" aria-hidden="true"></span><h2 id="h-lugares">Ubicaciones</h2></div>
+            <svg class="minimap" viewBox="0 0 1600 260" role="img" aria-label="Perfil de El Salvador de occidente a oriente con dos luces: Chalatenango y Cuscatlán">
+              <defs><radialGradient id="mmHalo"><stop offset="0" class="mm-halo-stop" stop-opacity=".6"/><stop offset="1" class="mm-halo-stop" stop-opacity="0"/></radialGradient></defs>
+              <path class="mm-far" d="M0 170 C60 160 110 120 150 90 C180 66 205 52 235 46 L262 44 C285 46 300 60 318 80 C340 100 360 110 400 120 C470 132 520 136 560 132 C620 126 660 100 700 90 C740 84 780 100 840 120 C900 136 960 130 1000 96 C1030 76 1060 78 1090 90 C1150 120 1230 130 1280 100 C1310 76 1325 56 1335 56 C1350 60 1370 90 1400 110 C1450 136 1520 140 1600 134 L1600 260 L0 260Z"/>
+              <circle class="mm-izalco" cx="250" cy="44" r="5"/>
+              <path class="mm-near" d="M0 220 C120 204 240 214 360 206 C480 198 600 216 720 210 C840 204 960 218 1080 212 C1200 206 1320 220 1440 214 C1520 210 1560 212 1600 214 L1600 260 L0 260Z"/>
+              <circle cx="660" cy="150" r="60" fill="url(#mmHalo)"/><circle class="mm-lamp" cx="660" cy="150" r="10"/>
+              <circle cx="850" cy="176" r="60" fill="url(#mmHalo)"/><circle class="mm-lamp" cx="850" cy="176" r="10"/>
+            </svg>
+            <ul class="chips">
+              <li><svg aria-hidden="true"><use href="#pin"/></svg>Chalatenango</li>
+              <li><svg aria-hidden="true"><use href="#pin"/></svg>Cuscatlán</li>
+            </ul>
+          </section>
+
+          <section class="sec" aria-labelledby="h-fuentes">
+            <div class="sec-head"><span class="lampdot" aria-hidden="true"></span><h2 id="h-fuentes">Fuentes</h2></div>
+            <ul class="sources">
+              <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7c2-3 10-3 12 0M6 10c1.6-2 6.4-2 8 0M8 13c.8-1 3.2-1 4 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>Tradición oral<small>Relatos contados de generación en generación</small></span></li>
+              <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5C5.5 3.5 8 3.8 10 5.5c2-1.7 4.5-2 7-1V16c-2.5-1-5-.7-7 1-2-1.7-4.5-2-7-1Z M10 5.5V17" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><span><cite>Mitos y leyendas de El Salvador</cite><small>Libro</small></span></li>
+            </ul>
+          </section>
+
+          <section class="sec" aria-labelledby="h-rel">
+            <div class="sec-head"><span class="lampdot" aria-hidden="true"></span><h2 id="h-rel">Relaciones</h2></div>
+            <div class="rel-group">
+              <h3 id="rel-enemigos">Enemigos</h3>
+              <ul class="rel-list" aria-labelledby="rel-enemigos">
+                <li class="rel">
+                  <span class="mini" aria-hidden="true"><svg viewBox="0 0 200 150" style="--coat:var(--sil);--eye:var(--red);--rim:var(--red)"><use href="#s-cadejo" transform="matrix(-1 0 0 1 200 0)"/></svg></span>
+                  <div>
+                    <a href="index.html#c-cadejo-negro">El Cadejo Negro</a>
+                    <p>Su opuesto malévolo. <b>Ojos rojos</b> cuando es hostil.</p>
+                  </div>
+                </li>
+              </ul>
+              <p class="rel-note">Relación mutua: se muestra una sola vez.</p>
+            </div>
+          </section>
+        </aside>
+      </div>
+    </article>
+
+    <p><a class="back" href="index.html"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M11 4 6 9l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Volver al mapa del catálogo</a></p>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="inner">
+    <p>Datos de demostración. Relatos de tradición oral y de <cite>Mitos y leyendas de El Salvador</cite>. Ilustraciones hechas en código, sin imágenes generadas.</p>
+    <p><a href="../index.html">Ver las tres direcciones</a></p>
+  </div>
+</footer>
+
+<div class="pool" id="pool" aria-hidden="true"></div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var fine = window.matchMedia('(pointer: fine)');
+  var darkMq = window.matchMedia('(prefers-color-scheme: dark)');
+  function onMq(mq, fn) { if (mq.addEventListener) mq.addEventListener('change', fn); else if (mq.addListener) mq.addListener(fn); }
+
+  /* theme */
+  var btn = document.getElementById('theme-btn');
+  function isNight() { var t = root.getAttribute('data-theme'); return t ? t === 'dark' : darkMq.matches; }
+  function syncTheme() {
+    var night = isNight();
+    root.classList.toggle('is-night', night);
+    btn.setAttribute('aria-label', night ? 'Cambiar a tema alba (claro)' : 'Cambiar a tema noche (oscuro)');
+  }
+  btn.addEventListener('click', function () {
+    var next = isNight() ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('myl-theme', next); } catch (e) {}
+    syncTheme();
+  });
+  onMq(darkMq, syncTheme);
+  syncTheme();
+
+  /* the Cadejo's eyes set the page accent */
+  var status = document.getElementById('eye-status');
+  var msgs = {
+    calm: ['Ojos azules:', ' el Cadejo está en calma.'],
+    hostile: ['Ojos rojos:', ' el Cadejo se vuelve hostil. Así avisa el peligro.']
+  };
+  document.querySelectorAll('input[name="eyes"]').forEach(function (r) {
+    r.addEventListener('change', function () {
+      if (!r.checked) return;
+      root.setAttribute('data-eyes', r.value);
+      var b = document.createElement('b');
+      b.textContent = msgs[r.value][0];
+      status.replaceChildren(b, document.createTextNode(msgs[r.value][1]));
+    });
+  });
+
+  /* sections light up as they come into view */
+  var secs = document.querySelectorAll('.sec');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-lit'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -30% 0px' });
+    secs.forEach(function (s) { io.observe(s); });
+  } else {
+    secs.forEach(function (s) { s.classList.add('is-lit'); });
+  }
+
+  /* pool of light follows a mouse pointer */
+  var pool = document.getElementById('pool'), pending = false, mx = 0, my = 0;
+  window.addEventListener('pointermove', function (e) {
+    if (!fine.matches || reduce.matches || e.pointerType !== 'mouse') return;
+    mx = e.clientX; my = e.clientY;
+    if (pending) return; pending = true;
+    requestAnimationFrame(function () {
+      pending = false;
+      pool.style.setProperty('--mx', mx + 'px'); pool.style.setProperty('--my', my + 'px');
+      pool.classList.add('is-on');
+    });
+  }, { passive: true });
+  root.addEventListener('pointerleave', function () { pool.classList.remove('is-on'); });
+})();
+</script>
+</body>
+</html>
