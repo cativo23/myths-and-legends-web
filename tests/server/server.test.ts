@@ -21,14 +21,25 @@ describe('server', async () => {
   it('should_send_security_headers_and_a_restrictive_csp', async () => {
     const { headers } = await fetch('/')
     const csp = headers.get('content-security-policy') ?? ''
+    const scriptSrc = csp.split(';').map(directive => directive.trim()).find(directive => directive.startsWith('script-src ')) ?? ''
 
     expect(csp).toContain("default-src 'self'")
     expect(csp).toContain("object-src 'none'")
     expect(csp).toContain("base-uri 'self'")
     expect(csp).toContain("frame-ancestors 'none'")
     expect(csp).not.toContain('unsafe-eval')
+    expect(scriptSrc).toMatch(/'nonce-[^']+'/)
+    expect(scriptSrc).toContain("'strict-dynamic'")
+    expect(scriptSrc).not.toContain('unsafe-inline')
     expect(headers.get('x-content-type-options')).toBe('nosniff')
     expect(headers.get('referrer-policy')).toBe('strict-origin-when-cross-origin')
     expect(headers.get('x-frame-options')).toBe('DENY')
+  })
+
+  it('should_not_allow_cross_origin_reads_of_server_routes', async () => {
+    // Session and admin routes arrive in 2.4; they must be same-origin only from the start.
+    const { headers } = await fetch('/api/health')
+
+    expect(headers.get('access-control-allow-origin')).toBeNull()
   })
 })

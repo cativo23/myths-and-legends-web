@@ -9,6 +9,8 @@ export default defineNuxtConfig({
     // Nuxt renders inline scripts (import map, runtime config); a per-request nonce
     // lets script-src stay strict without 'unsafe-inline'.
     nonce: true,
+    // Same-origin only: no CORS headers on pages or on the session and admin routes coming in 2.4.
+    corsHandler: false,
     headers: {
       contentSecurityPolicy: {
         'default-src': ['\'self\''],
