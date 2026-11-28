@@ -9,7 +9,7 @@
     "typecheck": "nuxt typecheck",
     "test": "vitest run",
     "client:generate": "openapi-ts -f openapi/openapi-ts.config.ts",
-    "client:check": "node scripts/check-client-drift.mjs"
+    "client:check": "node scripts/check-client-drift.ts"
   },
   "dependencies": {
     "nuxt": "^4.7.0",

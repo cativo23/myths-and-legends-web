@@ -42,15 +42,15 @@ description: "Tasks for session 2.2: Nuxt scaffold, generated API client, basic 
 
 ### Tests first
 
-- [ ] T009 Write `tests/unit/clientDrift.test.ts` against `compareDirectories` using on-disk fixtures in `tests/unit/fixtures/client-drift/` (`same/`, `changed/`): `should_report_no_difference_for_identical_directories`, `should_list_each_file_that_differs_or_is_missing`; plus one integration test, `should_fail_when_the_committed_client_was_edited`, that runs the real regeneration once; confirm they fail because the script does not exist
+- [X] T009 Write `tests/unit/clientDrift.test.ts` against `compareDirectories` using on-disk fixtures in `tests/unit/fixtures/client-drift/` (`same/`, `changed/`): `should_report_no_difference_for_identical_directories`, `should_list_each_file_that_differs_or_is_missing`; plus one integration test, `should_fail_when_the_committed_client_was_edited`, that runs the real regeneration once; confirm they fail because the script does not exist
 
 ### Implementation
 
-- [ ] T010 Copy the exported snapshot to `openapi/openapi.json` (sorted keys, two-space indent, trailing newline); if the temporary export is gone, re-export it following research R5 (API `develop` at 2bb7341, dummy env values, no `.env` read) instead of hand-editing
-- [ ] T011 [P] Write `openapi/SOURCE.md`: API repo, commit `2bb7341`, `info.version` 0.2.0 and the fact that tag `v0.2.0` does not exist yet (replace in 2.3 from the tag), export date, exact export command, and the stale-example note (API roadmap risk 18)
-- [ ] T012 [P] Write `openapi/openapi-ts.config.ts` (input `openapi/openapi.json`, output `app/api-client`, fetch client, a header marking the output as generated and not to be edited); add the `client:generate` script
-- [ ] T013 Run `pnpm client:generate` and commit `app/api-client/` as generated output; do not hand-edit any file in it
-- [ ] T014 Implement `scripts/check-client-drift.mjs` exposing a pure `compareDirectories(expectedDir, actualDir)` function plus a CLI entry that regenerates into a temp directory and calls it (exit 1 with the differing paths); add the `client:check` script; make T009 pass
+- [X] T010 Copy the exported snapshot to `openapi/openapi.json` (sorted keys, two-space indent, trailing newline); if the temporary export is gone, re-export it following research R5 (API `develop` at 2bb7341, dummy env values, no `.env` read) instead of hand-editing
+- [X] T011 [P] Write `openapi/SOURCE.md`: API repo, commit `2bb7341`, `info.version` 0.2.0 and the fact that tag `v0.2.0` does not exist yet (replace in 2.3 from the tag), export date, exact export command, and the stale-example note (API roadmap risk 18)
+- [X] T012 [P] Write `openapi/openapi-ts.config.ts` (input `openapi/openapi.json`, output `app/api-client`, fetch client, a header marking the output as generated and not to be edited); add the `client:generate` script
+- [X] T013 Run `pnpm client:generate` and commit `app/api-client/` as generated output; do not hand-edit any file in it
+- [X] T014 Implement `scripts/clientDrift.ts` (pure `compareDirectories(expectedDir, actualDir)`) and a thin CLI `scripts/check-client-drift.ts`; the CLI accepts `--client-dir` and that regenerates into a temp directory and calls it (exit 1 with the differing paths); add the `client:check` script; make T009 pass
 
 **Checkpoint**: `pnpm client:check` exits 0; editing a generated file or `openapi.json` makes it exit 1 (quickstart table).
 
