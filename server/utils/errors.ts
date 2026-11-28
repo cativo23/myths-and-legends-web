@@ -42,11 +42,6 @@ const STATUS_CATEGORIES: Record<number, ErrorCategory> = {
   429: 'rate_limit',
 }
 
-interface ValidationDetail {
-  loc: Array<string | number>
-  msg: string
-}
-
 function categoryOf({ status }: ApiFailure): ErrorCategory {
   if (status === undefined) return 'network'
   return STATUS_CATEGORIES[status] ?? 'server'
@@ -56,18 +51,34 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null
 }
 
-function fieldErrorsOf(body: unknown): Record<string, string> | undefined {
-  if (!isRecord(body) || !Array.isArray(body.detail)) return undefined
+/** The field a validation item points at: loc is ["body", "<field>", ...], so drop the source segment. */
+function fieldNameOf(item: unknown): string | undefined {
+  if (!isRecord(item) || !Array.isArray(item.loc)) return undefined
+  const name = item.loc.slice(1).join('.')
+  return name === '' ? undefined : name
+}
 
-  const details = body.detail as ValidationDetail[]
-  // loc is ["body", "<field>", ...]: drop the source segment and join the rest.
-  return Object.fromEntries(details.map(({ loc, msg }) => [loc.slice(1).join('.'), msg]))
+// The field message is the API's own validation text for that field (for example "Field required"),
+// shown next to the input; it is the one piece of API text allowed through, and only for validation.
+function fieldErrorsOf(body: unknown): Record<string, string> {
+  const details = isRecord(body) && Array.isArray(body.detail) ? body.detail : []
+  const fieldErrors: Record<string, string> = {}
+
+  for (const item of details) {
+    const name = fieldNameOf(item)
+    const message = isRecord(item) ? item.msg : undefined
+    if (name !== undefined && typeof message === 'string' && !(name in fieldErrors)) {
+      fieldErrors[name] = message
+    }
+  }
+
+  return fieldErrors
 }
 
 function retryAfterSecondsOf(body: unknown): number | undefined {
   if (!isRecord(body) || !isRecord(body.detail)) return undefined
   const { retry_after: retryAfter } = body.detail
-  return typeof retryAfter === 'number' ? retryAfter : undefined
+  return typeof retryAfter === 'number' && retryAfter > 0 ? retryAfter : undefined
 }
 
 export function toUserFacingError(failure: ApiFailure): UserFacingError {
