@@ -15,9 +15,10 @@ Options (one builder, `buildSessionCookieOptions`): `httpOnly`, `secure` (produc
 `path: /`, `maxAge` (seconds, derived from the token expiry). Names carry the `__Host-` prefix in production. Tokens never appear in logs, URLs, client
 state or error messages.
 
-## ApiFailure (single error layer, `errors.ts`)
+## UserFacingError (single error layer, `errors.ts`)
 
-Input: anything thrown or returned by the API wrapper. Output: a `UserFacingError`.
+Input: an `ApiFailure` (`{ status?, body? }`, what the API wrapper reports; no status means no response arrived).
+Output: a `UserFacingError`.
 
 | Field | Meaning |
 |---|---|
