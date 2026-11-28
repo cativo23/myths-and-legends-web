@@ -83,8 +83,8 @@ description: "Tasks for session 2.2: Nuxt scaffold, generated API client, basic 
 
 **Purpose**: the four gates run on every PR to `develop` and `main`.
 
-- [ ] T024 Create `.github/workflows/ci.yml`: triggers `pull_request` to `develop`/`main` and `push` to `develop`/`main`; read-only `permissions: contents: read`; pnpm and Node from `.nvmrc` with a lockfile-keyed cache; jobs `lint`, `typecheck`, `test`, `client-drift` (runs `pnpm client:check`), all using `pnpm install --frozen-lockfile`; no secrets used; `NUXT_API_BASE_URL` not required
-- [ ] T025 Verify locally that each CI command exits 0 on the branch and that `client:check` exits 1 after tampering with a generated file (then restore it)
+- [X] T024 Create `.github/workflows/ci.yml`: triggers `pull_request` to `develop`/`main` and `push` to `develop`/`main`; read-only `permissions: contents: read`; pnpm and Node from `.nvmrc` with a lockfile-keyed cache; jobs `lint`, `typecheck`, `test`, `client-drift` (runs `pnpm client:check`), all using `pnpm install --frozen-lockfile`; no secrets used; `NUXT_API_BASE_URL` not required
+- [X] T025 Verify locally that each CI command exits 0 on the branch and that `client:check` exits 1 after tampering with a generated file (then restore it)
 
 **Checkpoint**: CI runs green on the PR (verified in Phase 5).
 
@@ -92,8 +92,8 @@ description: "Tasks for session 2.2: Nuxt scaffold, generated API client, basic 
 
 ## Phase 5: Polish, review and delivery
 
-- [ ] T026 [P] Write `README.md` (what the project is, prerequisites, the commands from `quickstart.md`, link to the API repo, the "never edit `app/api-client/`" rule)
-- [ ] T027 Run the full `quickstart.md` validation from a clean clone state (`pnpm install --frozen-lockfile`, lint, typecheck, test, `client:check`, dev server, health curl)
+- [X] T026 [P] Write `README.md` (what the project is, prerequisites, the commands from `quickstart.md`, link to the API repo, the "never edit `app/api-client/`" rule)
+- [X] T027 Run the full `quickstart.md` validation from a clean clone state (`pnpm install --frozen-lockfile`, lint, typecheck, test, `client:check`, dev server, health curl)
 - [ ] T028 Review the whole diff for clean code (no duplicated logic, no dead code, no commented-out code, names describe behavior, files single-purpose) and dispatch `superpowers:code-reviewer` on it; apply its valid findings in separate commits
 - [ ] T029 Push `feat/web-scaffold`, open a PR to `develop` (title under 70 characters, dependency justifications in the body), wait for green CI and merge
 - [ ] T030 Mark session 2.2 done in the API repo's `docs/ROADMAP.md` in a separate PR to its `develop`, recording the decisions and the snapshot provenance, and hand off the prompt for session 2.3 (still blocked by 1.7 on risks 16, 17 and 18)
