@@ -80,12 +80,15 @@ To stay minimal (Constitution III) and avoid code without a consumer:
 
 If you prefer the routes and lock built now, say so; it adds about two sessions' worth of tests to 2.2.
 
+`ApiClient.healthCheck` is the only operation the wrapper exposes. No task asks for it and `/api/health` does
+not call it; it is kept so the wrapper has a real consumer-shaped operation to test until 2.4 adds the
+authentication operations, and is removed or replaced then.
+
 ## CI scope
 
-Your answer to the CI question arrived with only "Lint + typecheck" selected. The session brief and
-FR-013/SC-008 require tests and the drift check, so the plan includes **lint, typecheck, tests and
-drift**. `nuxt build` and `pnpm audit` are left out (YAGNI for a scaffold); add them in 2.8 if wanted.
-This is the one item to confirm when approving the plan.
+Decision (confirmed with Carlos when approving the plan, 2026-11-27): CI runs **lint, typecheck, tests and
+client drift** (FR-013, SC-008). `nuxt build` and `pnpm audit` are left out (YAGNI for a scaffold); add them
+in 2.8 if wanted.
 
 ## Project Structure
 
@@ -126,7 +129,8 @@ server/
     ├── session.ts              # cookie names + options (httpOnly, Secure, SameSite)
     └── errors.ts               # single API-error to user-message layer (FR-012)
 scripts/
-└── check-client-drift.mjs      # regenerate to temp dir, compare to committed client
+├── clientDrift.ts              # compareDirectories: pure comparison of two trees
+└── check-client-drift.ts       # CLI: regenerate to temp dir, compare to committed client
 tests/
 ├── unit/                       # server utils, drift script
 ├── nuxt/                       # components (shell)

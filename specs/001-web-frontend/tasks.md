@@ -70,7 +70,7 @@ description: "Tasks for session 2.2: Nuxt scaffold, generated API client, basic 
 ### Implementation
 
 - [X] T019 [P] Implement `server/utils/session.ts` (`sessionCookieNames`, `buildSessionCookieOptions`) until T015 passes, per `data-model.md` `SessionCookies` (cookie names, `httpOnly`, `secure`, `sameSite`, `path`, `maxAge`); no token handling yet
-- [X] T020 [P] Implement `server/utils/errors.ts` (`toUserFacingError`, messages defined once in a single table) until T016 passes, per `data-model.md` `ApiFailure.category`, `ApiFailure.message`, `ApiFailure.retryAfterSeconds` and `ApiFailure.fieldErrors`
+- [X] T020 [P] Implement `server/utils/errors.ts` (`toUserFacingError`, messages defined once in a single table) until T016 passes, per `data-model.md` `UserFacingError.category`, `UserFacingError.message`, `UserFacingError.retryAfterSeconds` and `UserFacingError.fieldErrors`
 - [X] T021 Implement `server/utils/apiClient.ts` as the only module importing `app/api-client/`, with `baseUrl` as a parameter and an injectable seam for tests, until T017 passes, per `data-model.md` Runtime configuration `apiBaseUrl`
 - [X] T022 Implement `server/api/health.get.ts` returning `{ status: "ok" }` without calling the API; makes the health test of T018 pass
 - [X] T023 Add the security headers and a restrictive, nonce-based Content-Security-Policy with the `nuxt-security` module in `nuxt.config.ts` (decision 2026-11-27: Nuxt's inline import map and runtime-config scripts make a plain `routeRules` CSP either break hydration or need `unsafe-inline`); verified in a real browser against the production build; makes the headers test of T018 pass
@@ -95,8 +95,8 @@ description: "Tasks for session 2.2: Nuxt scaffold, generated API client, basic 
 - [X] T026 [P] Write `README.md` (what the project is, prerequisites, the commands from `quickstart.md`, link to the API repo, the "never edit `app/api-client/`" rule)
 - [X] T027 Run the full `quickstart.md` validation from a clean clone state (`pnpm install --frozen-lockfile`, lint, typecheck, test, `client:check`, dev server, health curl)
 - [X] T028 Review the whole diff for clean code (no duplicated logic, no dead code, no commented-out code, names describe behavior, files single-purpose) and dispatch `superpowers:code-reviewer` on it; apply its valid findings in separate commits
-- [ ] T029 Push `feat/web-scaffold`, open a PR to `develop` (title under 70 characters, dependency justifications in the body), wait for green CI and merge
-- [ ] T030 Mark session 2.2 done in the API repo's `docs/ROADMAP.md` in a separate PR to its `develop`, recording the decisions and the snapshot provenance, and hand off the prompt for session 2.3 (still blocked by 1.7 on risks 16, 17 and 18)
+- [X] T029 Push `feat/web-scaffold`, open a PR to `develop` (title under 70 characters, dependency justifications in the body), wait for green CI and merge
+- [X] T030 Mark session 2.2 done in the API repo's `docs/ROADMAP.md` in a separate PR to its `develop`, recording the decisions and the snapshot provenance, and hand off the prompt for session 2.3 (still blocked by 1.7 on risks 16, 17 and 18)
 
 ---
 
@@ -129,3 +129,13 @@ Task: "Extend tests/server/server.test.ts"
 - Never edit `app/api-client/`; change `openapi/openapi.json` or the generator config and regenerate.
 - Do not read `.env`. Do not add routes or code outside the Scope Boundary; raise it first (Constitution III).
 - If something unexpected contradicts the spec or plan, stop and ask.
+
+---
+
+## Phase 6: Convergence
+
+- [X] T031 Mark T029 and T030 as done in `specs/001-web-frontend/tasks.md`, since web PR #2 and API PR #90 are merged per T029 and T030 (partial)
+- [X] T032 Replace the stale `check-client-drift.mjs` references with `scripts/check-client-drift.ts` and `scripts/clientDrift.ts` in `specs/001-web-frontend/plan.md` and `specs/001-web-frontend/research.md` per plan: Source Code (partial)
+- [X] T033 Rewrite the "CI scope" section of `specs/001-web-frontend/plan.md` as a decision taken (lint, typecheck, tests and drift; build and audit deferred) instead of an open point per plan: CI scope (partial)
+- [X] T034 Align `specs/001-web-frontend/data-model.md` with the code: `ApiFailure` is the input of the error layer and `UserFacingError` its output (partial)
+- [X] T035 Record in `specs/001-web-frontend/plan.md` Scope Boundary that `ApiClient.healthCheck` is the only exposed operation and is kept to give the wrapper a consumer until session 2.4 per plan: Scope Boundary (unrequested)

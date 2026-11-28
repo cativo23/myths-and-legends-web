@@ -32,7 +32,7 @@ No `NEEDS CLARIFICATION` remains: the six open choices were decided with Carlos 
 
 ## R4. Drift check (FR-013, SC-008)
 
-- **Decision**: `scripts/check-client-drift.mjs` regenerates the client into a temporary directory from
+- **Decision**: `scripts/check-client-drift.ts` (comparison in `scripts/clientDrift.ts`) regenerates the client into a temporary directory from
   `openapi/openapi.json` and compares file by file with `app/api-client/`; exit code 1 and a list of
   differing files on mismatch. CI runs it; a unit test proves it fails on a tampered file and passes
   on a clean one (that test is SC-008's evidence).
