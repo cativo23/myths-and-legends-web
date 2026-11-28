@@ -1,0 +1,5675 @@
+{
+  "components": {
+    "schemas": {
+      "Body_login_access_token_api_v1_auth_login_post": {
+        "properties": {
+          "client_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Client Id"
+          },
+          "client_secret": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "format": "password",
+            "title": "Client Secret"
+          },
+          "grant_type": {
+            "anyOf": [
+              {
+                "pattern": "^password$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Grant Type"
+          },
+          "password": {
+            "format": "password",
+            "title": "Password",
+            "type": "string"
+          },
+          "scope": {
+            "default": "",
+            "title": "Scope",
+            "type": "string"
+          },
+          "username": {
+            "title": "Username",
+            "type": "string"
+          }
+        },
+        "required": [
+          "username",
+          "password"
+        ],
+        "title": "Body_login_access_token_api_v1_auth_login_post",
+        "type": "object"
+      },
+      "Category": {
+        "description": "Schema returned by the API for category data.",
+        "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Description of the category",
+            "examples": [
+              "Divine beings and gods"
+            ],
+            "title": "Description"
+          },
+          "entity_count": {
+            "default": 0,
+            "description": "Number of entities in this category",
+            "examples": [
+              42
+            ],
+            "title": "Entity Count",
+            "type": "integer"
+          },
+          "id": {
+            "description": "Unique category identifier",
+            "examples": [
+              1
+            ],
+            "title": "ID",
+            "type": "integer"
+          },
+          "name": {
+            "$ref": "#/components/schemas/CategoryName",
+            "description": "Category name",
+            "examples": [
+              "Deity",
+              "Creature",
+              "Place",
+              "Object",
+              "Event"
+            ],
+            "title": "Name"
+          }
+        },
+        "required": [
+          "name",
+          "id"
+        ],
+        "title": "Category",
+        "type": "object"
+      },
+      "CategoryCreate": {
+        "description": "Schema for creating a new category.",
+        "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Description of the category",
+            "examples": [
+              "Divine beings and gods"
+            ],
+            "title": "Description"
+          },
+          "name": {
+            "$ref": "#/components/schemas/CategoryName",
+            "description": "Category name",
+            "examples": [
+              "Deity",
+              "Creature",
+              "Place",
+              "Object",
+              "Event"
+            ],
+            "title": "Name"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "CategoryCreate",
+        "type": "object"
+      },
+      "CategoryName": {
+        "enum": [
+          "MYTH",
+          "LEGEND",
+          "TRADITION"
+        ],
+        "title": "CategoryName",
+        "type": "string"
+      },
+      "CategoryUpdate": {
+        "description": "Schema for updating an existing category.",
+        "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Description of the category",
+            "examples": [
+              "Divine beings and gods"
+            ],
+            "title": "Description"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CategoryName"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Category name",
+            "examples": [
+              "Deity"
+            ],
+            "title": "Name"
+          }
+        },
+        "title": "CategoryUpdate",
+        "type": "object"
+      },
+      "Country": {
+        "description": "Schema returned by the API for country data.",
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Unique country identifier",
+            "examples": [
+              1
+            ],
+            "title": "ID"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Official name of the country",
+            "examples": [
+              "Nigeria",
+              "Mexico",
+              "Japan"
+            ],
+            "title": "Country Name"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": true,
+            "description": "Whether the country is active in the system",
+            "examples": [
+              true
+            ],
+            "title": "Status"
+          }
+        },
+        "title": "Country",
+        "type": "object"
+      },
+      "CountryCreate": {
+        "description": "Schema for creating a new country.",
+        "properties": {
+          "name": {
+            "description": "Official name of the country (required)",
+            "examples": [
+              "Nigeria"
+            ],
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Country Name",
+            "type": "string"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": true,
+            "description": "Whether the country is active in the system",
+            "examples": [
+              true
+            ],
+            "title": "Status"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "CountryCreate",
+        "type": "object"
+      },
+      "CountryUpdate": {
+        "description": "Schema for updating an existing country.",
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "New official name of the country",
+            "examples": [
+              "Nigeria"
+            ],
+            "title": "Country Name"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Whether the country is active in the system",
+            "examples": [
+              true
+            ],
+            "title": "Status"
+          }
+        },
+        "title": "CountryUpdate",
+        "type": "object"
+      },
+      "CreateRelationRequest": {
+        "description": "Request body for POST /entities/{id}/relations \u2014 the origin entity ID\ncomes from the URL path, so only the destination and relation type are\nneeded here.",
+        "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional description of the relation",
+            "examples": [
+              "The Cadejos represent the eternal struggle between good and evil"
+            ],
+            "title": "Description"
+          },
+          "entity_destination_id": {
+            "description": "ID of the entity this relation points to",
+            "examples": [
+              2
+            ],
+            "title": "Destination Entity ID",
+            "type": "integer"
+          },
+          "relation_type": {
+            "$ref": "#/components/schemas/RelationType",
+            "description": "Type of relation between the two entities",
+            "examples": [
+              "SIBLINGS",
+              "ENEMIES",
+              "MOTHER_CHILD"
+            ],
+            "title": "Relation Type"
+          }
+        },
+        "required": [
+          "entity_destination_id",
+          "relation_type"
+        ],
+        "title": "CreateRelationRequest",
+        "type": "object"
+      },
+      "Entity": {
+        "description": "Schema returned by the API for entity data with nested relations.\n\nIncludes category, entity_type, characteristics, locations, and sources.",
+        "properties": {
+          "alternative_names": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Other names or aliases for this entity",
+            "examples": [
+              [
+                "Anpu",
+                "Inpu"
+              ]
+            ],
+            "title": "Alternative Names"
+          },
+          "behavior": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Typical behavior or characteristics",
+            "examples": [
+              "Guides souls to the underworld, weighs hearts against Ma'at feather"
+            ],
+            "title": "Behavior"
+          },
+          "category": {
+            "additionalProperties": true,
+            "default": {},
+            "description": "Category information",
+            "examples": [
+              {
+                "id": 1,
+                "name": "Deity"
+              }
+            ],
+            "title": "Category",
+            "type": "object"
+          },
+          "category_id": {
+            "description": "ID of the entity category (e.g., Deity, Creature, Place)",
+            "examples": [
+              1
+            ],
+            "title": "Category ID",
+            "type": "integer"
+          },
+          "characteristics": {
+            "default": [],
+            "description": "List of characteristics",
+            "examples": [
+              [
+                {
+                  "id": 1,
+                  "name": "Immortal",
+                  "value": "Yes"
+                }
+              ]
+            ],
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Characteristics",
+            "type": "array"
+          },
+          "created_at": {
+            "description": "Timestamp when the entity was created",
+            "examples": [
+              "2024-01-15T10:30:00Z"
+            ],
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Detailed description of the entity",
+            "examples": [
+              "God of mummification and the afterlife"
+            ],
+            "title": "Description"
+          },
+          "entity_type": {
+            "additionalProperties": true,
+            "default": {},
+            "description": "Entity type information",
+            "examples": [
+              {
+                "id": 2,
+                "name": "Egyptian"
+              }
+            ],
+            "title": "Entity Type",
+            "type": "object"
+          },
+          "entity_type_id": {
+            "description": "ID of the entity type (e.g., Egyptian, Greek, Aztec)",
+            "examples": [
+              2
+            ],
+            "title": "Entity Type ID",
+            "type": "integer"
+          },
+          "id": {
+            "description": "Unique entity identifier",
+            "examples": [
+              1
+            ],
+            "title": "ID",
+            "type": "integer"
+          },
+          "image_url": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "URL to an image representing the entity",
+            "examples": [
+              "https://example.com/images/anubis.jpg"
+            ],
+            "title": "Image URL"
+          },
+          "is_active": {
+            "default": true,
+            "description": "Whether the entity is active in the system",
+            "examples": [
+              true
+            ],
+            "title": "Is Active",
+            "type": "boolean"
+          },
+          "locations": {
+            "default": [],
+            "description": "List of associated locations",
+            "examples": [
+              [
+                {
+                  "id": 1,
+                  "name": "Duat"
+                }
+              ]
+            ],
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Locations",
+            "type": "array"
+          },
+          "name": {
+            "description": "Primary name of the entity",
+            "examples": [
+              "Anubis",
+              "Zeus",
+              "Quetzalcoatl"
+            ],
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "origin": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Origin story or background of the entity",
+            "examples": [
+              "Born from the primordial waters of Nun"
+            ],
+            "title": "Origin"
+          },
+          "sources": {
+            "default": [],
+            "description": "List of mythological sources",
+            "examples": [
+              [
+                {
+                  "id": 1,
+                  "name": "Book of the Dead"
+                }
+              ]
+            ],
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Sources",
+            "type": "array"
+          }
+        },
+        "required": [
+          "name",
+          "category_id",
+          "entity_type_id",
+          "id",
+          "created_at"
+        ],
+        "title": "Entity",
+        "type": "object"
+      },
+      "EntityCreate": {
+        "description": "Schema for creating a new entity.\n\nNote: Characteristics, locations, and sources are handled separately\nvia their respective endpoints after entity creation.",
+        "properties": {
+          "alternative_names": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Other names or aliases for this entity",
+            "examples": [
+              [
+                "Anpu",
+                "Inpu"
+              ]
+            ],
+            "title": "Alternative Names"
+          },
+          "behavior": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Typical behavior or characteristics",
+            "examples": [
+              "Guides souls to the underworld, weighs hearts against Ma'at feather"
+            ],
+            "title": "Behavior"
+          },
+          "category_id": {
+            "description": "ID of the entity category (e.g., Deity, Creature, Place)",
+            "examples": [
+              1
+            ],
+            "title": "Category ID",
+            "type": "integer"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Detailed description of the entity",
+            "examples": [
+              "God of mummification and the afterlife"
+            ],
+            "title": "Description"
+          },
+          "entity_type_id": {
+            "description": "ID of the entity type (e.g., Egyptian, Greek, Aztec)",
+            "examples": [
+              2
+            ],
+            "title": "Entity Type ID",
+            "type": "integer"
+          },
+          "image_url": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "URL to an image representing the entity",
+            "examples": [
+              "https://example.com/images/anubis.jpg"
+            ],
+            "title": "Image URL"
+          },
+          "is_active": {
+            "default": true,
+            "description": "Whether the entity is active in the system",
+            "examples": [
+              true
+            ],
+            "title": "Is Active",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Primary name of the entity",
+            "examples": [
+              "Anubis",
+              "Zeus",
+              "Quetzalcoatl"
+            ],
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "origin": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Origin story or background of the entity",
+            "examples": [
+              "Born from the primordial waters of Nun"
+            ],
+            "title": "Origin"
+          }
+        },
+        "required": [
+          "name",
+          "category_id",
+          "entity_type_id"
+        ],
+        "title": "EntityCreate",
+        "type": "object"
+      },
+      "EntityRelation": {
+        "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "entity_destination_id": {
+            "title": "Entity Destination Id",
+            "type": "integer"
+          },
+          "entity_destination_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Entity Destination Name"
+          },
+          "entity_origin_id": {
+            "title": "Entity Origin Id",
+            "type": "integer"
+          },
+          "entity_origin_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Entity Origin Name"
+          },
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "relation_type": {
+            "$ref": "#/components/schemas/RelationType"
+          }
+        },
+        "required": [
+          "relation_type",
+          "id",
+          "entity_origin_id",
+          "entity_destination_id"
+        ],
+        "title": "EntityRelation",
+        "type": "object"
+      },
+      "EntityRelationSummary": {
+        "description": "Summary of a relation between two entities.",
+        "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Description of the relationship",
+            "examples": [
+              "Anubis is the son of Osiris"
+            ],
+            "title": "Description"
+          },
+          "direction": {
+            "description": "Direction of the relation relative to the current entity",
+            "examples": [
+              "origin",
+              "destination"
+            ],
+            "title": "Direction",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique identifier for the relation",
+            "examples": [
+              1
+            ],
+            "title": "Relation ID",
+            "type": "integer"
+          },
+          "related_entity_id": {
+            "description": "ID of the related entity",
+            "examples": [
+              2
+            ],
+            "title": "Related Entity ID",
+            "type": "integer"
+          },
+          "related_entity_name": {
+            "description": "Name of the related entity",
+            "examples": [
+              "Osiris"
+            ],
+            "title": "Related Entity Name",
+            "type": "string"
+          },
+          "relation_type": {
+            "description": "Type of relationship (e.g., parent-child, sibling, enemy)",
+            "examples": [
+              "parent-of",
+              "sibling-of",
+              "enemy-of"
+            ],
+            "title": "Relation Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "relation_type",
+          "related_entity_id",
+          "related_entity_name",
+          "direction"
+        ],
+        "title": "EntityRelationSummary",
+        "type": "object"
+      },
+      "EntityType": {
+        "description": "Schema returned by the API for entity type data.",
+        "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Description of the mythology or culture",
+            "examples": [
+              "Ancient Egyptian mythology from the Nile Valley"
+            ],
+            "title": "Description"
+          },
+          "entity_count": {
+            "default": 0,
+            "description": "Number of entities with this type",
+            "examples": [
+              15
+            ],
+            "title": "Entity Count",
+            "type": "integer"
+          },
+          "id": {
+            "description": "Unique entity type identifier",
+            "examples": [
+              1
+            ],
+            "title": "ID",
+            "type": "integer"
+          },
+          "name": {
+            "$ref": "#/components/schemas/EntityTypeName",
+            "description": "Entity type name representing a mythology or culture",
+            "examples": [
+              "Egyptian",
+              "Greek",
+              "Norse",
+              "Aztec",
+              "Japanese"
+            ],
+            "title": "Name"
+          }
+        },
+        "required": [
+          "name",
+          "id"
+        ],
+        "title": "EntityType",
+        "type": "object"
+      },
+      "EntityTypeCreate": {
+        "description": "Schema for creating a new entity type.",
+        "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Description of the mythology or culture",
+            "examples": [
+              "Ancient Egyptian mythology from the Nile Valley"
+            ],
+            "title": "Description"
+          },
+          "name": {
+            "$ref": "#/components/schemas/EntityTypeName",
+            "description": "Entity type name representing a mythology or culture",
+            "examples": [
+              "Egyptian",
+              "Greek",
+              "Norse",
+              "Aztec",
+              "Japanese"
+            ],
+            "title": "Name"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "EntityTypeCreate",
+        "type": "object"
+      },
+      "EntityTypeName": {
+        "enum": [
+          "CHARACTER",
+          "PLACE",
+          "OBJECT",
+          "GROUP",
+          "EVENT"
+        ],
+        "title": "EntityTypeName",
+        "type": "string"
+      },
+      "EntityTypeUpdate": {
+        "description": "Schema for updating an existing entity type.",
+        "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Description of the mythology or culture",
+            "examples": [
+              "Ancient Egyptian mythology from the Nile Valley"
+            ],
+            "title": "Description"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EntityTypeName"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Entity type name representing a mythology or culture",
+            "examples": [
+              "Egyptian"
+            ],
+            "title": "Name"
+          }
+        },
+        "title": "EntityTypeUpdate",
+        "type": "object"
+      },
+      "EntityUpdate": {
+        "description": "Schema for updating an existing entity.\n\nAll fields are optional - only provided fields will be updated.",
+        "properties": {
+          "alternative_names": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Other names or aliases for this entity",
+            "examples": [
+              [
+                "Anpu",
+                "Inpu"
+              ]
+            ],
+            "title": "Alternative Names"
+          },
+          "behavior": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Typical behavior or characteristics",
+            "examples": [
+              "Guides souls to the underworld"
+            ],
+            "title": "Behavior"
+          },
+          "category_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "ID of the entity category",
+            "examples": [
+              1
+            ],
+            "title": "Category ID"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Detailed description of the entity",
+            "examples": [
+              "God of mummification and the afterlife"
+            ],
+            "title": "Description"
+          },
+          "entity_type_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "ID of the entity type",
+            "examples": [
+              2
+            ],
+            "title": "Entity Type ID"
+          },
+          "image_url": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "URL to an image representing the entity",
+            "examples": [
+              "https://example.com/images/anubis.jpg"
+            ],
+            "title": "Image URL"
+          },
+          "is_active": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Whether the entity is active in the system",
+            "examples": [
+              true
+            ],
+            "title": "Is Active"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "maxLength": 255,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Primary name of the entity",
+            "examples": [
+              "Anubis"
+            ],
+            "title": "Name"
+          },
+          "origin": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Origin story or background of the entity",
+            "examples": [
+              "Born from the primordial waters of Nun"
+            ],
+            "title": "Origin"
+          }
+        },
+        "title": "EntityUpdate",
+        "type": "object"
+      },
+      "EntityWithRelations": {
+        "description": "Entity schema including its full relation graph.\n\nExtends Entity with a list of all relations to other entities.",
+        "properties": {
+          "alternative_names": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Other names or aliases for this entity",
+            "examples": [
+              [
+                "Anpu",
+                "Inpu"
+              ]
+            ],
+            "title": "Alternative Names"
+          },
+          "behavior": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Typical behavior or characteristics",
+            "examples": [
+              "Guides souls to the underworld, weighs hearts against Ma'at feather"
+            ],
+            "title": "Behavior"
+          },
+          "category": {
+            "additionalProperties": true,
+            "default": {},
+            "description": "Category information",
+            "examples": [
+              {
+                "id": 1,
+                "name": "Deity"
+              }
+            ],
+            "title": "Category",
+            "type": "object"
+          },
+          "category_id": {
+            "description": "ID of the entity category (e.g., Deity, Creature, Place)",
+            "examples": [
+              1
+            ],
+            "title": "Category ID",
+            "type": "integer"
+          },
+          "characteristics": {
+            "default": [],
+            "description": "List of characteristics",
+            "examples": [
+              [
+                {
+                  "id": 1,
+                  "name": "Immortal",
+                  "value": "Yes"
+                }
+              ]
+            ],
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Characteristics",
+            "type": "array"
+          },
+          "created_at": {
+            "description": "Timestamp when the entity was created",
+            "examples": [
+              "2024-01-15T10:30:00Z"
+            ],
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Detailed description of the entity",
+            "examples": [
+              "God of mummification and the afterlife"
+            ],
+            "title": "Description"
+          },
+          "entity_type": {
+            "additionalProperties": true,
+            "default": {},
+            "description": "Entity type information",
+            "examples": [
+              {
+                "id": 2,
+                "name": "Egyptian"
+              }
+            ],
+            "title": "Entity Type",
+            "type": "object"
+          },
+          "entity_type_id": {
+            "description": "ID of the entity type (e.g., Egyptian, Greek, Aztec)",
+            "examples": [
+              2
+            ],
+            "title": "Entity Type ID",
+            "type": "integer"
+          },
+          "id": {
+            "description": "Unique entity identifier",
+            "examples": [
+              1
+            ],
+            "title": "ID",
+            "type": "integer"
+          },
+          "image_url": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "URL to an image representing the entity",
+            "examples": [
+              "https://example.com/images/anubis.jpg"
+            ],
+            "title": "Image URL"
+          },
+          "is_active": {
+            "default": true,
+            "description": "Whether the entity is active in the system",
+            "examples": [
+              true
+            ],
+            "title": "Is Active",
+            "type": "boolean"
+          },
+          "locations": {
+            "default": [],
+            "description": "List of associated locations",
+            "examples": [
+              [
+                {
+                  "id": 1,
+                  "name": "Duat"
+                }
+              ]
+            ],
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Locations",
+            "type": "array"
+          },
+          "name": {
+            "description": "Primary name of the entity",
+            "examples": [
+              "Anubis",
+              "Zeus",
+              "Quetzalcoatl"
+            ],
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "origin": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Origin story or background of the entity",
+            "examples": [
+              "Born from the primordial waters of Nun"
+            ],
+            "title": "Origin"
+          },
+          "relations": {
+            "default": [],
+            "description": "List of relations to other entities",
+            "items": {
+              "$ref": "#/components/schemas/EntityRelationSummary"
+            },
+            "title": "Relations",
+            "type": "array"
+          },
+          "sources": {
+            "default": [],
+            "description": "List of mythological sources",
+            "examples": [
+              [
+                {
+                  "id": 1,
+                  "name": "Book of the Dead"
+                }
+              ]
+            ],
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Sources",
+            "type": "array"
+          }
+        },
+        "required": [
+          "name",
+          "category_id",
+          "entity_type_id",
+          "id",
+          "created_at"
+        ],
+        "title": "EntityWithRelations",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "Location": {
+        "description": "Schema returned by the API for location data.",
+        "properties": {
+          "department": {
+            "description": "Department or state",
+            "examples": [
+              "Cundinamarca",
+              "Oaxaca"
+            ],
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Department",
+            "type": "string"
+          },
+          "entity_id": {
+            "description": "ID of the associated entity",
+            "examples": [
+              1
+            ],
+            "title": "Entity ID",
+            "type": "integer"
+          },
+          "id": {
+            "description": "Unique location identifier",
+            "examples": [
+              1
+            ],
+            "title": "ID",
+            "type": "integer"
+          },
+          "municipality": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Municipality or city",
+            "examples": [
+              "Bogot\u00e1",
+              "Tlacolula"
+            ],
+            "title": "Municipality"
+          },
+          "place_description": {
+            "anyOf": [
+              {
+                "maxLength": 1000,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Description of the specific place",
+            "examples": [
+              "Ancient temple ruins near the mountain"
+            ],
+            "title": "Place Description"
+          }
+        },
+        "required": [
+          "department",
+          "id",
+          "entity_id"
+        ],
+        "title": "Location",
+        "type": "object"
+      },
+      "LocationCreate": {
+        "description": "Schema for creating a new location.",
+        "properties": {
+          "department": {
+            "description": "Department or state",
+            "examples": [
+              "Cundinamarca",
+              "Oaxaca"
+            ],
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Department",
+            "type": "string"
+          },
+          "entity_id": {
+            "description": "ID of the associated entity",
+            "examples": [
+              1
+            ],
+            "title": "Entity ID",
+            "type": "integer"
+          },
+          "municipality": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Municipality or city",
+            "examples": [
+              "Bogot\u00e1",
+              "Tlacolula"
+            ],
+            "title": "Municipality"
+          },
+          "place_description": {
+            "anyOf": [
+              {
+                "maxLength": 1000,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Description of the specific place",
+            "examples": [
+              "Ancient temple ruins near the mountain"
+            ],
+            "title": "Place Description"
+          }
+        },
+        "required": [
+          "department",
+          "entity_id"
+        ],
+        "title": "LocationCreate",
+        "type": "object"
+      },
+      "LocationUpdate": {
+        "description": "Schema for updating an existing location.",
+        "properties": {
+          "department": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Department or state",
+            "examples": [
+              "Cundinamarca"
+            ],
+            "title": "Department"
+          },
+          "municipality": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Municipality or city",
+            "examples": [
+              "Bogot\u00e1"
+            ],
+            "title": "Municipality"
+          },
+          "place_description": {
+            "anyOf": [
+              {
+                "maxLength": 1000,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Description of the specific place",
+            "examples": [
+              "Ancient temple ruins"
+            ],
+            "title": "Place Description"
+          }
+        },
+        "title": "LocationUpdate",
+        "type": "object"
+      },
+      "Page_Category_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Category"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "page": {
+            "minimum": 1.0,
+            "title": "Page",
+            "type": "integer"
+          },
+          "pages": {
+            "minimum": 0.0,
+            "title": "Pages",
+            "type": "integer"
+          },
+          "size": {
+            "minimum": 1.0,
+            "title": "Size",
+            "type": "integer"
+          },
+          "total": {
+            "minimum": 0.0,
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "page",
+          "size",
+          "pages"
+        ],
+        "title": "Page[Category]",
+        "type": "object"
+      },
+      "Page_EntityType_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/EntityType"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "page": {
+            "minimum": 1.0,
+            "title": "Page",
+            "type": "integer"
+          },
+          "pages": {
+            "minimum": 0.0,
+            "title": "Pages",
+            "type": "integer"
+          },
+          "size": {
+            "minimum": 1.0,
+            "title": "Size",
+            "type": "integer"
+          },
+          "total": {
+            "minimum": 0.0,
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "page",
+          "size",
+          "pages"
+        ],
+        "title": "Page[EntityType]",
+        "type": "object"
+      },
+      "Page_Entity_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Entity"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "page": {
+            "minimum": 1.0,
+            "title": "Page",
+            "type": "integer"
+          },
+          "pages": {
+            "minimum": 0.0,
+            "title": "Pages",
+            "type": "integer"
+          },
+          "size": {
+            "minimum": 1.0,
+            "title": "Size",
+            "type": "integer"
+          },
+          "total": {
+            "minimum": 0.0,
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "page",
+          "size",
+          "pages"
+        ],
+        "title": "Page[Entity]",
+        "type": "object"
+      },
+      "Page_Location_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Location"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "page": {
+            "minimum": 1.0,
+            "title": "Page",
+            "type": "integer"
+          },
+          "pages": {
+            "minimum": 0.0,
+            "title": "Pages",
+            "type": "integer"
+          },
+          "size": {
+            "minimum": 1.0,
+            "title": "Size",
+            "type": "integer"
+          },
+          "total": {
+            "minimum": 0.0,
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "page",
+          "size",
+          "pages"
+        ],
+        "title": "Page[Location]",
+        "type": "object"
+      },
+      "Page_Source_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "page": {
+            "minimum": 1.0,
+            "title": "Page",
+            "type": "integer"
+          },
+          "pages": {
+            "minimum": 0.0,
+            "title": "Pages",
+            "type": "integer"
+          },
+          "size": {
+            "minimum": 1.0,
+            "title": "Size",
+            "type": "integer"
+          },
+          "total": {
+            "minimum": 0.0,
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "page",
+          "size",
+          "pages"
+        ],
+        "title": "Page[Source]",
+        "type": "object"
+      },
+      "Page_User_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/User"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "page": {
+            "minimum": 1.0,
+            "title": "Page",
+            "type": "integer"
+          },
+          "pages": {
+            "minimum": 0.0,
+            "title": "Pages",
+            "type": "integer"
+          },
+          "size": {
+            "minimum": 1.0,
+            "title": "Size",
+            "type": "integer"
+          },
+          "total": {
+            "minimum": 0.0,
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "page",
+          "size",
+          "pages"
+        ],
+        "title": "Page[User]",
+        "type": "object"
+      },
+      "PasswordReset": {
+        "description": "Password reset request schema.",
+        "properties": {
+          "new_password": {
+            "description": "New password (min 8 characters)",
+            "examples": [
+              "NewSecureP@ss123"
+            ],
+            "maxLength": 100,
+            "minLength": 8,
+            "title": "New Password",
+            "type": "string"
+          },
+          "token": {
+            "description": "Password recovery token",
+            "examples": [
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+            ],
+            "title": "Token",
+            "type": "string"
+          }
+        },
+        "required": [
+          "token",
+          "new_password"
+        ],
+        "title": "PasswordReset",
+        "type": "object"
+      },
+      "RefreshRequest": {
+        "description": "Request body for POST /auth/refresh.",
+        "properties": {
+          "refresh_token": {
+            "description": "A valid, non-expired, non-rotated refresh token",
+            "examples": [
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+            ],
+            "title": "Refresh Token",
+            "type": "string"
+          }
+        },
+        "required": [
+          "refresh_token"
+        ],
+        "title": "RefreshRequest",
+        "type": "object"
+      },
+      "RelationType": {
+        "enum": [
+          "MOTHER_CHILD",
+          "FATHER_CHILD",
+          "SIBLINGS",
+          "GUARDIAN_PLACE",
+          "ENEMIES",
+          "ALLIES"
+        ],
+        "title": "RelationType",
+        "type": "string"
+      },
+      "Source": {
+        "description": "Schema returned by the API for source data.",
+        "properties": {
+          "author": {
+            "anyOf": [
+              {
+                "maxLength": 255,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Author or creator of the source",
+            "examples": [
+              "Anonymous",
+              "James George Frazer"
+            ],
+            "title": "Author"
+          },
+          "entity_id": {
+            "description": "ID of the associated entity",
+            "examples": [
+              1
+            ],
+            "title": "Entity ID",
+            "type": "integer"
+          },
+          "id": {
+            "description": "Unique source identifier",
+            "examples": [
+              1
+            ],
+            "title": "ID",
+            "type": "integer"
+          },
+          "source_type": {
+            "$ref": "#/components/schemas/SourceType",
+            "description": "Type of source (e.g., Book, Website, Manuscript, Oral Tradition)",
+            "examples": [
+              "Book",
+              "Website",
+              "Manuscript",
+              "Oral Tradition"
+            ],
+            "title": "Source Type"
+          },
+          "title": {
+            "description": "Title of the source",
+            "examples": [
+              "The Book of the Dead",
+              "Popol Vuh"
+            ],
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "URL where the source can be accessed",
+            "examples": [
+              "https://example.com/book-of-the-dead"
+            ],
+            "title": "URL"
+          }
+        },
+        "required": [
+          "source_type",
+          "title",
+          "id",
+          "entity_id"
+        ],
+        "title": "Source",
+        "type": "object"
+      },
+      "SourceCreate": {
+        "description": "Schema for creating a new source.",
+        "properties": {
+          "author": {
+            "anyOf": [
+              {
+                "maxLength": 255,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Author or creator of the source",
+            "examples": [
+              "Anonymous",
+              "James George Frazer"
+            ],
+            "title": "Author"
+          },
+          "entity_id": {
+            "description": "ID of the associated entity",
+            "examples": [
+              1
+            ],
+            "title": "Entity ID",
+            "type": "integer"
+          },
+          "source_type": {
+            "$ref": "#/components/schemas/SourceType",
+            "description": "Type of source (e.g., Book, Website, Manuscript, Oral Tradition)",
+            "examples": [
+              "Book",
+              "Website",
+              "Manuscript",
+              "Oral Tradition"
+            ],
+            "title": "Source Type"
+          },
+          "title": {
+            "description": "Title of the source",
+            "examples": [
+              "The Book of the Dead",
+              "Popol Vuh"
+            ],
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "URL where the source can be accessed",
+            "examples": [
+              "https://example.com/book-of-the-dead"
+            ],
+            "title": "URL"
+          }
+        },
+        "required": [
+          "source_type",
+          "title",
+          "entity_id"
+        ],
+        "title": "SourceCreate",
+        "type": "object"
+      },
+      "SourceType": {
+        "enum": [
+          "BOOK",
+          "ORAL_TRADITION",
+          "WEB",
+          "DOCUMENT"
+        ],
+        "title": "SourceType",
+        "type": "string"
+      },
+      "SourceUpdate": {
+        "description": "Schema for updating an existing source.",
+        "properties": {
+          "author": {
+            "anyOf": [
+              {
+                "maxLength": 255,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Author or creator of the source",
+            "examples": [
+              "Anonymous"
+            ],
+            "title": "Author"
+          },
+          "source_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SourceType"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Type of source",
+            "examples": [
+              "Book"
+            ],
+            "title": "Source Type"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "maxLength": 255,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Title of the source",
+            "examples": [
+              "The Book of the Dead"
+            ],
+            "title": "Title"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "URL where the source can be accessed",
+            "examples": [
+              "https://example.com/book-of-the-dead"
+            ],
+            "title": "URL"
+          }
+        },
+        "title": "SourceUpdate",
+        "type": "object"
+      },
+      "Token": {
+        "description": "JWT token pair response for authentication endpoints.\n\nReturned by both POST /auth/login and POST /auth/refresh.",
+        "properties": {
+          "access_token": {
+            "description": "JWT access token for authenticated requests",
+            "examples": [
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+            ],
+            "title": "Access Token",
+            "type": "string"
+          },
+          "expires_at": {
+            "description": "Timestamp when the token expires",
+            "examples": [
+              "2024-01-20T10:30:00Z"
+            ],
+            "title": "Expires At"
+          },
+          "refresh_token": {
+            "description": "Long-lived JWT used to obtain a new access token via /auth/refresh",
+            "examples": [
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+            ],
+            "title": "Refresh Token",
+            "type": "string"
+          },
+          "token_type": {
+            "description": "Type of token (Bearer)",
+            "examples": [
+              "Bearer"
+            ],
+            "title": "Token Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "access_token",
+          "refresh_token",
+          "expires_at",
+          "token_type"
+        ],
+        "title": "Token",
+        "type": "object"
+      },
+      "User": {
+        "description": "Schema returned by the API for user data.",
+        "properties": {
+          "email": {
+            "anyOf": [
+              {
+                "format": "email",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "User email address",
+            "examples": [
+              "user@example.com"
+            ],
+            "title": "Email"
+          },
+          "full_name": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "User full name",
+            "examples": [
+              "John Doe"
+            ],
+            "title": "Full Name"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Unique user identifier",
+            "examples": [
+              1
+            ],
+            "title": "ID"
+          },
+          "is_active": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": true,
+            "description": "Whether the user account is active",
+            "examples": [
+              true
+            ],
+            "title": "Is Active"
+          },
+          "is_superuser": {
+            "default": false,
+            "description": "Whether the user has superuser privileges",
+            "examples": [
+              false
+            ],
+            "title": "Is Superuser",
+            "type": "boolean"
+          }
+        },
+        "title": "User",
+        "type": "object"
+      },
+      "UserCreate": {
+        "description": "Schema for creating a new user.",
+        "properties": {
+          "email": {
+            "description": "User email address (required for creation)",
+            "examples": [
+              "user@example.com"
+            ],
+            "format": "email",
+            "title": "Email",
+            "type": "string"
+          },
+          "full_name": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "User full name",
+            "examples": [
+              "John Doe"
+            ],
+            "title": "Full Name"
+          },
+          "is_active": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": true,
+            "description": "Whether the user account is active",
+            "examples": [
+              true
+            ],
+            "title": "Is Active"
+          },
+          "is_superuser": {
+            "default": false,
+            "description": "Whether the user has superuser privileges",
+            "examples": [
+              false
+            ],
+            "title": "Is Superuser",
+            "type": "boolean"
+          },
+          "password": {
+            "description": "User password (min 8 characters)",
+            "examples": [
+              "SecureP@ss123"
+            ],
+            "maxLength": 100,
+            "minLength": 8,
+            "title": "Password",
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ],
+        "title": "UserCreate",
+        "type": "object"
+      },
+      "UserUpdate": {
+        "description": "Schema for updating an existing user.",
+        "properties": {
+          "email": {
+            "anyOf": [
+              {
+                "format": "email",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "User email address",
+            "examples": [
+              "user@example.com"
+            ],
+            "title": "Email"
+          },
+          "full_name": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "User full name",
+            "examples": [
+              "John Doe"
+            ],
+            "title": "Full Name"
+          },
+          "is_active": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": true,
+            "description": "Whether the user account is active",
+            "examples": [
+              true
+            ],
+            "title": "Is Active"
+          },
+          "is_superuser": {
+            "default": false,
+            "description": "Whether the user has superuser privileges",
+            "examples": [
+              false
+            ],
+            "title": "Is Superuser",
+            "type": "boolean"
+          },
+          "password": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "minLength": 8,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "New password (min 8 characters). Only include to change password.",
+            "examples": [
+              "NewSecureP@ss123"
+            ],
+            "title": "Password"
+          }
+        },
+        "title": "UserUpdate",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "OAuth2PasswordBearer": {
+        "flows": {
+          "password": {
+            "scopes": {},
+            "tokenUrl": "/api/v1/auth/login"
+          }
+        },
+        "type": "oauth2"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "email": "cativo23.kt@gmail.com",
+      "name": "Carlos Cativo"
+    },
+    "description": "\n## Overview\n\nThe Myths and Legends API is a comprehensive REST API for managing mythological characters, creatures, places, and objects from various cultures and mythologies around the world.\n\n## Features\n\n- **Entities Management**: Browse mythological entities (characters, creatures, places, objects)\n- **Countries**: Explore countries and their associated myths\n- **Categories & Types**: Classify entities by category and mythological origin\n- **Relations**: Discover relationships between entities\n- **Characteristics**: Learn about powers, weaknesses, and physical features\n- **Locations**: Explore geographic places associated with myths\n- **Sources**: Reference original materials (books, manuscripts, oral traditions)\n- **Rate Limiting**: Protection against brute force attacks\n- **Security Headers**: Enhanced HTTP security headers\n\n## Rate Limiting\n\n- General endpoints: 60 requests per minute\n- Authentication endpoints: 10 requests per minute\n\n## Looking for Admin Documentation?\n\nAdmin endpoints (create, update, delete) are documented at `/admin/docs` (requires authentication).\n    ",
+    "license": {
+      "name": "MIT License",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "title": "Myths and Legends API",
+    "version": "0.2.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "index__get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Index"
+      }
+    },
+    "/api/v1/": {
+      "get": {
+        "description": "Welcome endpoint with API information and documentation links.",
+        "operationId": "index_api_v1__get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "API welcome message"
+          }
+        },
+        "summary": "Home",
+        "tags": [
+          "home",
+          "home"
+        ]
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "description": "OAuth2 compatible token login. Exchange username/password for an access token.",
+        "operationId": "login_access_token_api_v1_auth_login_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_login_access_token_api_v1_auth_login_post",
+                "properties": {
+                  "password": {
+                    "description": "User password",
+                    "example": "SecureP@ss123",
+                    "format": "password",
+                    "title": "Password",
+                    "type": "string"
+                  },
+                  "username": {
+                    "description": "User email address",
+                    "example": "user@example.com",
+                    "title": "Username",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "username",
+                  "password"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            },
+            "description": "Successful login, token returned"
+          },
+          "400": {
+            "description": "Incorrect email/password or inactive user"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Login",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/api/v1/auth/logout": {
+      "post": {
+        "description": "Revoke the current user's refresh token, so it can no longer be exchanged via /auth/refresh. This does NOT invalidate the caller's current access token \u2014 like any stateless JWT, it remains valid until it expires (see ACCESS_TOKEN_EXPIRE_MINUTES). Use this to end a session going forward, not to instantly revoke an already-issued access token.",
+        "operationId": "logout_api_v1_auth_logout_post",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Logout Api V1 Auth Logout Post",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successfully logged out"
+          },
+          "401": {
+            "description": "Unauthorized - No valid token provided"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Logout",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/api/v1/auth/me": {
+      "get": {
+        "description": "Get information about the currently authenticated user.",
+        "operationId": "get_current_user_info_api_v1_auth_me_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "description": "Successful retrieval of user info"
+          },
+          "401": {
+            "description": "Unauthorized - No valid token provided"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Get Current User",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/api/v1/auth/password-recovery/{email}": {
+      "post": {
+        "description": "Initiate password recovery by sending a reset email to the user.",
+        "operationId": "recover_password_api_v1_auth_password_recovery__email__post",
+        "parameters": [
+          {
+            "description": "User email address",
+            "in": "path",
+            "name": "email",
+            "required": true,
+            "schema": {
+              "description": "User email address",
+              "examples": [
+                "user@example.com"
+              ],
+              "title": "Email",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Recover Password Api V1 Auth Password Recovery  Email  Post",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Password recovery email sent, if the account exists"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Password Recovery",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/api/v1/auth/refresh": {
+      "post": {
+        "description": "Exchange a valid refresh token for a new access token and a new (rotated) refresh token. The presented refresh token is invalidated on use \u2014 it cannot be reused.",
+        "operationId": "refresh_access_token_api_v1_auth_refresh_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            },
+            "description": "New token pair issued"
+          },
+          "401": {
+            "description": "Invalid, expired, wrong-type, or already-used refresh token"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Refresh Access Token",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/api/v1/auth/reset-password/": {
+      "post": {
+        "description": "Reset password using a valid recovery token.",
+        "operationId": "reset_password_api_v1_auth_reset_password__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PasswordReset"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Reset Password Api V1 Auth Reset Password  Post",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Password successfully updated"
+          },
+          "400": {
+            "description": "Invalid token or inactive user"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Reset Password",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/api/v1/categories/": {
+      "get": {
+        "description": "Retrieve a paginated list of categories for classifying entities (e.g., Deity, Creature, Place).",
+        "operationId": "list_categories_api_v1_categories__get",
+        "parameters": [
+          {
+            "description": "Page number",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "default": 1,
+              "description": "Page number",
+              "minimum": 1,
+              "title": "Page",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Page size",
+            "in": "query",
+            "name": "size",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "description": "Page size",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Size",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Sort field",
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "default": "name",
+              "description": "Sort field",
+              "enum": [
+                "name",
+                "id"
+              ],
+              "examples": [
+                "name",
+                "id"
+              ],
+              "title": "Sort",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Sort order (asc, desc)",
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "default": "asc",
+              "description": "Sort order (asc, desc)",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "examples": [
+                "asc",
+                "desc"
+              ],
+              "title": "Order",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_Category_"
+                }
+              }
+            },
+            "description": "Successful retrieval of categories"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Categories",
+        "tags": [
+          "categories"
+        ]
+      },
+      "post": {
+        "description": "Create a new category. Requires superuser privileges.",
+        "operationId": "create_category_api_v1_categories__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CategoryCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Category"
+                }
+              }
+            },
+            "description": "Category successfully created"
+          },
+          "401": {
+            "description": "Unauthorized - No valid token provided"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "409": {
+            "description": "A category with this name already exists"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Create Category",
+        "tags": [
+          "categories"
+        ]
+      }
+    },
+    "/api/v1/categories/{id}": {
+      "delete": {
+        "description": "Delete a category by ID. Requires superuser privileges.",
+        "operationId": "delete_category_api_v1_categories__id__delete",
+        "parameters": [
+          {
+            "description": "Category ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "Category ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Category successfully deleted"
+          },
+          "401": {
+            "description": "Unauthorized - No valid token provided"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "404": {
+            "description": "Category not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Delete Category",
+        "tags": [
+          "categories"
+        ]
+      },
+      "get": {
+        "description": "Retrieve a specific category by ID.",
+        "operationId": "get_category_api_v1_categories__id__get",
+        "parameters": [
+          {
+            "description": "Category ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "Category ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Category"
+                }
+              }
+            },
+            "description": "Successful retrieval of category"
+          },
+          "404": {
+            "description": "Category not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Category",
+        "tags": [
+          "categories"
+        ]
+      },
+      "put": {
+        "description": "Update an existing category by ID. Requires superuser privileges.",
+        "operationId": "update_category_api_v1_categories__id__put",
+        "parameters": [
+          {
+            "description": "Category ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "Category ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CategoryUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Category"
+                }
+              }
+            },
+            "description": "Category successfully updated"
+          },
+          "401": {
+            "description": "Unauthorized - No valid token provided"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "404": {
+            "description": "Category not found"
+          },
+          "409": {
+            "description": "A category with this name already exists"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Update Category",
+        "tags": [
+          "categories"
+        ]
+      }
+    },
+    "/api/v1/countries/": {
+      "get": {
+        "description": "Retrieve a list of all countries in the system.",
+        "operationId": "list_countries_api_v1_countries__get",
+        "parameters": [
+          {
+            "description": "Field to sort by",
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "default": "name",
+              "description": "Field to sort by",
+              "enum": [
+                "name",
+                "id"
+              ],
+              "examples": [
+                "name",
+                "id"
+              ],
+              "title": "Sort",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Sort order",
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "default": "asc",
+              "description": "Sort order",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "examples": [
+                "asc",
+                "desc"
+              ],
+              "title": "Order",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Country"
+                  },
+                  "title": "Response List Countries Api V1 Countries  Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful retrieval of countries"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Countries",
+        "tags": [
+          "countries"
+        ]
+      },
+      "post": {
+        "description": "Create a new country in the system. Requires superuser privileges.",
+        "operationId": "add_country_api_v1_countries__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CountryCreate",
+                "description": "Country data to create",
+                "examples": [
+                  {
+                    "name": "Nigeria",
+                    "status": true
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Country"
+                }
+              }
+            },
+            "description": "Country successfully created"
+          },
+          "400": {
+            "description": "Invalid input data"
+          },
+          "401": {
+            "description": "Unauthorized - No valid token provided"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Create Country",
+        "tags": [
+          "countries"
+        ]
+      }
+    },
+    "/api/v1/countries/{country_id}": {
+      "delete": {
+        "description": "Delete a country by its ID. Requires superuser privileges.",
+        "operationId": "delete_country_api_v1_countries__country_id__delete",
+        "parameters": [
+          {
+            "description": "Country ID",
+            "in": "path",
+            "name": "country_id",
+            "required": true,
+            "schema": {
+              "description": "Country ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "Country Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Country successfully deleted"
+          },
+          "401": {
+            "description": "Unauthorized - No valid token provided"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "404": {
+            "description": "Country not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Delete Country",
+        "tags": [
+          "countries"
+        ]
+      },
+      "get": {
+        "description": "Retrieve a specific country by its ID.",
+        "operationId": "get_country_api_v1_countries__country_id__get",
+        "parameters": [
+          {
+            "description": "Country ID",
+            "in": "path",
+            "name": "country_id",
+            "required": true,
+            "schema": {
+              "description": "Country ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "Country Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Country"
+                }
+              }
+            },
+            "description": "Successful retrieval of country"
+          },
+          "404": {
+            "description": "Country not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Country",
+        "tags": [
+          "countries"
+        ]
+      },
+      "put": {
+        "description": "Update an existing country by its ID. Requires superuser privileges.",
+        "operationId": "update_country_api_v1_countries__country_id__put",
+        "parameters": [
+          {
+            "description": "Country ID",
+            "in": "path",
+            "name": "country_id",
+            "required": true,
+            "schema": {
+              "description": "Country ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "Country Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CountryUpdate",
+                "description": "Updated country data"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Country"
+                }
+              }
+            },
+            "description": "Country successfully updated"
+          },
+          "401": {
+            "description": "Unauthorized - No valid token provided"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "404": {
+            "description": "Country not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Update Country",
+        "tags": [
+          "countries"
+        ]
+      }
+    },
+    "/api/v1/entities/": {
+      "get": {
+        "description": "Retrieve a paginated list of mythological entities with optional filters.",
+        "operationId": "list_entities_api_v1_entities__get",
+        "parameters": [
+          {
+            "description": "Filter by entity type (e.g., Egyptian, Greek, Norse)",
+            "in": "query",
+            "name": "entity_type",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/EntityTypeName"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by entity type (e.g., Egyptian, Greek, Norse)",
+              "examples": [
+                "Egyptian",
+                "Greek"
+              ],
+              "title": "Entity Type"
+            }
+          },
+          {
+            "description": "Filter by category (e.g., Deity, Creature, Place)",
+            "in": "query",
+            "name": "category",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/CategoryName"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by category (e.g., Deity, Creature, Place)",
+              "examples": [
+                "Deity",
+                "Creature"
+              ],
+              "title": "Category"
+            }
+          },
+          {
+            "description": "Filter by active status",
+            "in": "query",
+            "name": "is_active",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": true,
+              "description": "Filter by active status",
+              "title": "Is Active"
+            }
+          },
+          {
+            "description": "Page number",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "default": 1,
+              "description": "Page number",
+              "minimum": 1,
+              "title": "Page",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Page size",
+            "in": "query",
+            "name": "size",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "description": "Page size",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Size",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Sort field",
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "default": "name",
+              "description": "Sort field",
+              "enum": [
+                "id",
+                "name",
+                "created_at"
+              ],
+              "examples": [
+                "name",
+                "id",
+                "created_at"
+              ],
+              "title": "Sort",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Sort order (asc, desc)",
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "default": "asc",
+              "description": "Sort order (asc, desc)",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "examples": [
+                "asc",
+                "desc"
+              ],
+              "title": "Order",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_Entity_"
+                }
+              }
+            },
+            "description": "Successful retrieval of entities"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Entities",
+        "tags": [
+          "entities"
+        ]
+      },
+      "post": {
+        "description": "Create a new mythological entity. Requires superuser privileges.",
+        "operationId": "create_entity_api_v1_entities__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntityCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Entity"
+                }
+              }
+            },
+            "description": "Entity successfully created"
+          },
+          "400": {
+            "description": "Invalid input data"
+          },
+          "401": {
+            "description": "Unauthorized - No valid token provided"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Create Entity",
+        "tags": [
+          "entities"
+        ]
+      }
+    },
+    "/api/v1/entities/search": {
+      "get": {
+        "description": "Search entities by name, description, or origin using a free-text query.",
+        "operationId": "search_entities_api_v1_entities_search_get",
+        "parameters": [
+          {
+            "description": "Search term (searches name, description, and origin)",
+            "in": "query",
+            "name": "q",
+            "required": true,
+            "schema": {
+              "description": "Search term (searches name, description, and origin)",
+              "examples": [
+                "Zeus",
+                "underworld",
+                "god of thunder"
+              ],
+              "maxLength": 200,
+              "minLength": 1,
+              "title": "Q",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Entity"
+                  },
+                  "title": "Response Search Entities Api V1 Entities Search Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful search results"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Search Entities",
+        "tags": [
+          "entities"
+        ]
+      }
+    },
+    "/api/v1/entities/{id}": {
+      "delete": {
+        "description": "Delete an entity by ID. Requires superuser privileges.",
+        "operationId": "delete_entity_api_v1_entities__id__delete",
+        "parameters": [
+          {
+            "description": "Entity ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "Entity ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Entity successfully deleted"
+          },
+          "401": {
+            "description": "Unauthorized - No valid token provided"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "404": {
+            "description": "Entity not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Delete Entity",
+        "tags": [
+          "entities"
+        ]
+      },
+      "get": {
+        "description": "Retrieve a specific entity by ID with all its nested relations (category, type, characteristics, locations, sources, and entity relations).",
+        "operationId": "get_entity_api_v1_entities__id__get",
+        "parameters": [
+          {
+            "description": "Entity ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "Entity ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityWithRelations"
+                }
+              }
+            },
+            "description": "Successful retrieval of entity with relations"
+          },
+          "404": {
+            "description": "Entity not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Entity",
+        "tags": [
+          "entities"
+        ]
+      },
+      "put": {
+        "description": "Update an existing entity by ID. Requires superuser privileges.",
+        "operationId": "update_entity_api_v1_entities__id__put",
+        "parameters": [
+          {
+            "description": "Entity ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "Entity ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntityUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Entity"
+                }
+              }
+            },
+            "description": "Entity successfully updated"
+          },
+          "401": {
+            "description": "Unauthorized - No valid token provided"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "404": {
+            "description": "Entity not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Update Entity",
+        "tags": [
+          "entities"
+        ]
+      }
+    },
+    "/api/v1/entities/{id}/relations": {
+      "get": {
+        "description": "Retrieve all relations for a specific entity (e.g., parent-child, siblings, enemies).",
+        "operationId": "get_entity_relations_api_v1_entities__id__relations_get",
+        "parameters": [
+          {
+            "description": "Entity ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "Entity ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/EntityRelationSummary"
+                  },
+                  "title": "Response Get Entity Relations Api V1 Entities  Id  Relations Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful retrieval of relations"
+          },
+          "404": {
+            "description": "Entity not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Entity Relations",
+        "tags": [
+          "entities"
+        ]
+      },
+      "post": {
+        "description": "Create a relation between two entities. Symmetric relation types (SIBLINGS, ALLIES, ENEMIES) automatically create the reverse relation too. Requires superuser privileges.",
+        "operationId": "create_entity_relation_api_v1_entities__id__relations_post",
+        "parameters": [
+          {
+            "description": "Origin entity ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "Origin entity ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRelationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityRelation"
+                }
+              }
+            },
+            "description": "Relation successfully created"
+          },
+          "400": {
+            "description": "An entity cannot have a relation to itself"
+          },
+          "401": {
+            "description": "Unauthorized - No valid token provided"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "404": {
+            "description": "Entity not found"
+          },
+          "409": {
+            "description": "This exact relation (origin, destination, type) already exists"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Create Entity Relation",
+        "tags": [
+          "entities"
+        ]
+      }
+    },
+    "/api/v1/entities/{id}/relations/{relation_id}": {
+      "delete": {
+        "description": "Delete a relation of this entity (as origin or destination). Symmetric relation types (SIBLINGS, ALLIES, ENEMIES) are stored as a pair, and both rows are deleted. Requires superuser privileges.",
+        "operationId": "delete_entity_relation_api_v1_entities__id__relations__relation_id__delete",
+        "parameters": [
+          {
+            "description": "Entity ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "Entity ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "Id",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Relation ID",
+            "in": "path",
+            "name": "relation_id",
+            "required": true,
+            "schema": {
+              "description": "Relation ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "Relation Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Relation successfully deleted"
+          },
+          "401": {
+            "description": "Unauthorized - No valid token provided"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "404": {
+            "description": "Entity or relation not found"
+          },
+          "422": {
+            "description": "Invalid entity or relation ID"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Delete Entity Relation",
+        "tags": [
+          "entities"
+        ]
+      }
+    },
+    "/api/v1/entity-types/": {
+      "get": {
+        "description": "Retrieve a paginated list of entity types representing mythological origins (e.g., Egyptian, Greek, Norse).",
+        "operationId": "list_entity_types_api_v1_entity_types__get",
+        "parameters": [
+          {
+            "description": "Page number",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "default": 1,
+              "description": "Page number",
+              "minimum": 1,
+              "title": "Page",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Page size",
+            "in": "query",
+            "name": "size",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "description": "Page size",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Size",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Sort field",
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "default": "name",
+              "description": "Sort field",
+              "enum": [
+                "name",
+                "id"
+              ],
+              "examples": [
+                "name",
+                "id"
+              ],
+              "title": "Sort",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Sort order (asc, desc)",
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "default": "asc",
+              "description": "Sort order (asc, desc)",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "examples": [
+                "asc",
+                "desc"
+              ],
+              "title": "Order",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_EntityType_"
+                }
+              }
+            },
+            "description": "Successful retrieval of entity types"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Entity Types",
+        "tags": [
+          "entity-types"
+        ]
+      },
+      "post": {
+        "description": "Create a new entity type. Requires superuser privileges.",
+        "operationId": "create_entity_type_api_v1_entity_types__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntityTypeCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityType"
+                }
+              }
+            },
+            "description": "Entity type successfully created"
+          },
+          "401": {
+            "description": "Unauthorized - No valid token provided"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "409": {
+            "description": "An entity type with this name already exists"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Create Entity Type",
+        "tags": [
+          "entity-types"
+        ]
+      }
+    },
+    "/api/v1/entity-types/{id}": {
+      "delete": {
+        "description": "Delete an entity type by ID. Requires superuser privileges.",
+        "operationId": "delete_entity_type_api_v1_entity_types__id__delete",
+        "parameters": [
+          {
+            "description": "Entity Type ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "Entity Type ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Entity type successfully deleted"
+          },
+          "401": {
+            "description": "Unauthorized - No valid token provided"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "404": {
+            "description": "Entity type not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Delete Entity Type",
+        "tags": [
+          "entity-types"
+        ]
+      },
+      "get": {
+        "description": "Retrieve a specific entity type by ID.",
+        "operationId": "get_entity_type_api_v1_entity_types__id__get",
+        "parameters": [
+          {
+            "description": "Entity Type ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "Entity Type ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityType"
+                }
+              }
+            },
+            "description": "Successful retrieval of entity type"
+          },
+          "404": {
+            "description": "Entity type not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Entity Type",
+        "tags": [
+          "entity-types"
+        ]
+      },
+      "put": {
+        "description": "Update an existing entity type by ID. Requires superuser privileges.",
+        "operationId": "update_entity_type_api_v1_entity_types__id__put",
+        "parameters": [
+          {
+            "description": "Entity Type ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "Entity Type ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntityTypeUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityType"
+                }
+              }
+            },
+            "description": "Entity type successfully updated"
+          },
+          "401": {
+            "description": "Unauthorized - No valid token provided"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "404": {
+            "description": "Entity type not found"
+          },
+          "409": {
+            "description": "An entity type with this name already exists"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Update Entity Type",
+        "tags": [
+          "entity-types"
+        ]
+      }
+    },
+    "/api/v1/health": {
+      "get": {
+        "description": "Basic health check endpoint. Returns service status and timestamp.",
+        "operationId": "health_check_api_v1_health_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Health Check Api V1 Health Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service is healthy"
+          }
+        },
+        "summary": "Health Check",
+        "tags": [
+          "health",
+          "health"
+        ]
+      }
+    },
+    "/api/v1/health/": {
+      "get": {
+        "description": "Basic health check endpoint. Returns service status and timestamp.",
+        "operationId": "health_check_api_v1_health__get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Health Check Api V1 Health  Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service is healthy"
+          }
+        },
+        "summary": "Health Check",
+        "tags": [
+          "health",
+          "health"
+        ]
+      }
+    },
+    "/api/v1/health/live": {
+      "get": {
+        "description": "Kubernetes liveness probe. Returns healthy as long as the service is running.",
+        "operationId": "liveness_probe_api_v1_health_live_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Liveness Probe Api V1 Health Live Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service is alive"
+          }
+        },
+        "summary": "Liveness Probe",
+        "tags": [
+          "health",
+          "health"
+        ]
+      }
+    },
+    "/api/v1/health/ready": {
+      "get": {
+        "description": "Kubernetes readiness probe. Checks database connectivity and other dependencies.",
+        "operationId": "readiness_probe_api_v1_health_ready_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Readiness Probe Api V1 Health Ready Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service is ready (all dependencies healthy)"
+          },
+          "503": {
+            "description": "Service not ready (dependency unavailable)"
+          }
+        },
+        "summary": "Readiness Probe",
+        "tags": [
+          "health",
+          "health"
+        ]
+      }
+    },
+    "/api/v1/images/{name_file}": {
+      "get": {
+        "description": "Retrieve an image file from the server.",
+        "operationId": "get_file_api_v1_images__name_file__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name_file",
+            "required": true,
+            "schema": {
+              "title": "Name File",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              },
+              "image/*": {}
+            },
+            "description": "Image file returned"
+          },
+          "400": {
+            "description": "Invalid filename or extension"
+          },
+          "404": {
+            "description": "Image not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Image",
+        "tags": [
+          "images",
+          "images"
+        ]
+      }
+    },
+    "/api/v1/locations/": {
+      "get": {
+        "description": "Retrieve a paginated list of locations, optionally filtered by department.",
+        "operationId": "list_locations_api_v1_locations__get",
+        "parameters": [
+          {
+            "description": "Filter by department",
+            "in": "query",
+            "name": "department",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 200,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by department",
+              "examples": [
+                "Cundinamarca",
+                "Oaxaca"
+              ],
+              "title": "Department"
+            }
+          },
+          {
+            "description": "Page number",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "default": 1,
+              "description": "Page number",
+              "minimum": 1,
+              "title": "Page",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Page size",
+            "in": "query",
+            "name": "size",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "description": "Page size",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Size",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_Location_"
+                }
+              }
+            },
+            "description": "Successful retrieval of locations"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Locations",
+        "tags": [
+          "locations"
+        ]
+      },
+      "post": {
+        "description": "Create a new location. Requires superuser privileges.",
+        "operationId": "create_location_api_v1_locations__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocationCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Location"
+                }
+              }
+            },
+            "description": "Location successfully created"
+          },
+          "401": {
+            "description": "Unauthorized - No valid token provided"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "404": {
+            "description": "The referenced entity_id does not exist"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Create Location",
+        "tags": [
+          "locations"
+        ]
+      }
+    },
+    "/api/v1/locations/{department}": {
+      "get": {
+        "description": "Retrieve all locations in a specific department.",
+        "operationId": "get_location_by_department_api_v1_locations__department__get",
+        "parameters": [
+          {
+            "description": "Department name",
+            "in": "path",
+            "name": "department",
+            "required": true,
+            "schema": {
+              "description": "Department name",
+              "examples": [
+                "Cundinamarca"
+              ],
+              "maxLength": 200,
+              "title": "Department",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Location"
+                  },
+                  "title": "Response Get Location By Department Api V1 Locations  Department  Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful retrieval of locations"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Locations by Department",
+        "tags": [
+          "locations"
+        ]
+      }
+    },
+    "/api/v1/locations/{id}": {
+      "delete": {
+        "description": "Delete a location by ID. Requires superuser privileges.",
+        "operationId": "delete_location_api_v1_locations__id__delete",
+        "parameters": [
+          {
+            "description": "Location ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "Location ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Location successfully deleted"
+          },
+          "401": {
+            "description": "Unauthorized - No valid token provided"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "404": {
+            "description": "Location not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Delete Location",
+        "tags": [
+          "locations"
+        ]
+      },
+      "get": {
+        "description": "Retrieve a specific location by ID.",
+        "operationId": "get_location_api_v1_locations__id__get",
+        "parameters": [
+          {
+            "description": "Location ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "Location ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Location"
+                }
+              }
+            },
+            "description": "Successful retrieval of location"
+          },
+          "404": {
+            "description": "Location not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Location",
+        "tags": [
+          "locations"
+        ]
+      },
+      "put": {
+        "description": "Update an existing location by ID. Requires superuser privileges.",
+        "operationId": "update_location_api_v1_locations__id__put",
+        "parameters": [
+          {
+            "description": "Location ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "Location ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocationUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Location"
+                }
+              }
+            },
+            "description": "Location successfully updated"
+          },
+          "401": {
+            "description": "Unauthorized - No valid token provided"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "404": {
+            "description": "Location not found, or the referenced entity_id does not exist"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Update Location",
+        "tags": [
+          "locations"
+        ]
+      }
+    },
+    "/api/v1/sources/": {
+      "get": {
+        "description": "Retrieve a paginated list of sources, optionally filtered by type and sorted.",
+        "operationId": "list_sources_api_v1_sources__get",
+        "parameters": [
+          {
+            "description": "Filter by source type",
+            "in": "query",
+            "name": "source_type",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/SourceType"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by source type",
+              "examples": [
+                "Book",
+                "Website",
+                "Manuscript",
+                "Oral Tradition"
+              ],
+              "title": "Source Type"
+            }
+          },
+          {
+            "description": "Page number",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "default": 1,
+              "description": "Page number",
+              "minimum": 1,
+              "title": "Page",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Page size",
+            "in": "query",
+            "name": "size",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "description": "Page size",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Size",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Sort field",
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "default": "id",
+              "description": "Sort field",
+              "enum": [
+                "id",
+                "title",
+                "author",
+                "source_type"
+              ],
+              "examples": [
+                "title",
+                "author",
+                "id"
+              ],
+              "title": "Sort",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Sort order (asc, desc)",
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "default": "asc",
+              "description": "Sort order (asc, desc)",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "examples": [
+                "asc",
+                "desc"
+              ],
+              "title": "Order",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_Source_"
+                }
+              }
+            },
+            "description": "Successful retrieval of sources"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Sources",
+        "tags": [
+          "sources"
+        ]
+      },
+      "post": {
+        "description": "Create a new source. Requires superuser privileges.",
+        "operationId": "create_source_api_v1_sources__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SourceCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Source"
+                }
+              }
+            },
+            "description": "Source successfully created"
+          },
+          "401": {
+            "description": "Unauthorized - No valid token provided"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "404": {
+            "description": "The referenced entity_id does not exist"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Create Source",
+        "tags": [
+          "sources"
+        ]
+      }
+    },
+    "/api/v1/sources/{id}": {
+      "delete": {
+        "description": "Delete a source by ID. Requires superuser privileges.",
+        "operationId": "delete_source_api_v1_sources__id__delete",
+        "parameters": [
+          {
+            "description": "Source ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "Source ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Source successfully deleted"
+          },
+          "401": {
+            "description": "Unauthorized - No valid token provided"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "404": {
+            "description": "Source not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Delete Source",
+        "tags": [
+          "sources"
+        ]
+      },
+      "get": {
+        "description": "Retrieve a single source by its ID.",
+        "operationId": "get_source_api_v1_sources__id__get",
+        "parameters": [
+          {
+            "description": "Source ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "Source ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Source"
+                }
+              }
+            },
+            "description": "Successful retrieval of source"
+          },
+          "404": {
+            "description": "Source not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Source by ID",
+        "tags": [
+          "sources"
+        ]
+      },
+      "put": {
+        "description": "Update an existing source by ID. Requires superuser privileges.",
+        "operationId": "update_source_api_v1_sources__id__put",
+        "parameters": [
+          {
+            "description": "Source ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "Source ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SourceUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Source"
+                }
+              }
+            },
+            "description": "Source successfully updated"
+          },
+          "401": {
+            "description": "Unauthorized - No valid token provided"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "404": {
+            "description": "Source not found, or the referenced entity_id does not exist"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Update Source",
+        "tags": [
+          "sources"
+        ]
+      }
+    },
+    "/api/v1/users/": {
+      "get": {
+        "description": "Retrieve a paginated list of users. Requires superuser privileges.",
+        "operationId": "get_users_api_v1_users__get",
+        "parameters": [
+          {
+            "description": "Page number",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "default": 1,
+              "description": "Page number",
+              "minimum": 1,
+              "title": "Page",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Page size",
+            "in": "query",
+            "name": "size",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "description": "Page size",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Size",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Field to sort by",
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "default": "email",
+              "description": "Field to sort by",
+              "enum": [
+                "id",
+                "email",
+                "full_name"
+              ],
+              "examples": [
+                "email",
+                "full_name",
+                "id"
+              ],
+              "title": "Sort",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Sort order",
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "default": "asc",
+              "description": "Sort order",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "examples": [
+                "asc",
+                "desc"
+              ],
+              "title": "Order",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_User_"
+                }
+              }
+            },
+            "description": "Successful retrieval of users"
+          },
+          "401": {
+            "description": "Unauthorized - No valid token provided"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "List Users",
+        "tags": [
+          "users"
+        ]
+      },
+      "post": {
+        "description": "Create a new user. Requires superuser privileges.",
+        "operationId": "create_user_api_v1_users__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "description": "User successfully created"
+          },
+          "400": {
+            "description": "Email already exists"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Create User",
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/api/v1/users/{user_id}": {
+      "delete": {
+        "description": "Delete a user by ID. Requires superuser privileges.",
+        "operationId": "delete_user_api_v1_users__user_id__delete",
+        "parameters": [
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "description": "User ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "User Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "User successfully deleted"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Delete User",
+        "tags": [
+          "users"
+        ]
+      },
+      "get": {
+        "description": "Retrieve a specific user by ID. Requires superuser privileges.",
+        "operationId": "get_user_api_v1_users__user_id__get",
+        "parameters": [
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "description": "User ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "User Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "description": "Successful retrieval of user"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Get User",
+        "tags": [
+          "users"
+        ]
+      },
+      "put": {
+        "description": "Update an existing user by ID. Requires superuser privileges.",
+        "operationId": "update_user_api_v1_users__user_id__put",
+        "parameters": [
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "description": "User ID",
+              "examples": [
+                1
+              ],
+              "exclusiveMinimum": 0,
+              "title": "User Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "description": "User successfully updated"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - User is not a superuser"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "summary": "Update User",
+        "tags": [
+          "users"
+        ]
+      }
+    }
+  }
+}
