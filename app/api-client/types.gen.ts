@@ -236,7 +236,7 @@ export type Entity = {
     /**
      * Category ID
      *
-     * ID of the entity category (e.g., Deity, Creature, Place)
+     * ID of the entity category (MYTH, LEGEND or TRADITION)
      */
     category_id: number;
     /**
@@ -270,7 +270,7 @@ export type Entity = {
     /**
      * Entity Type ID
      *
-     * ID of the entity type (e.g., Egyptian, Greek, Aztec)
+     * ID of the entity type (CHARACTER, PLACE, OBJECT, GROUP or EVENT)
      */
     entity_type_id: number;
     /**
@@ -279,6 +279,12 @@ export type Entity = {
      * Unique entity identifier
      */
     id: number;
+    /**
+     * Image Credit
+     *
+     * Artist credited for the image (blank is treated as no credit)
+     */
+    image_credit?: string | null;
     /**
      * Image URL
      *
@@ -345,7 +351,7 @@ export type EntityCreate = {
     /**
      * Category ID
      *
-     * ID of the entity category (e.g., Deity, Creature, Place)
+     * ID of the entity category (MYTH, LEGEND or TRADITION)
      */
     category_id: number;
     /**
@@ -357,9 +363,15 @@ export type EntityCreate = {
     /**
      * Entity Type ID
      *
-     * ID of the entity type (e.g., Egyptian, Greek, Aztec)
+     * ID of the entity type (CHARACTER, PLACE, OBJECT, GROUP or EVENT)
      */
     entity_type_id: number;
+    /**
+     * Image Credit
+     *
+     * Artist credited for the image (blank is treated as no credit)
+     */
+    image_credit?: string | null;
     /**
      * Image URL
      *
@@ -470,7 +482,7 @@ export type EntityType = {
     /**
      * Description
      *
-     * Description of the mythology or culture
+     * Description of this kind of entity
      */
     description?: string | null;
     /**
@@ -488,7 +500,7 @@ export type EntityType = {
     /**
      * Name
      *
-     * Entity type name representing a mythology or culture
+     * Kind of entity: CHARACTER, PLACE, OBJECT, GROUP or EVENT
      */
     name: EntityTypeName;
 };
@@ -502,13 +514,13 @@ export type EntityTypeCreate = {
     /**
      * Description
      *
-     * Description of the mythology or culture
+     * Description of this kind of entity
      */
     description?: string | null;
     /**
      * Name
      *
-     * Entity type name representing a mythology or culture
+     * Kind of entity: CHARACTER, PLACE, OBJECT, GROUP or EVENT
      */
     name: EntityTypeName;
 };
@@ -527,13 +539,13 @@ export type EntityTypeUpdate = {
     /**
      * Description
      *
-     * Description of the mythology or culture
+     * Description of this kind of entity
      */
     description?: string | null;
     /**
      * Name
      *
-     * Entity type name representing a mythology or culture
+     * Kind of entity: CHARACTER, PLACE, OBJECT, GROUP or EVENT
      */
     name?: EntityTypeName | null;
 };
@@ -576,6 +588,12 @@ export type EntityUpdate = {
      * ID of the entity type
      */
     entity_type_id?: number | null;
+    /**
+     * Image Credit
+     *
+     * Artist credited for the image (blank is treated as no credit)
+     */
+    image_credit?: string | null;
     /**
      * Image URL
      *
@@ -633,7 +651,7 @@ export type EntityWithRelations = {
     /**
      * Category ID
      *
-     * ID of the entity category (e.g., Deity, Creature, Place)
+     * ID of the entity category (MYTH, LEGEND or TRADITION)
      */
     category_id: number;
     /**
@@ -667,7 +685,7 @@ export type EntityWithRelations = {
     /**
      * Entity Type ID
      *
-     * ID of the entity type (e.g., Egyptian, Greek, Aztec)
+     * ID of the entity type (CHARACTER, PLACE, OBJECT, GROUP or EVENT)
      */
     entity_type_id: number;
     /**
@@ -676,6 +694,12 @@ export type EntityWithRelations = {
      * Unique entity identifier
      */
     id: number;
+    /**
+     * Image Credit
+     *
+     * Artist credited for the image (blank is treated as no credit)
+     */
+    image_credit?: string | null;
     /**
      * Image URL
      *
@@ -1163,7 +1187,7 @@ export type Token = {
      *
      * Timestamp when the token expires
      */
-    expires_at: unknown;
+    expires_at: string;
     /**
      * Refresh Token
      *
@@ -1958,13 +1982,13 @@ export type ListEntitiesApiV1EntitiesGetData = {
         /**
          * Entity Type
          *
-         * Filter by entity type (e.g., Egyptian, Greek, Norse)
+         * Filter by entity type (CHARACTER, PLACE, OBJECT, GROUP or EVENT)
          */
         entity_type?: EntityTypeName | null;
         /**
          * Category
          *
-         * Filter by category (e.g., Deity, Creature, Place)
+         * Filter by category (MYTH, LEGEND or TRADITION)
          */
         category?: CategoryName | null;
         /**
