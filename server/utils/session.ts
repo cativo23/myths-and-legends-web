@@ -24,8 +24,12 @@ export function buildSessionCookieOptions(
   return { httpOnly: true, secure: isProduction, sameSite: 'lax', path: '/', maxAge: maxAgeSeconds }
 }
 
-/** Whole seconds from `now` until `expiresAt`, never negative. `now` is injected so the clock can be faked. */
+/**
+ * Whole seconds from `now` until `expiresAt`, never negative. An unparseable expiry yields 0 so the
+ * cookie expires immediately (fail closed) instead of silently outliving the token.
+ * `now` is injected so the clock can be faked.
+ */
 export function secondsUntil(expiresAt: string, now: Date = new Date()): number {
   const seconds = Math.floor((new Date(expiresAt).getTime() - now.getTime()) / 1000)
-  return Math.max(0, seconds)
+  return Number.isNaN(seconds) ? 0 : Math.max(0, seconds)
 }

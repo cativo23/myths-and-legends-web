@@ -29,4 +29,14 @@ describe('session cookie policy', () => {
 
     expect(secondsUntil('2026-11-27T11:00:00Z', now)).toBe(0)
   })
+
+  it('should_return_zero_for_an_unparseable_expiry', () => {
+    expect(secondsUntil('not-a-date', new Date('2026-11-27T12:00:00Z'))).toBe(0)
+  })
+
+  it('should_round_down_to_whole_seconds', () => {
+    const now = new Date('2026-11-27T12:00:00.000Z')
+
+    expect(secondsUntil('2026-11-27T12:00:10.900Z', now)).toBe(10)
+  })
 })
