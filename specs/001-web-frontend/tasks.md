@@ -50,7 +50,7 @@ description: "Tasks for session 2.2: Nuxt scaffold, generated API client, basic 
 - [X] T011 [P] Write `openapi/SOURCE.md`: API repo, commit `2bb7341`, `info.version` 0.2.0 and the fact that tag `v0.2.0` does not exist yet (replace in 2.3 from the tag), export date, exact export command, and the stale-example note (API roadmap risk 18)
 - [X] T012 [P] Write `openapi/openapi-ts.config.ts` (input `openapi/openapi.json`, output `app/api-client`, fetch client, a header marking the output as generated and not to be edited); add the `client:generate` script
 - [X] T013 Run `pnpm client:generate` and commit `app/api-client/` as generated output; do not hand-edit any file in it
-- [X] T014 Implement `scripts/clientDrift.ts` (pure `compareDirectories(expectedDir, actualDir)`) and a thin CLI `scripts/check-client-drift.ts`; the CLI accepts `--client-dir` and that regenerates into a temp directory and calls it (exit 1 with the differing paths); add the `client:check` script; make T009 pass
+- [X] T014 Implement `scripts/clientDrift.ts` (pure `compareDirectories(expectedDir, actualDir)`) and a thin CLI `scripts/check-client-drift.ts`; the CLI regenerates into a temp directory, compares it with the committed client (or `--client-dir`) and exits 1 listing the differing paths; add the `client:check` script; make T009 pass
 
 **Checkpoint**: `pnpm client:check` exits 0; editing a generated file or `openapi.json` makes it exit 1 (quickstart table).
 
@@ -62,18 +62,18 @@ description: "Tasks for session 2.2: Nuxt scaffold, generated API client, basic 
 
 ### Tests first (write all, run, confirm each fails for the right reason)
 
-- [ ] T015 [P] Write `tests/unit/session.test.ts`: `should_mark_session_cookies_httponly_and_samesite_lax`, `should_require_secure_cookies_in_production`, `should_use_host_prefix_names_in_production_only`, `should_derive_max_age_from_token_expiry`
-- [ ] T016 [P] Write `tests/unit/errors.test.ts`, one test per category: `should_map_422_to_validation_with_field_errors`, `should_map_409_to_conflict`, `should_map_404_to_not_found`, `should_map_401_to_unauthorized`, `should_map_403_to_forbidden`, `should_map_429_to_rate_limit_with_retry_after`, `should_map_5xx_to_server`, `should_map_missing_response_to_network`, `should_map_unknown_status_to_server`, `should_never_include_raw_payload_or_stack_in_message`. For 429, read `detail.retry_after` as the only shape (no adapter for the default-limit `{"error": ...}` body, Constitution IV and FR-018); reconfirm against the API after session 1.7
-- [ ] T017 [P] Write `tests/unit/apiClient.test.ts`: `should_call_the_generated_client_with_the_given_base_url` and `should_accept_a_typed_fake_in_place_of_the_client` (the fake is typed with generated types so contract changes break compilation). The wrapper takes `baseUrl` as a parameter; it never reads Nuxt runtime config itself
-- [ ] T018 [P] Extend `tests/server/server.test.ts` (the `server` project): `should_respond_ok_without_calling_the_api` for `GET /api/health`, and `should_send_security_headers_and_a_restrictive_csp` (checks the headers and CSP of that response)
+- [X] T015 [P] Write `tests/unit/session.test.ts`: `should_mark_session_cookies_httponly_and_samesite_lax`, `should_require_secure_cookies_in_production`, `should_use_host_prefix_names_in_production_only`, `should_derive_max_age_from_token_expiry`
+- [X] T016 [P] Write `tests/unit/errors.test.ts`, one test per category: `should_map_422_to_validation_with_field_errors`, `should_map_409_to_conflict`, `should_map_404_to_not_found`, `should_map_401_to_unauthorized`, `should_map_403_to_forbidden`, `should_map_429_to_rate_limit_with_retry_after`, `should_map_5xx_to_server`, `should_map_missing_response_to_network`, `should_map_unknown_status_to_server`, `should_never_include_raw_payload_or_stack_in_message`. For 429, read `detail.retry_after` as the only shape (no adapter for the default-limit `{"error": ...}` body, Constitution IV and FR-018); reconfirm against the API after session 1.7
+- [X] T017 [P] Write `tests/unit/apiClient.test.ts`: `should_call_the_api_at_the_given_base_url`, `should_return_the_data_when_the_api_answers_successfully`, `should_return_status_and_body_when_the_api_answers_with_an_error`, `should_return_a_failure_without_status_when_the_network_is_down` (the wrapper normalizes outcomes into the `ApiFailure` input of the error layer; `ApiClient` is an interface so consumers can be given a fake typed with it). The wrapper takes `baseUrl` as a parameter; it never reads Nuxt runtime config itself
+- [X] T018 [P] Extend `tests/server/server.test.ts` (the `server` project): `should_respond_ok_without_calling_the_api` for `GET /api/health`, and `should_send_security_headers_and_a_restrictive_csp` (checks the headers and CSP of that response)
 
 ### Implementation
 
-- [ ] T019 [P] Implement `server/utils/session.ts` (`sessionCookieNames`, `buildSessionCookieOptions`) until T015 passes, per `data-model.md` `SessionCookies` (cookie names, `httpOnly`, `secure`, `sameSite`, `path`, `maxAge`); no token handling yet
-- [ ] T020 [P] Implement `server/utils/errors.ts` (`toUserFacingError`, messages defined once in a single table) until T016 passes, per `data-model.md` `ApiFailure.category`, `ApiFailure.message`, `ApiFailure.retryAfterSeconds` and `ApiFailure.fieldErrors`
-- [ ] T021 Implement `server/utils/apiClient.ts` as the only module importing `app/api-client/`, with `baseUrl` as a parameter and an injectable seam for tests, until T017 passes, per `data-model.md` Runtime configuration `apiBaseUrl`
-- [ ] T022 Implement `server/api/health.get.ts` returning `{ status: "ok" }` without calling the API; makes the health test of T018 pass
-- [ ] T023 Add the security headers and a restrictive Content-Security-Policy through Nitro `routeRules` in `nuxt.config.ts`; makes the headers test of T018 pass
+- [X] T019 [P] Implement `server/utils/session.ts` (`sessionCookieNames`, `buildSessionCookieOptions`) until T015 passes, per `data-model.md` `SessionCookies` (cookie names, `httpOnly`, `secure`, `sameSite`, `path`, `maxAge`); no token handling yet
+- [X] T020 [P] Implement `server/utils/errors.ts` (`toUserFacingError`, messages defined once in a single table) until T016 passes, per `data-model.md` `ApiFailure.category`, `ApiFailure.message`, `ApiFailure.retryAfterSeconds` and `ApiFailure.fieldErrors`
+- [X] T021 Implement `server/utils/apiClient.ts` as the only module importing `app/api-client/`, with `baseUrl` as a parameter and an injectable seam for tests, until T017 passes, per `data-model.md` Runtime configuration `apiBaseUrl`
+- [X] T022 Implement `server/api/health.get.ts` returning `{ status: "ok" }` without calling the API; makes the health test of T018 pass
+- [X] T023 Add the security headers and a restrictive, nonce-based Content-Security-Policy with the `nuxt-security` module in `nuxt.config.ts` (decision 2026-11-27: Nuxt's inline import map and runtime-config scripts make a plain `routeRules` CSP either break hydration or need `unsafe-inline`); verified in a real browser against the production build; makes the headers test of T018 pass
 
 **Checkpoint**: `pnpm test` is green; `pnpm dev` serves the shell and `curl localhost:3000/api/health` returns `{"status":"ok"}`.
 

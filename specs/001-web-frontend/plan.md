@@ -30,7 +30,7 @@ FR-006/FR-012 groundwork (cookie policy and single error layer, as tested units)
 **Language/Version**: TypeScript (strict), Node 24 (`.nvmrc`), Nuxt 4 / Vue 3 / Nitro.
 
 **Primary Dependencies**: `nuxt`, `@hey-api/openapi-ts` (dev, generator; the runtime client is generated
-code), `vitest`, `@nuxt/test-utils`, `@vue/test-utils`, `happy-dom`, `@nuxt/eslint`, `vue-tsc`.
+code), `vitest`, `@nuxt/test-utils`, `@vue/test-utils`, `happy-dom`, `@nuxt/eslint`, `vue-tsc`, `nuxt-security` (nonce-based CSP and security headers; decided with Carlos 2026-11-27).
 Exact versions come from the lockfile (constitution, Technical Constraints). Versions resolved on
 2026-11-27 are recorded in `research.md`; each dependency gets a one-line justification in the PR.
 
@@ -59,7 +59,7 @@ the health route and the security headers). Playwright and axe arrive with the f
 | Principle | Check | Result |
 |---|---|---|
 | I. Test-First | Each unit (cookie policy, refresh lock, error mapping, API wrapper, drift check) gets a failing test before code. Tasks order Red before Green. The API is wrapped, third-party code is not mocked. | Pass |
-| II. Security-First | Cookie policy (`httpOnly`, `Secure`, `SameSite`) is a tested unit; no tokens in logs, URLs or client state; config from env; CSP and security headers set in Nitro config; CI runs no secret. | Pass |
+| II. Security-First | Cookie policy (`httpOnly`, `Secure`, `SameSite`) is a tested unit; no tokens in logs, URLs or client state; config from env; CSP and security headers and nonce-based CSP through `nuxt-security`; CI runs no secret. | Pass |
 | III. Minimalism | Only what 2.2 needs. The refresh lock and the admin proxy are NOT built now (see Scope Boundary). No UI library, no state library, no i18n. | Pass |
 | IV. Generated Contract | Snapshot committed with its source recorded; generated client in `app/api-client/` marked generated; CI drift check; one error layer created now. | Pass |
 | V. Accessible | No pages yet beyond a placeholder. Base `lang`, `main` landmark, theme tokens and reduced-motion only. | Accepted temporary deviation: the axe gate in the end-to-end suite does not exist yet because there is no end-to-end suite; it MUST start with the first real pages in session 2.3 (deadline: before 2.3 merges) |
@@ -109,7 +109,7 @@ specs/001-web-frontend/
 .github/workflows/ci.yml        # lint, typecheck, test, drift
 .nvmrc
 package.json  pnpm-lock.yaml  pnpm-workspace.yaml
-nuxt.config.ts                  # runtimeConfig, security headers, color-mode base
+nuxt.config.ts                  # runtimeConfig, security headers (nuxt-security), tokens
 tsconfig.json  eslint.config.mjs  vitest.config.ts
 openapi/
 ├── openapi.json                # committed snapshot (deterministic, sorted keys)

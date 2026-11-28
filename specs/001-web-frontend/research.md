@@ -94,3 +94,17 @@ No `NEEDS CLARIFICATION` remains: the six open choices were decided with Carlos 
   by tooling in this repo's workflow.
 - **Alternatives**: public runtime config (would expose the address to the browser; not needed because
   the browser only talks to the Nuxt server).
+
+## R11. Content-Security-Policy
+
+- **Decision**: `nuxt-security` 2.x with `nonce: true`; `script-src 'self' 'nonce-{{nonce}}' 'strict-dynamic'`
+  (no `unsafe-inline`, no `unsafe-eval`), `default-src 'self'`, `object-src 'none'`, `base-uri 'self'`,
+  `frame-ancestors 'none'`, plus `X-Frame-Options: DENY`, `Referrer-Policy: strict-origin-when-cross-origin`
+  and the module's defaults (`nosniff`, HSTS).
+- **Evidence**: the production HTML carries two executable inline scripts (an import map and
+  `window.__NUXT__` config) whose content changes per build, so `script-src 'self'` alone breaks
+  hydration and hashes cannot be fixed in advance. Checked in Chrome against the production build:
+  every script carries the nonce, Vue mounts, no console violations.
+- **Alternatives**: `routeRules` with `'unsafe-inline'` (weaker); defer CSP to 2.3 (gate left open).
+- **Cost**: one dependency; `style-src` keeps the module default (`'self' https: 'unsafe-inline'`)
+  and is to be tightened when real components exist (2.3).
