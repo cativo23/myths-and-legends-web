@@ -105,7 +105,7 @@ export const resetPasswordApiV1AuthResetPasswordPost = <ThrowOnError extends boo
 /**
  * List Categories
  *
- * Retrieve a paginated list of categories for classifying entities (e.g., Deity, Creature, Place).
+ * Retrieve a paginated list of categories for classifying entities (MYTH, LEGEND or TRADITION).
  */
 export const listCategoriesApiV1CategoriesGet = <ThrowOnError extends boolean = false>(options?: Options<ListCategoriesApiV1CategoriesGetData, ThrowOnError>): RequestResult<ListCategoriesApiV1CategoriesGetResponses, ListCategoriesApiV1CategoriesGetErrors, ThrowOnError> => (options?.client ?? client).get<ListCategoriesApiV1CategoriesGetResponses, ListCategoriesApiV1CategoriesGetErrors, ThrowOnError>({ url: '/api/v1/categories/', ...options });
 
@@ -310,7 +310,7 @@ export const deleteEntityRelationApiV1EntitiesIdRelationsRelationIdDelete = <Thr
 /**
  * List Entity Types
  *
- * Retrieve a paginated list of entity types representing mythological origins (e.g., Egyptian, Greek, Norse).
+ * Retrieve a paginated list of entity types (CHARACTER, PLACE, OBJECT, GROUP or EVENT).
  */
 export const listEntityTypesApiV1EntityTypesGet = <ThrowOnError extends boolean = false>(options?: Options<ListEntityTypesApiV1EntityTypesGetData, ThrowOnError>): RequestResult<ListEntityTypesApiV1EntityTypesGetResponses, ListEntityTypesApiV1EntityTypesGetErrors, ThrowOnError> => (options?.client ?? client).get<ListEntityTypesApiV1EntityTypesGetResponses, ListEntityTypesApiV1EntityTypesGetErrors, ThrowOnError>({ url: '/api/v1/entity-types/', ...options });
 

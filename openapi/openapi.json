@@ -74,7 +74,7 @@
             ],
             "description": "Description of the category",
             "examples": [
-              "Divine beings and gods"
+              "Stories told as having happened in a real place"
             ],
             "title": "Description"
           },
@@ -99,11 +99,9 @@
             "$ref": "#/components/schemas/CategoryName",
             "description": "Category name",
             "examples": [
-              "Deity",
-              "Creature",
-              "Place",
-              "Object",
-              "Event"
+              "MYTH",
+              "LEGEND",
+              "TRADITION"
             ],
             "title": "Name"
           }
@@ -129,7 +127,7 @@
             ],
             "description": "Description of the category",
             "examples": [
-              "Divine beings and gods"
+              "Stories told as having happened in a real place"
             ],
             "title": "Description"
           },
@@ -137,11 +135,9 @@
             "$ref": "#/components/schemas/CategoryName",
             "description": "Category name",
             "examples": [
-              "Deity",
-              "Creature",
-              "Place",
-              "Object",
-              "Event"
+              "MYTH",
+              "LEGEND",
+              "TRADITION"
             ],
             "title": "Name"
           }
@@ -175,7 +171,7 @@
             ],
             "description": "Description of the category",
             "examples": [
-              "Divine beings and gods"
+              "Stories told as having happened in a real place"
             ],
             "title": "Description"
           },
@@ -190,7 +186,7 @@
             ],
             "description": "Category name",
             "examples": [
-              "Deity"
+              "LEGEND"
             ],
             "title": "Name"
           }
@@ -391,8 +387,8 @@
             "description": "Other names or aliases for this entity",
             "examples": [
               [
-                "Anpu",
-                "Inpu"
+                "Cipit\u00edo",
+                "El Cipit"
               ]
             ],
             "title": "Alternative Names"
@@ -408,7 +404,7 @@
             ],
             "description": "Typical behavior or characteristics",
             "examples": [
-              "Guides souls to the underworld, weighs hearts against Ma'at feather"
+              "Plays near rivers and throws pebbles at women who wander at night"
             ],
             "title": "Behavior"
           },
@@ -419,14 +415,14 @@
             "examples": [
               {
                 "id": 1,
-                "name": "Deity"
+                "name": "LEGEND"
               }
             ],
             "title": "Category",
             "type": "object"
           },
           "category_id": {
-            "description": "ID of the entity category (e.g., Deity, Creature, Place)",
+            "description": "ID of the entity category (MYTH, LEGEND or TRADITION)",
             "examples": [
               1
             ],
@@ -440,7 +436,7 @@
               [
                 {
                   "id": 1,
-                  "name": "Immortal",
+                  "name": "Never ages",
                   "value": "Yes"
                 }
               ]
@@ -472,7 +468,7 @@
             ],
             "description": "Detailed description of the entity",
             "examples": [
-              "God of mummification and the afterlife"
+              "A boy who never grows up, son of La Siguanaba"
             ],
             "title": "Description"
           },
@@ -483,14 +479,14 @@
             "examples": [
               {
                 "id": 2,
-                "name": "Egyptian"
+                "name": "CHARACTER"
               }
             ],
             "title": "Entity Type",
             "type": "object"
           },
           "entity_type_id": {
-            "description": "ID of the entity type (e.g., Egyptian, Greek, Aztec)",
+            "description": "ID of the entity type (CHARACTER, PLACE, OBJECT, GROUP or EVENT)",
             "examples": [
               2
             ],
@@ -505,6 +501,22 @@
             "title": "ID",
             "type": "integer"
           },
+          "image_credit": {
+            "anyOf": [
+              {
+                "maxLength": 255,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Artist credited for the image (blank is treated as no credit)",
+            "examples": [
+              "Ana Perez"
+            ],
+            "title": "Image Credit"
+          },
           "image_url": {
             "anyOf": [
               {
@@ -517,7 +529,7 @@
             ],
             "description": "URL to an image representing the entity",
             "examples": [
-              "https://example.com/images/anubis.jpg"
+              "https://example.com/images/el-cipitio.jpg"
             ],
             "title": "Image URL"
           },
@@ -537,7 +549,7 @@
               [
                 {
                   "id": 1,
-                  "name": "Duat"
+                  "name": "Cuscatl\u00e1n"
                 }
               ]
             ],
@@ -551,9 +563,9 @@
           "name": {
             "description": "Primary name of the entity",
             "examples": [
-              "Anubis",
-              "Zeus",
-              "Quetzalcoatl"
+              "El Cipit\u00edo",
+              "La Siguanaba",
+              "El Cadejo"
             ],
             "maxLength": 255,
             "minLength": 1,
@@ -571,7 +583,7 @@
             ],
             "description": "Origin story or background of the entity",
             "examples": [
-              "Born from the primordial waters of Nun"
+              "Said to be the child of La Siguanaba and a nobleman of Cuscatl\u00e1n"
             ],
             "title": "Origin"
           },
@@ -622,8 +634,8 @@
             "description": "Other names or aliases for this entity",
             "examples": [
               [
-                "Anpu",
-                "Inpu"
+                "Cipit\u00edo",
+                "El Cipit"
               ]
             ],
             "title": "Alternative Names"
@@ -639,12 +651,12 @@
             ],
             "description": "Typical behavior or characteristics",
             "examples": [
-              "Guides souls to the underworld, weighs hearts against Ma'at feather"
+              "Plays near rivers and throws pebbles at women who wander at night"
             ],
             "title": "Behavior"
           },
           "category_id": {
-            "description": "ID of the entity category (e.g., Deity, Creature, Place)",
+            "description": "ID of the entity category (MYTH, LEGEND or TRADITION)",
             "examples": [
               1
             ],
@@ -662,17 +674,33 @@
             ],
             "description": "Detailed description of the entity",
             "examples": [
-              "God of mummification and the afterlife"
+              "A boy who never grows up, son of La Siguanaba"
             ],
             "title": "Description"
           },
           "entity_type_id": {
-            "description": "ID of the entity type (e.g., Egyptian, Greek, Aztec)",
+            "description": "ID of the entity type (CHARACTER, PLACE, OBJECT, GROUP or EVENT)",
             "examples": [
               2
             ],
             "title": "Entity Type ID",
             "type": "integer"
+          },
+          "image_credit": {
+            "anyOf": [
+              {
+                "maxLength": 255,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Artist credited for the image (blank is treated as no credit)",
+            "examples": [
+              "Ana Perez"
+            ],
+            "title": "Image Credit"
           },
           "image_url": {
             "anyOf": [
@@ -686,7 +714,7 @@
             ],
             "description": "URL to an image representing the entity",
             "examples": [
-              "https://example.com/images/anubis.jpg"
+              "https://example.com/images/el-cipitio.jpg"
             ],
             "title": "Image URL"
           },
@@ -702,9 +730,9 @@
           "name": {
             "description": "Primary name of the entity",
             "examples": [
-              "Anubis",
-              "Zeus",
-              "Quetzalcoatl"
+              "El Cipit\u00edo",
+              "La Siguanaba",
+              "El Cadejo"
             ],
             "maxLength": 255,
             "minLength": 1,
@@ -722,7 +750,7 @@
             ],
             "description": "Origin story or background of the entity",
             "examples": [
-              "Born from the primordial waters of Nun"
+              "Said to be the child of La Siguanaba and a nobleman of Cuscatl\u00e1n"
             ],
             "title": "Origin"
           }
@@ -809,7 +837,7 @@
             ],
             "description": "Description of the relationship",
             "examples": [
-              "Anubis is the son of Osiris"
+              "El Cipit\u00edo is the son of La Siguanaba"
             ],
             "title": "Description"
           },
@@ -841,7 +869,7 @@
           "related_entity_name": {
             "description": "Name of the related entity",
             "examples": [
-              "Osiris"
+              "La Siguanaba"
             ],
             "title": "Related Entity Name",
             "type": "string"
@@ -879,9 +907,9 @@
                 "type": "null"
               }
             ],
-            "description": "Description of the mythology or culture",
+            "description": "Description of this kind of entity",
             "examples": [
-              "Ancient Egyptian mythology from the Nile Valley"
+              "A being from Salvadoran folklore, such as El Cipit\u00edo"
             ],
             "title": "Description"
           },
@@ -904,13 +932,13 @@
           },
           "name": {
             "$ref": "#/components/schemas/EntityTypeName",
-            "description": "Entity type name representing a mythology or culture",
+            "description": "Kind of entity: CHARACTER, PLACE, OBJECT, GROUP or EVENT",
             "examples": [
-              "Egyptian",
-              "Greek",
-              "Norse",
-              "Aztec",
-              "Japanese"
+              "CHARACTER",
+              "PLACE",
+              "OBJECT",
+              "GROUP",
+              "EVENT"
             ],
             "title": "Name"
           }
@@ -934,21 +962,21 @@
                 "type": "null"
               }
             ],
-            "description": "Description of the mythology or culture",
+            "description": "Description of this kind of entity",
             "examples": [
-              "Ancient Egyptian mythology from the Nile Valley"
+              "A being from Salvadoran folklore, such as El Cipit\u00edo"
             ],
             "title": "Description"
           },
           "name": {
             "$ref": "#/components/schemas/EntityTypeName",
-            "description": "Entity type name representing a mythology or culture",
+            "description": "Kind of entity: CHARACTER, PLACE, OBJECT, GROUP or EVENT",
             "examples": [
-              "Egyptian",
-              "Greek",
-              "Norse",
-              "Aztec",
-              "Japanese"
+              "CHARACTER",
+              "PLACE",
+              "OBJECT",
+              "GROUP",
+              "EVENT"
             ],
             "title": "Name"
           }
@@ -982,9 +1010,9 @@
                 "type": "null"
               }
             ],
-            "description": "Description of the mythology or culture",
+            "description": "Description of this kind of entity",
             "examples": [
-              "Ancient Egyptian mythology from the Nile Valley"
+              "A being from Salvadoran folklore, such as El Cipit\u00edo"
             ],
             "title": "Description"
           },
@@ -997,9 +1025,9 @@
                 "type": "null"
               }
             ],
-            "description": "Entity type name representing a mythology or culture",
+            "description": "Kind of entity: CHARACTER, PLACE, OBJECT, GROUP or EVENT",
             "examples": [
-              "Egyptian"
+              "CHARACTER"
             ],
             "title": "Name"
           }
@@ -1025,8 +1053,8 @@
             "description": "Other names or aliases for this entity",
             "examples": [
               [
-                "Anpu",
-                "Inpu"
+                "Cipit\u00edo",
+                "El Cipit"
               ]
             ],
             "title": "Alternative Names"
@@ -1042,7 +1070,7 @@
             ],
             "description": "Typical behavior or characteristics",
             "examples": [
-              "Guides souls to the underworld"
+              "Plays near rivers at night"
             ],
             "title": "Behavior"
           },
@@ -1072,7 +1100,7 @@
             ],
             "description": "Detailed description of the entity",
             "examples": [
-              "God of mummification and the afterlife"
+              "A boy who never grows up, son of La Siguanaba"
             ],
             "title": "Description"
           },
@@ -1091,6 +1119,22 @@
             ],
             "title": "Entity Type ID"
           },
+          "image_credit": {
+            "anyOf": [
+              {
+                "maxLength": 255,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Artist credited for the image (blank is treated as no credit)",
+            "examples": [
+              "Ana Perez"
+            ],
+            "title": "Image Credit"
+          },
           "image_url": {
             "anyOf": [
               {
@@ -1103,7 +1147,7 @@
             ],
             "description": "URL to an image representing the entity",
             "examples": [
-              "https://example.com/images/anubis.jpg"
+              "https://example.com/images/el-cipitio.jpg"
             ],
             "title": "Image URL"
           },
@@ -1135,7 +1179,7 @@
             ],
             "description": "Primary name of the entity",
             "examples": [
-              "Anubis"
+              "El Cipit\u00edo"
             ],
             "title": "Name"
           },
@@ -1150,7 +1194,7 @@
             ],
             "description": "Origin story or background of the entity",
             "examples": [
-              "Born from the primordial waters of Nun"
+              "Said to be the child of La Siguanaba and a nobleman of Cuscatl\u00e1n"
             ],
             "title": "Origin"
           }
@@ -1176,8 +1220,8 @@
             "description": "Other names or aliases for this entity",
             "examples": [
               [
-                "Anpu",
-                "Inpu"
+                "Cipit\u00edo",
+                "El Cipit"
               ]
             ],
             "title": "Alternative Names"
@@ -1193,7 +1237,7 @@
             ],
             "description": "Typical behavior or characteristics",
             "examples": [
-              "Guides souls to the underworld, weighs hearts against Ma'at feather"
+              "Plays near rivers and throws pebbles at women who wander at night"
             ],
             "title": "Behavior"
           },
@@ -1204,14 +1248,14 @@
             "examples": [
               {
                 "id": 1,
-                "name": "Deity"
+                "name": "LEGEND"
               }
             ],
             "title": "Category",
             "type": "object"
           },
           "category_id": {
-            "description": "ID of the entity category (e.g., Deity, Creature, Place)",
+            "description": "ID of the entity category (MYTH, LEGEND or TRADITION)",
             "examples": [
               1
             ],
@@ -1225,7 +1269,7 @@
               [
                 {
                   "id": 1,
-                  "name": "Immortal",
+                  "name": "Never ages",
                   "value": "Yes"
                 }
               ]
@@ -1257,7 +1301,7 @@
             ],
             "description": "Detailed description of the entity",
             "examples": [
-              "God of mummification and the afterlife"
+              "A boy who never grows up, son of La Siguanaba"
             ],
             "title": "Description"
           },
@@ -1268,14 +1312,14 @@
             "examples": [
               {
                 "id": 2,
-                "name": "Egyptian"
+                "name": "CHARACTER"
               }
             ],
             "title": "Entity Type",
             "type": "object"
           },
           "entity_type_id": {
-            "description": "ID of the entity type (e.g., Egyptian, Greek, Aztec)",
+            "description": "ID of the entity type (CHARACTER, PLACE, OBJECT, GROUP or EVENT)",
             "examples": [
               2
             ],
@@ -1290,6 +1334,22 @@
             "title": "ID",
             "type": "integer"
           },
+          "image_credit": {
+            "anyOf": [
+              {
+                "maxLength": 255,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Artist credited for the image (blank is treated as no credit)",
+            "examples": [
+              "Ana Perez"
+            ],
+            "title": "Image Credit"
+          },
           "image_url": {
             "anyOf": [
               {
@@ -1302,7 +1362,7 @@
             ],
             "description": "URL to an image representing the entity",
             "examples": [
-              "https://example.com/images/anubis.jpg"
+              "https://example.com/images/el-cipitio.jpg"
             ],
             "title": "Image URL"
           },
@@ -1322,7 +1382,7 @@
               [
                 {
                   "id": 1,
-                  "name": "Duat"
+                  "name": "Cuscatl\u00e1n"
                 }
               ]
             ],
@@ -1336,9 +1396,9 @@
           "name": {
             "description": "Primary name of the entity",
             "examples": [
-              "Anubis",
-              "Zeus",
-              "Quetzalcoatl"
+              "El Cipit\u00edo",
+              "La Siguanaba",
+              "El Cadejo"
             ],
             "maxLength": 255,
             "minLength": 1,
@@ -1356,7 +1416,7 @@
             ],
             "description": "Origin story or background of the entity",
             "examples": [
-              "Born from the primordial waters of Nun"
+              "Said to be the child of La Siguanaba and a nobleman of Cuscatl\u00e1n"
             ],
             "title": "Origin"
           },
@@ -1470,7 +1530,7 @@
             ],
             "description": "Description of the specific place",
             "examples": [
-              "Ancient temple ruins near the mountain"
+              "A ravine on the outskirts of the town"
             ],
             "title": "Place Description"
           }
@@ -1534,7 +1594,7 @@
             ],
             "description": "Description of the specific place",
             "examples": [
-              "Ancient temple ruins near the mountain"
+              "A ravine on the outskirts of the town"
             ],
             "title": "Place Description"
           }
@@ -1594,7 +1654,7 @@
             ],
             "description": "Description of the specific place",
             "examples": [
-              "Ancient temple ruins"
+              "A ravine on the outskirts"
             ],
             "title": "Place Description"
           }
@@ -2157,7 +2217,9 @@
             "examples": [
               "2024-01-20T10:30:00Z"
             ],
-            "title": "Expires At"
+            "format": "date-time",
+            "title": "Expires At",
+            "type": "string"
           },
           "refresh_token": {
             "description": "Long-lived JWT used to obtain a new access token via /auth/refresh",
@@ -2474,7 +2536,7 @@
       "email": "cativo23.kt@gmail.com",
       "name": "Carlos Cativo"
     },
-    "description": "\n## Overview\n\nThe Myths and Legends API is a comprehensive REST API for managing mythological characters, creatures, places, and objects from various cultures and mythologies around the world.\n\n## Features\n\n- **Entities Management**: Browse mythological entities (characters, creatures, places, objects)\n- **Countries**: Explore countries and their associated myths\n- **Categories & Types**: Classify entities by category and mythological origin\n- **Relations**: Discover relationships between entities\n- **Characteristics**: Learn about powers, weaknesses, and physical features\n- **Locations**: Explore geographic places associated with myths\n- **Sources**: Reference original materials (books, manuscripts, oral traditions)\n- **Rate Limiting**: Protection against brute force attacks\n- **Security Headers**: Enhanced HTTP security headers\n\n## Rate Limiting\n\n- General endpoints: 60 requests per minute\n- Authentication endpoints: 10 requests per minute\n\n## Looking for Admin Documentation?\n\nAdmin endpoints (create, update, delete) are documented at `/admin/docs` (requires authentication).\n    ",
+    "description": "\n## Overview\n\nThe Myths and Legends API is a REST API for the myths, legends and traditions of El Salvador: their characters, places, objects, groups and events.\n\n## Features\n\n- **Entities**: Browse Salvadoran myths, legends and traditions (types CHARACTER, PLACE, OBJECT, GROUP, EVENT)\n- **Countries**: Explore countries and their associated entities\n- **Categories & Types**: Classify entities as MYTH, LEGEND or TRADITION, and by what they are\n- **Relations**: Discover relationships between entities\n- **Characteristics**: Learn about powers, weaknesses, and physical features\n- **Locations**: Explore geographic places associated with myths\n- **Sources**: Reference original materials (books, manuscripts, oral traditions)\n- **Rate Limiting**: Protection against brute force attacks\n- **Security Headers**: Enhanced HTTP security headers\n\n## Rate Limiting\n\n- General endpoints: 60 requests per minute\n- Authentication endpoints: 10 requests per minute\n\n## Fair Use\n\nThe content of this API is offered for educational and cultural purposes. When an entity has an `image_credit`, the image is the work of that artist: please keep the credit whenever you show it. To request a correction or a removal, contact the maintainer listed at the top of this page.\n\n## Looking for Admin Documentation?\n\nAdmin endpoints (create, update, delete) are documented at `/admin/docs` (requires authentication).\n    ",
     "license": {
       "name": "MIT License",
       "url": "https://opensource.org/licenses/MIT"
@@ -2801,7 +2863,7 @@
     },
     "/api/v1/categories/": {
       "get": {
-        "description": "Retrieve a paginated list of categories for classifying entities (e.g., Deity, Creature, Place).",
+        "description": "Retrieve a paginated list of categories for classifying entities (MYTH, LEGEND or TRADITION).",
         "operationId": "list_categories_api_v1_categories__get",
         "parameters": [
           {
@@ -3457,7 +3519,7 @@
         "operationId": "list_entities_api_v1_entities__get",
         "parameters": [
           {
-            "description": "Filter by entity type (e.g., Egyptian, Greek, Norse)",
+            "description": "Filter by entity type (CHARACTER, PLACE, OBJECT, GROUP or EVENT)",
             "in": "query",
             "name": "entity_type",
             "required": false,
@@ -3470,16 +3532,16 @@
                   "type": "null"
                 }
               ],
-              "description": "Filter by entity type (e.g., Egyptian, Greek, Norse)",
+              "description": "Filter by entity type (CHARACTER, PLACE, OBJECT, GROUP or EVENT)",
               "examples": [
-                "Egyptian",
-                "Greek"
+                "CHARACTER",
+                "PLACE"
               ],
               "title": "Entity Type"
             }
           },
           {
-            "description": "Filter by category (e.g., Deity, Creature, Place)",
+            "description": "Filter by category (MYTH, LEGEND or TRADITION)",
             "in": "query",
             "name": "category",
             "required": false,
@@ -3492,10 +3554,10 @@
                   "type": "null"
                 }
               ],
-              "description": "Filter by category (e.g., Deity, Creature, Place)",
+              "description": "Filter by category (MYTH, LEGEND or TRADITION)",
               "examples": [
-                "Deity",
-                "Creature"
+                "MYTH",
+                "LEGEND"
               ],
               "title": "Category"
             }
@@ -3684,9 +3746,9 @@
             "schema": {
               "description": "Search term (searches name, description, and origin)",
               "examples": [
-                "Zeus",
-                "underworld",
-                "god of thunder"
+                "El Cipit\u00edo",
+                "river",
+                "night spirit"
               ],
               "maxLength": 200,
               "minLength": 1,
@@ -4103,7 +4165,7 @@
     },
     "/api/v1/entity-types/": {
       "get": {
-        "description": "Retrieve a paginated list of entity types representing mythological origins (e.g., Egyptian, Greek, Norse).",
+        "description": "Retrieve a paginated list of entity types (CHARACTER, PLACE, OBJECT, GROUP or EVENT).",
         "operationId": "list_entity_types_api_v1_entity_types__get",
         "parameters": [
           {
