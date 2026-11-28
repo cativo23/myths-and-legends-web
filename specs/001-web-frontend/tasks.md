@@ -129,3 +129,13 @@ Task: "Extend tests/server/server.test.ts"
 - Never edit `app/api-client/`; change `openapi/openapi.json` or the generator config and regenerate.
 - Do not read `.env`. Do not add routes or code outside the Scope Boundary; raise it first (Constitution III).
 - If something unexpected contradicts the spec or plan, stop and ask.
+
+---
+
+## Phase 6: Convergence
+
+- [ ] T031 Mark T029 and T030 as done in `specs/001-web-frontend/tasks.md`, since web PR #2 and API PR #90 are merged per T029 and T030 (partial)
+- [ ] T032 Replace the stale `check-client-drift.mjs` references with `scripts/check-client-drift.ts` and `scripts/clientDrift.ts` in `specs/001-web-frontend/plan.md` and `specs/001-web-frontend/research.md` per plan: Source Code (partial)
+- [ ] T033 Rewrite the "CI scope" section of `specs/001-web-frontend/plan.md` as a decision taken (lint, typecheck, tests and drift; build and audit deferred) instead of an open point per plan: CI scope (partial)
+- [ ] T034 Align `specs/001-web-frontend/data-model.md` with the code: `ApiFailure` is the input of the error layer and `UserFacingError` its output (partial)
+- [ ] T035 Record in `specs/001-web-frontend/plan.md` Scope Boundary that `ApiClient.healthCheck` is the only exposed operation and is kept to give the wrapper a consumer until session 2.4 per plan: Scope Boundary (unrequested)
