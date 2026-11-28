@@ -1,9 +1,9 @@
-import { cp, mkdtemp, appendFile } from 'node:fs/promises'
+import { appendFile, cp, mkdtemp, rm } from 'node:fs/promises'
 import { execFile } from 'node:child_process'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { promisify } from 'node:util'
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it } from 'vitest'
 import { compareDirectories } from '../../scripts/clientDrift.ts'
 
 const run = promisify(execFile)
@@ -18,6 +18,12 @@ describe('compareDirectories', () => {
     expect(differences).toEqual([])
   })
 
+  it('should_treat_a_missing_directory_as_having_no_files', async () => {
+    const differences = await compareDirectories(join(fixtures, 'base'), join(fixtures, 'does-not-exist'))
+
+    expect(differences).toEqual(['a.ts', 'nested/b.ts'])
+  })
+
   it('should_list_each_file_that_differs_or_is_missing_or_extra', async () => {
     const differences = await compareDirectories(join(fixtures, 'base'), join(fixtures, 'changed'))
 
@@ -26,18 +32,29 @@ describe('compareDirectories', () => {
 })
 
 describe('check-client-drift CLI', () => {
-  it('should_pass_for_the_committed_client', async () => {
-    await expect(run('node', [cli])).resolves.toBeDefined()
+  const scratchDirs: string[] = []
+  afterEach(async () => {
+    await Promise.all(scratchDirs.splice(0).map(dir => rm(dir, { recursive: true, force: true })))
   })
 
   it('should_fail_and_name_the_file_when_the_committed_client_was_edited', async () => {
-    const editedCopy = join(await mkdtemp(join(tmpdir(), 'client-')), 'api-client')
+    const scratch = await mkdtemp(join(tmpdir(), 'client-'))
+    scratchDirs.push(scratch)
+    const editedCopy = join(scratch, 'api-client')
     await cp(committedClient, editedCopy, { recursive: true })
     await appendFile(join(editedCopy, 'index.ts'), '\nexport const handEdited = true\n')
 
-    const failure = await run('node', [cli, '--client-dir', editedCopy]).catch(error => error)
+    const failure = await run(process.execPath, [cli, '--client-dir', editedCopy]).catch(error => error)
 
     expect(failure.code).toBe(1)
     expect(failure.stderr).toContain('index.ts')
+  })
+
+  it('should_fail_with_the_regenerate_hint_when_the_committed_client_is_missing', async () => {
+    const failure = await run(process.execPath, [cli, '--client-dir', join(tmpdir(), 'no-such-client-dir')]).catch(error => error)
+
+    expect(failure.code).toBe(1)
+    expect(failure.stderr).toContain('pnpm client:generate')
+    expect(failure.stderr).not.toContain('ENOENT')
   })
 })
