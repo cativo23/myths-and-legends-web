@@ -12,7 +12,7 @@ in-memory shapes used by the server utilities. API entities (entities, relations
 | refresh cookie | API refresh token (single-use, rotated) | refresh token lifetime | No (`httpOnly`) |
 
 Options (one builder, `buildSessionCookieOptions`): `httpOnly`, `secure` (production), `sameSite: lax`,
-`path: /`. Names carry the `__Host-` prefix in production. Tokens never appear in logs, URLs, client
+`path: /`, `maxAge` (seconds, derived from the token expiry). Names carry the `__Host-` prefix in production. Tokens never appear in logs, URLs, client
 state or error messages.
 
 ## ApiFailure (single error layer, `errors.ts`)

@@ -36,8 +36,9 @@ Exact versions come from the lockfile (constitution, Technical Constraints). Ver
 
 **Storage**: None. The server layer holds no database (Constitution III). Session lives only in cookies.
 
-**Testing**: Vitest with two projects: `unit` (node, server utils and pure code) and `nuxt` (Nuxt
-environment, components). Playwright and axe arrive with the first screens (2.3) and are not added now.
+**Testing**: Vitest with two projects: `unit` (node, server utils and pure code; the API wrapper takes
+its base address as a parameter so it needs no Nuxt context) and `nuxt` (Nuxt environment: components and
+server-route tests with `@nuxt/test-utils`, including the health route and the security headers). Playwright and axe arrive with the first screens (2.3) and are not added now.
 
 **Target Platform**: Nuxt server (Node) behind the same site as the page; deployment is Phase 3.
 
@@ -60,7 +61,7 @@ environment, components). Playwright and axe arrive with the first screens (2.3)
 | II. Security-First | Cookie policy (`httpOnly`, `Secure`, `SameSite`) is a tested unit; no tokens in logs, URLs or client state; config from env; CSP and security headers set in Nitro config; CI runs no secret. | Pass |
 | III. Minimalism | Only what 2.2 needs. The refresh lock and the admin proxy are NOT built now (see Scope Boundary). No UI library, no state library, no i18n. | Pass |
 | IV. Generated Contract | Snapshot committed with its source recorded; generated client in `app/api-client/` marked generated; CI drift check; one error layer created now. | Pass |
-| V. Accessible | No pages yet beyond a placeholder. Base `lang`, theme-color scheme and reduced-motion tokens only. axe gate starts in 2.3. | Pass (deferred by design) |
+| V. Accessible | No pages yet beyond a placeholder. Base `lang`, `main` landmark, theme tokens and reduced-motion only. | Accepted temporary deviation: the axe gate in the end-to-end suite does not exist yet because there is no end-to-end suite; it MUST start with the first real pages in session 2.3 (deadline: before 2.3 merges) |
 
 No violations, so no Complexity Tracking entries.
 
