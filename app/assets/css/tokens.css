@@ -1,0 +1,41 @@
+/* Design tokens from the approved "Mezcla" mockup (design/mockups/mezcla/).
+   Names and values only; layout and components arrive with the screens. */
+:root {
+  --bg: #f6f0e4;
+  --surface: #fffbf2;
+  --text: #12203f;
+  --muted: #46527a;
+  --line: rgba(18, 32, 63, 0.13);
+  --focus: #12203f;
+  --category-myth: #2457b8;
+  --category-legend: #0b645b;
+  --category-tradition: #9a3f14;
+  --motion-duration: 200ms;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #070b14;
+    --surface: #0f1626;
+    --text: #e8e4da;
+    --muted: #9aa3b8;
+    --line: rgba(232, 228, 218, 0.11);
+    --focus: #e8e4da;
+    --category-myth: #6ea8ff;
+    --category-legend: #3dd6c4;
+    --category-tradition: #ff7a2f;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration: 0ms;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}

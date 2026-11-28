@@ -23,14 +23,14 @@ description: "Tasks for session 2.2: Nuxt scaffold, generated API client, basic 
 
 **Purpose**: a Nuxt project that installs, lints, typechecks and runs tests, with a placeholder shell built test-first.
 
-- [ ] T001 Create `package.json` (name, `private`, `type: module`, `packageManager` pinned to the installed pnpm, scripts `dev`, `lint`, `typecheck`, `test`, `client:generate`, `client:check`), `.nvmrc` (Node 24) and `pnpm-workspace.yaml` if pnpm requires it
-- [ ] T002 Install dependencies with pnpm and commit `pnpm-lock.yaml`: `nuxt`, `typescript` (6.x, research R2), `vue-tsc`, `@nuxt/eslint`, `eslint`, `vitest`, `@nuxt/test-utils`, `@vue/test-utils`, `happy-dom`, `@hey-api/openapi-ts` (exact pin); put the one-line justification per dependency in the PR body
-- [ ] T003 [P] Create `nuxt.config.ts` (compatibility date, strict TypeScript, `runtimeConfig.apiBaseUrl` server-only from `NUXT_API_BASE_URL`; security headers are added in T023, after their test) and `tsconfig.json`
-- [ ] T004 [P] Create `eslint.config.mjs` via `@nuxt/eslint` with `app/api-client/**` ignored
-- [ ] T005 [P] Create `.env.example` (names only, empty values: `NUXT_API_BASE_URL=`) and verify `.env` stays ignored by `.gitignore`
-- [ ] T006 Create `vitest.config.ts` with two projects, `unit` (node, `tests/unit/**`) and `nuxt` (`@nuxt/test-utils`, happy-dom, `tests/nuxt/**`, includes server-route tests), coverage excluding `app/api-client/**`
-- [ ] T007 Write `tests/nuxt/app.test.ts`: `should_render_the_shell_with_language_and_main_landmark`; run it and confirm it fails because `app/app.vue` does not exist
-- [ ] T008 [P] Create `app/app.vue` (placeholder shell with `lang`, a `main` landmark and a title; no catalog) and `app/assets/css/tokens.css` (light and dark custom-property names derived from `design/mockups/mezcla/`, honoring `prefers-color-scheme` and `prefers-reduced-motion`) until T007 passes
+- [X] T001 Create `package.json` (name, `private`, `type: module`, `packageManager` pinned to the installed pnpm, scripts `dev`, `lint`, `typecheck`, `test`, `client:generate`, `client:check`), `.nvmrc` (Node 24) and `pnpm-workspace.yaml` if pnpm requires it
+- [X] T002 Install dependencies with pnpm and commit `pnpm-lock.yaml`: `nuxt`, `typescript` (6.x, research R2), `vue-tsc`, `@nuxt/eslint`, `eslint`, `vitest`, `@nuxt/test-utils`, `@vue/test-utils`, `happy-dom`, `@hey-api/openapi-ts` (exact pin); put the one-line justification per dependency in the PR body
+- [X] T003 [P] Create `nuxt.config.ts` (compatibility date, strict TypeScript, `runtimeConfig.apiBaseUrl` server-only from `NUXT_API_BASE_URL`; security headers are added in T023, after their test) and `tsconfig.json`
+- [X] T004 [P] Create `eslint.config.mjs` via `@nuxt/eslint` with `app/api-client/**` ignored
+- [X] T005 [P] Create `.env.example` (names only, empty values: `NUXT_API_BASE_URL=`) and verify `.env` stays ignored by `.gitignore`
+- [X] T006 Create `vitest.config.ts` with three projects, `unit` (node, `tests/unit/**`), `nuxt` (`@nuxt/test-utils`, happy-dom, `tests/nuxt/**`, components) and `server` (node, `tests/server/**`, boots Nuxt and calls it over HTTP), coverage excluding `app/api-client/**`
+- [X] T007 Write `tests/nuxt/app.test.ts` (`should_render_a_main_landmark`) and `tests/server/server.test.ts` (`should_render_html_with_a_language_on_first_load`, SSR HTML, because the Nuxt test DOM does not apply `<html lang>`); run them and confirm they fail because `app/app.vue` does not exist
+- [X] T008 [P] Create `app/app.vue` (placeholder shell with `lang`, a `main` landmark and a title; no catalog) and `app/assets/css/tokens.css` (light and dark custom-property names derived from `design/mockups/mezcla/`, honoring `prefers-color-scheme` and `prefers-reduced-motion`) until T007 passes
 
 **Checkpoint**: `pnpm install --frozen-lockfile && pnpm lint && pnpm typecheck && pnpm test` pass.
 
@@ -65,7 +65,7 @@ description: "Tasks for session 2.2: Nuxt scaffold, generated API client, basic 
 - [ ] T015 [P] Write `tests/unit/session.test.ts`: `should_mark_session_cookies_httponly_and_samesite_lax`, `should_require_secure_cookies_in_production`, `should_use_host_prefix_names_in_production_only`, `should_derive_max_age_from_token_expiry`
 - [ ] T016 [P] Write `tests/unit/errors.test.ts`, one test per category: `should_map_422_to_validation_with_field_errors`, `should_map_409_to_conflict`, `should_map_404_to_not_found`, `should_map_401_to_unauthorized`, `should_map_403_to_forbidden`, `should_map_429_to_rate_limit_with_retry_after`, `should_map_5xx_to_server`, `should_map_missing_response_to_network`, `should_map_unknown_status_to_server`, `should_never_include_raw_payload_or_stack_in_message`. For 429, read `detail.retry_after` as the only shape (no adapter for the default-limit `{"error": ...}` body, Constitution IV and FR-018); reconfirm against the API after session 1.7
 - [ ] T017 [P] Write `tests/unit/apiClient.test.ts`: `should_call_the_generated_client_with_the_given_base_url` and `should_accept_a_typed_fake_in_place_of_the_client` (the fake is typed with generated types so contract changes break compilation). The wrapper takes `baseUrl` as a parameter; it never reads Nuxt runtime config itself
-- [ ] T018 [P] Write `tests/nuxt/server.test.ts` with `@nuxt/test-utils` server setup: `should_respond_ok_without_calling_the_api` for `GET /api/health`, and `should_send_security_headers_and_a_restrictive_csp` (checks the headers and CSP of that response)
+- [ ] T018 [P] Extend `tests/server/server.test.ts` (the `server` project): `should_respond_ok_without_calling_the_api` for `GET /api/health`, and `should_send_security_headers_and_a_restrictive_csp` (checks the headers and CSP of that response)
 
 ### Implementation
 
@@ -113,7 +113,7 @@ description: "Tasks for session 2.2: Nuxt scaffold, generated API client, basic 
 Task: "Write tests/unit/session.test.ts"
 Task: "Write tests/unit/errors.test.ts"
 Task: "Write tests/unit/apiClient.test.ts"
-Task: "Write tests/nuxt/server.test.ts"
+Task: "Extend tests/server/server.test.ts"
 ```
 
 ## Implementation Strategy

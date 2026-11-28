@@ -36,9 +36,10 @@ Exact versions come from the lockfile (constitution, Technical Constraints). Ver
 
 **Storage**: None. The server layer holds no database (Constitution III). Session lives only in cookies.
 
-**Testing**: Vitest with two projects: `unit` (node, server utils and pure code; the API wrapper takes
-its base address as a parameter so it needs no Nuxt context) and `nuxt` (Nuxt environment: components and
-server-route tests with `@nuxt/test-utils`, including the health route and the security headers). Playwright and axe arrive with the first screens (2.3) and are not added now.
+**Testing**: Vitest with three projects: `unit` (node, server utils and pure code; the API wrapper takes
+its base address as a parameter so it needs no Nuxt context), `nuxt` (Nuxt environment, components) and
+`server` (node; `@nuxt/test-utils/e2e` boots Nuxt and checks real HTTP responses: first-load HTML,
+the health route and the security headers). Playwright and axe arrive with the first screens (2.3) and are not added now.
 
 **Target Platform**: Nuxt server (Node) behind the same site as the page; deployment is Phase 3.
 
@@ -128,7 +129,8 @@ scripts/
 └── check-client-drift.mjs      # regenerate to temp dir, compare to committed client
 tests/
 ├── unit/                       # server utils, drift script
-└── nuxt/                       # app shell render
+├── nuxt/                       # components (shell)
+└── server/                     # HTTP-level checks (SSR html, health, headers)
 ```
 
 **Structure Decision**: one Nuxt project; routes are adapters, logic lives in `server/utils/*` so each
