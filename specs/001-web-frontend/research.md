@@ -108,3 +108,8 @@ No `NEEDS CLARIFICATION` remains: the six open choices were decided with Carlos 
 - **Alternatives**: `routeRules` with `'unsafe-inline'` (weaker); defer CSP to 2.3 (gate left open).
 - **Cost**: one dependency; `style-src` keeps the module default (`'self' https: 'unsafe-inline'`)
   and is to be tightened when real components exist (2.3).
+- **Module defaults left on, to revisit** (found in review): `style-src` keeps `'unsafe-inline'`
+  and `font-src`/`upgrade-insecure-requests` come from defaults; the module's per-IP rate limiter
+  (150 requests per 5 minutes) is enabled and would count every user behind a reverse proxy as one IP.
+  Both are decided with real screens (2.3) and deployment (Phase 3). CORS is disabled explicitly
+  (`corsHandler: false`) and covered by a test, because session and admin routes arrive in 2.4.

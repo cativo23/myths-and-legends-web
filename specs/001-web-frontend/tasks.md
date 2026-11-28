@@ -42,7 +42,7 @@ description: "Tasks for session 2.2: Nuxt scaffold, generated API client, basic 
 
 ### Tests first
 
-- [X] T009 Write `tests/unit/clientDrift.test.ts` against `compareDirectories` using on-disk fixtures in `tests/unit/fixtures/client-drift/` (`same/`, `changed/`): `should_report_no_difference_for_identical_directories`, `should_list_each_file_that_differs_or_is_missing`; plus one integration test, `should_fail_when_the_committed_client_was_edited`, that runs the real regeneration once; confirm they fail because the script does not exist
+- [X] T009 Write `tests/unit/clientDrift.test.ts` against `compareDirectories` using on-disk fixtures in `tests/unit/fixtures/client-drift/` (`base/`, `identical/`, `changed/`): `should_report_no_difference_for_identical_directories`, `should_list_each_file_that_differs_or_is_missing`; plus CLI tests that regenerate for real (`should_fail_and_name_the_file_when_the_committed_client_was_edited`, `should_fail_with_the_regenerate_hint_when_the_committed_client_is_missing`; the passing case is the CI job itself); confirm they fail because the script does not exist
 
 ### Implementation
 
