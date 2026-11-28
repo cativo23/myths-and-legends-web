@@ -38,4 +38,25 @@ describe('createApiClient', () => {
 
     expect(await api.healthCheck()).toEqual({ ok: false, failure: {} })
   })
+
+  it('should_return_status_and_text_body_when_the_error_is_not_json', async () => {
+    const html = '<html>Bad Gateway</html>'
+    const api = createApiClient({
+      baseUrl: 'http://api.test',
+      fetch: async () => new Response(html, { status: 502, headers: { 'content-type': 'text/html' } }),
+    })
+
+    expect(await api.healthCheck()).toEqual({ ok: false, failure: { status: 502, body: html } })
+  })
+
+  it('should_not_hide_programming_errors_as_network_failures', async () => {
+    const api = createApiClient({
+      baseUrl: 'http://api.test',
+      fetch: async () => {
+        throw new RangeError('bug in our code')
+      },
+    })
+
+    await expect(api.healthCheck()).rejects.toThrow('bug in our code')
+  })
 })
