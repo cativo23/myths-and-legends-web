@@ -94,7 +94,7 @@ description: "Tasks for session 2.2: Nuxt scaffold, generated API client, basic 
 
 - [X] T026 [P] Write `README.md` (what the project is, prerequisites, the commands from `quickstart.md`, link to the API repo, the "never edit `app/api-client/`" rule)
 - [X] T027 Run the full `quickstart.md` validation from a clean clone state (`pnpm install --frozen-lockfile`, lint, typecheck, test, `client:check`, dev server, health curl)
-- [ ] T028 Review the whole diff for clean code (no duplicated logic, no dead code, no commented-out code, names describe behavior, files single-purpose) and dispatch `superpowers:code-reviewer` on it; apply its valid findings in separate commits
+- [X] T028 Review the whole diff for clean code (no duplicated logic, no dead code, no commented-out code, names describe behavior, files single-purpose) and dispatch `superpowers:code-reviewer` on it; apply its valid findings in separate commits
 - [ ] T029 Push `feat/web-scaffold`, open a PR to `develop` (title under 70 characters, dependency justifications in the body), wait for green CI and merge
 - [ ] T030 Mark session 2.2 done in the API repo's `docs/ROADMAP.md` in a separate PR to its `develop`, recording the decisions and the snapshot provenance, and hand off the prompt for session 2.3 (still blocked by 1.7 on risks 16, 17 and 18)
 
